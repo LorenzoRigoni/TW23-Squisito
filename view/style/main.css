@@ -1,8 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Inter');
+@import url('https://fonts.googleapis.com/css?family=Kaushan Script');
 .selector-for-some-widget {
     box-sizing: content-box;
   }
 body {
     font-family: 'Inter';
     font-size: 1rem;
+    background-color: #E5E5E5;
+}
+.far.active, .fas.active {
+  color: #f26e21;
+}
+.far:hover, .fas:hover {
+  color: #f26e21;
 }

@@ -1,15 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <title>Home</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-avatar@latest/dist/avatar.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="./style/main.css" rel="stylesheet">
-    <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
-  </head>
+    <link href="./style/home.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/ce8df11f13.js" crossorigin="anonymous"></script>
 
-  <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  </body>
+</head>
+
+<body>
+    <div class="row box">
+        <div class="col-md-9 col-sm-12">
+            <div class="row title">
+                <p>Squisito</p>
+            </div>
+            <div class="row posts-box">
+                CENTER
+            </div>
+            <nav class="row">
+                <div class="nav">
+                    <span class="fas fa-house active fa-lg"></span>
+                    <span class="fas fa-globe fa-lg"></span>
+                    <span class="far fa-square-plus fa-lg"></span>
+                    <span class="fas fa-magnifying-glass fa-lg"></span>
+                    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp" alt="profile-image"
+                        class="avatar avatar-32 rounded-circle p-1 d-md-none">
+                </div>
+            </nav>
+        </div>
+        <aside class="col-md-3 d-none d-md-block">
+            <div class="notification">
+                <span class="fas fa-bell fa-2xl"></span>
+            </div>
+            <div class="profile-info">
+                <img src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp" alt="Avatar"
+                class="avatar avatar-128 rounded-circle p-1">
+                <label id="username">Marco Food Blogger</label>
+                <input type="button" class="btn btn-dark" id="edit-profile" value="Edit">
+            </div>
+            <div class="row follow">
+                <div class="col-4">
+                    <strong><label>15</label></strong><br>
+                    <label>Post</label>
+                </div>
+                <div class="col-4">
+                    <strong><label>500</label></strong><br>
+                    <label>Follower</label>
+                </div>
+                <div class="col-4">
+                    <strong><label>150</label></strong><br>
+                    <label>Seguiti</label>
+                </div>
+            </div>
+        </aside>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
 </html>
