@@ -8,7 +8,8 @@ CREATE TABLE utenti(
     Username VARCHAR(30) NOT NULL,
     Nome VARCHAR(50) NOT NULL,
     FotoProfilo VARBINARY(MAX), /*Da vedere come salvare le immagini*/
-    Pwd CHAR(128) NOT NULL
+    Pwd CHAR(128) NOT NULL,
+    Salt CHAR(128) NOT NULL
 );
 
 CREATE TABLE post(
@@ -37,7 +38,7 @@ CREATE TABLE foto(
 
 CREATE TABLE tentativi_login(
     EmailUtente VARCHAR(50) NOT NULL,
-    DataOra DATETIME NOT NULL
+    DataOra VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE seguiti(
