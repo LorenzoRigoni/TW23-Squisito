@@ -7,11 +7,13 @@ include "create_sec_session.php";
 start_session("login_session");
 if(isset($_POST['email'], $_POST['password'])) {
     if(login($_POST['email'], $_POST['password'], $conn)) {
-        echo "Login effettuato"; /*Al posto di echo scegliere se ritornare JSON*/
+        $response = array("success" => true);
     } else {
-        echo "Login fallito";
+        $response = array("success" => false);
     }
 } else {
-    echo "Richiesta invalida";
+    $response = array("success" => false);
 }
+
+echo json_encode($response);
 ?>

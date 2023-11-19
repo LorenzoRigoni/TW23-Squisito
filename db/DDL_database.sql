@@ -7,7 +7,7 @@ CREATE TABLE utenti(
     Email VARCHAR(50) NOT NULL PRIMARY KEY,
     Username VARCHAR(30) NOT NULL,
     Nome VARCHAR(50) NOT NULL,
-    FotoProfilo VARBINARY(MAX), /*Da vedere come salvare le immagini*/
+    FotoProfilo BLOB,
     Pwd CHAR(128) NOT NULL,
     Salt CHAR(128) NOT NULL
 );
@@ -16,6 +16,7 @@ CREATE TABLE post(
     IDPost INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     EmailUtente VARCHAR(50) NOT NULL,
     Titolo VARCHAR(30) NOT NULL,
+    Foto BLOB,
     Ricetta VARCHAR(500) NOT NULL,
     Nazione VARCHAR(50) NOT NULL,
     FOREIGN KEY (EmailUtente) REFERENCES utenti(Email)
@@ -25,14 +26,6 @@ CREATE TABLE commenti(
     IDCommento INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     IDPost INT NOT NULL,
     Contenuto VARCHAR(100) NOT NULL,
-    FOREIGN KEY (IDPost) REFERENCES post(IDPost)
-);
-
-/*Discutere se un post può avere più foto*/
-CREATE TABLE foto(
-    IDFoto INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    IDPost INT NOT NULL,
-    Immagine VARBINARY(MAX) NOT NULL, /*Da vedere come salvare le immagini*/
     FOREIGN KEY (IDPost) REFERENCES post(IDPost)
 );
 
