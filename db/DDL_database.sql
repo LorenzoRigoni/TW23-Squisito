@@ -1,7 +1,7 @@
 CREATE DATABASE squisito_DB;
 
-CREATE USER 'sec_user'@'localhost' IDENTIFIED BY 'P4sswordLungaMaSicura!';
-GRANT SELECT, INSERT, UPDATE, DELETE ON `secure_login`.* TO 'sec_user'@'localhost';
+CREATE USER 'secureUser'@'localhost' IDENTIFIED BY 'P4sswordLungaMaSicura!';
+GRANT SELECT, INSERT, UPDATE, DELETE ON `squisito_db`.* TO 'secureUser'@'localhost';
 
 CREATE TABLE utenti(
     Email VARCHAR(50) NOT NULL PRIMARY KEY,

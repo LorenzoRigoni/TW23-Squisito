@@ -1,6 +1,6 @@
 <?
-function start_session($name) {
-    $session_name = $name;
+function start_session() {
+    $session_name = 'sec_session';
     $secure = true; 
     $httponly = true;
     //ini_set('session.use_only_cookies', 1); 

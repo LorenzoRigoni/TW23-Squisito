@@ -4,7 +4,7 @@ include "db_conn.php";
 include "login_functions.php";
 include "create_sec_session.php";
 
-start_session("login_session");
+start_session();
 if(isset($_POST['email'], $_POST['password'])) {
     if(login($_POST['email'], $_POST['password'], $conn)) {
         $response = array("success" => true);
