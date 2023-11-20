@@ -8,6 +8,7 @@ CREATE TABLE utenti(
     Username VARCHAR(30) NOT NULL,
     Nome VARCHAR(50) NOT NULL,
     FotoProfilo BLOB,
+    Bio VARCHAR(100),
     Pwd CHAR(128) NOT NULL,
     Salt CHAR(128) NOT NULL
 );
