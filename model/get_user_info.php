@@ -26,4 +26,6 @@ if ($selectQuery = $conn->prepare($query)) {
 } else {
     echo json_encode(array("error" => $selectQuery->error));
 }
+
+$conn->close();
 ?>

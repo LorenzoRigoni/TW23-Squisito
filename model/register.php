@@ -20,3 +20,6 @@ if ($insert = $conn->prepare($query)) {
         echo json_encode($response);
     }
 }
+
+$conn->close();
+?>
