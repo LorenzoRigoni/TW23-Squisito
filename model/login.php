@@ -16,4 +16,6 @@ if(isset($_POST['email'], $_POST['password'])) {
 }
 
 echo json_encode($response);
+
+$conn->close();
 ?>
