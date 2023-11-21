@@ -1,48 +1,91 @@
-html,body {
-    height: 100%;
+html,
+body {
+  height: 100%;
 }
+
 .hero-image {
-    background-image:url("https://www.unafamigliaincucina.com/wp-content/uploads/2021/02/IMG_5322-scaled.jpg");
-    background-position: center;
-    background-size: cover;
-    height: 100%; 
+  background-image: url("https://www.unafamigliaincucina.com/wp-content/uploads/2021/02/IMG_5322-scaled.jpg");
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+}
+
+.back-button {
+  margin: 5px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.75);
+  text-align: center;
+}
+
+.place {
+  margin: 5px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.75);
+  padding: 5px;
+  width: fit-content;
+}
+
+.back-button:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.back-button span {
+  color: black;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.flag {
+  width: 40px;
+  height: 30px;
+}
+.fixed-row-bottom { 
+  position: fixed;
+  bottom: 0;
+}
+.container {
+  max-width: 100% !important;
+}
+
+.line-1 {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1)
+}
+
+.follow {
+  background-color: rgba(229, 103, 23, 0.8);
+  color: white;
+}
+
+.follow:focus {
+  background-color: rgba(170, 170, 170, 0.8);
+}
+.like {
+  font-size: 1.5em;
+  color: red;
+  border-radius: 50%;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.75);
+}
+.post-time {
+  font-size: smaller;
+  color: rgba(0, 0, 0, 0.75);
+}
+.posts {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+@media (max-width: 768px) {
+  .hero-image {
+    height: 50%;
   }
-  .back-button {
-    margin: 5px;
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.75);
-    text-align: center;
+  .fixed-row-bottom { 
+    position: fixed;
+    bottom: 50%;
   }
-  .place {
-    margin: 5px;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.75);
-    padding: 5px;
-    width: fit-content;
-  }
-  .back-button:before {
-    content: '';
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-  }
-  
-  .back-button span {  
-    color: black;
-    text-align: center;
-    vertical-align: middle;
-  }
-  .flag {
-    width: 40px;
-    height: 30px;
-  }
-  @media (max-width: 768px) { 
-    .hero-image {
-        height: 50%;
-    }
-  }
-  .container {
-    max-width: 100% !important;
-  }
+}
