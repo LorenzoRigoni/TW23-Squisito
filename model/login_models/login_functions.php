@@ -1,6 +1,13 @@
 <?
+require_once('../connection_models/db_conn.php');
 
-//Funzione di login
+/**
+ * This function is for the login of the user.
+ * @param string $email The email of the user
+ * @param string $pwd The password of the user
+ * @param mysqli $conn The connection to the database
+ * @return true|false True if the user is succesfully logged, false otherwise
+ */
 function login($email, $pwd, $conn)
 {
     $userEmail = "";
@@ -41,10 +48,16 @@ function login($email, $pwd, $conn)
     }
 }
 
+/**
+ * Function for the check against the brute-force attacks
+ * @param string $email The email of the user
+ * @param mysqli $conn The connection to the database
+ * @return true|false False if there isn't an attack, true otherwise
+ */
 function checkBruteForce($email, $conn)
 {
     $now = time();
-    // Vengono analizzati tutti i tentativi di login a partire dalle ultime due ore.
+    //Analyzing the login attemps from 2 hours
     $valid_attempts = $now - (2 * 60 * 60);
     if ($query = $conn->prepare("SELECT DataOra FROM tentativi_login WHERE EmailUtente = ? AND DataOra > '$valid_attempts'")) {
         $query->bind_param('i', $email);
@@ -58,6 +71,11 @@ function checkBruteForce($email, $conn)
     }
 }
 
+/**
+ * This function checks if the user is connected at the moment.
+ * @param mysqli $conn The connection to the database
+ * @return true|false True if the user is logged, false otherwise.
+ */
 function checkLogin($conn)
 {
     $password = "";
@@ -72,22 +90,17 @@ function checkLogin($conn)
                 $query->fetch();
                 $login_check = hash('sha512', $password.$_SERVER['HTTPS_USER_AGENT']);
                 if ($login_check == $_SESSION['login_string']) {
-                    // Login eseguito
                     return true;
                 } else {
-                    //  Login non eseguito
                     return false;
                 }
             } else {
-                // Login non eseguito
                 return false;
             }
         } else {
-            // Login non eseguito
             return false;
         }
     } else {
-        // Login non eseguito
         return false;
     }
 }

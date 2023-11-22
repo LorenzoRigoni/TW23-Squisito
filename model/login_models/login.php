@@ -1,8 +1,8 @@
 <?
-require_once("db_conn.php");
-include "db_conn.php";
+require_once("../connection_models/db_conn.php");
+include "../connection_models/db_conn.php";
 include "login_functions.php";
-include "create_sec_session.php";
+include "../session_models/create_session.php";
 
 start_session();
 if(isset($_POST['email'], $_POST['password'])) {

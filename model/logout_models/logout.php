@@ -1,6 +1,6 @@
 <?
-include 'login_functions.php';
-include 'create_sec_session.php';
+include '../login_models/login_functions.php';
+include '../session_models/create_sec_session.php';
 
 start_session();
 $_SESSION = array();

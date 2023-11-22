@@ -1,6 +1,6 @@
 <?
-include 'db_conn.php';
-require_once('db_conn.php');
+include '../connection_models/db_conn.php';
+require_once('../connection_models/db_conn.php');
 
 $query = "SELECT P.IDPost, P.Titolo, P.Foto, P.Ricetta, P.Nazione, U.Email, U.Username, U.FotoProfilo
         FROM post P INNER JOIN utente U ON U.Email = P.EmailUtente

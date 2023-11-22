@@ -1,6 +1,6 @@
 <?
-include "db_conn.php";
-require_once("db_conn.php");
+include "../connection_models/db_conn.php";
+require_once("../connection_models/db_conn.php");
 
 $query = "SELECT U.Username, U.Nome, U.FotoProfilo, U.Bio
         FROM utente U
