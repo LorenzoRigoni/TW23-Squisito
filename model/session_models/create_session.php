@@ -1,4 +1,4 @@
-<?
+<?php
 function start_session() {
     $session_name = 'sec_session';
     $secure = true; 

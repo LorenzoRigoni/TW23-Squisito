@@ -1,4 +1,4 @@
-<?
+<?php
 include '../login_models/login_functions.php';
 include '../session_models/create_sec_session.php';
 

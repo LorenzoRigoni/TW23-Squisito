@@ -1,4 +1,4 @@
-<?
+<?php
 require_once('../connection_models/db_conn.php');
 
 /**
@@ -34,7 +34,7 @@ function login($email, $pwd, $conn)
                     $_SESSION['userNome'] = $userNome;
                     $_SESSION['username'] = $username;
                     $_SESSION['userPhoto'] = $userPhoto;
-                    $_SESSION['login_string'] = hash('sha512', $pwd.$_SERVER['HTTPS_USER_AGENT']);
+                    $_SESSION['login_string'] = hash('sha512', $pwd.$_SERVER['HTTP_USER_AGENT']);
                     return true;
                 } else {
                     $now = time();

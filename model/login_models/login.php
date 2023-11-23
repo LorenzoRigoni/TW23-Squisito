@@ -1,4 +1,4 @@
-<?
+<?php
 require_once("../connection_models/db_conn.php");
 include "../connection_models/db_conn.php";
 include "login_functions.php";
@@ -8,6 +8,7 @@ start_session();
 if(isset($_POST['email'], $_POST['password'])) {
     if(login($_POST['email'], $_POST['password'], $conn)) {
         $response = array("success" => true);
+        header("Location: ../../view/home.html");
     } else {
         $response = array("success" => false);
     }
