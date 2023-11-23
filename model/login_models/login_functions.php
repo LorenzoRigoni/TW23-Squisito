@@ -1,22 +1,17 @@
 <?php
-require_once('../connection_models/db_conn.php');
+require('../connection_models/db_conn.php');
 
 /**
  * This function is for the login of the user.
  * @param string $email The email of the user
  * @param string $pwd The password of the user
  * @param mysqli $conn The connection to the database
- * @return true|false True if the user is succesfully logged, false otherwise
+ * @return bool True if the user is succesfully logged, false otherwise
  */
 function login($email, $pwd, $conn)
 {
     $userEmail = "";
-    $username = "";
-    $userNome = "";
-    $userPwd = "";
-    $userSalt = "";
-    $userPhoto = 0;
-    $query = "SELECT Email, Username, Nome, FotoProfilo, Pwd, Salt FROM utenti WHERE Email = ?";
+    $query = "SELECT Email, Username, Nome, FotoProfilo, Pwd, Salt FROM utenti WHERE Email = ? LIMIT 1";
     if ($excQuery = $conn->prepare($query)) {
         $excQuery->bind_param('s', $email);
         $excQuery->execute();
@@ -31,9 +26,6 @@ function login($email, $pwd, $conn)
             } else {
                 if ($pwd == $userPwd) {
                     $_SESSION['userEmail'] = $userEmail;
-                    $_SESSION['userNome'] = $userNome;
-                    $_SESSION['username'] = $username;
-                    $_SESSION['userPhoto'] = $userPhoto;
                     $_SESSION['login_string'] = hash('sha512', $pwd.$_SERVER['HTTP_USER_AGENT']);
                     return true;
                 } else {
@@ -52,7 +44,7 @@ function login($email, $pwd, $conn)
  * Function for the check against the brute-force attacks
  * @param string $email The email of the user
  * @param mysqli $conn The connection to the database
- * @return true|false False if there isn't an attack, true otherwise
+ * @return bool False if there isn't an attack, true otherwise
  */
 function checkBruteForce($email, $conn)
 {
@@ -74,12 +66,12 @@ function checkBruteForce($email, $conn)
 /**
  * This function checks if the user is connected at the moment.
  * @param mysqli $conn The connection to the database
- * @return true|false True if the user is logged, false otherwise.
+ * @return bool True if the user is logged, false otherwise.
  */
 function checkLogin($conn)
 {
     $password = "";
-    if (isset($_SESSION['userEmail'], $_SESSION['userNome'], $_SESSION['username'], $_SESSION['userPhoto'], $_SESSION['login_string'])) {
+    if (isset($_SESSION['userEmail'])) {
         if ($query = $conn->prepare("SELECT pwd FROM utenti WHERE email = ? LIMIT 1")) {
             $query->bind_param('i', $_SESSION['userEmail']);
             $query->execute();
@@ -88,7 +80,7 @@ function checkLogin($conn)
             if ($query->num_rows == 1) { 
                 $query->bind_result($password);
                 $query->fetch();
-                $login_check = hash('sha512', $password.$_SERVER['HTTPS_USER_AGENT']);
+                $login_check = hash('sha512', $password.$_SERVER['HTTP_USER_AGENT']);
                 if ($login_check == $_SESSION['login_string']) {
                     return true;
                 } else {

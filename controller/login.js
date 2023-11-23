@@ -24,9 +24,9 @@ $('#login').on("click",function() {
 			"password": $("#password").val()
         },
         success:function(result){
-			console.log(result)
-			if (result) {
-            console.log("result");
+			const responseObj = JSON.parse(result);
+			if (responseObj.success) {
+				window.location.href = '../view/home.html';
 			}
         }
     });

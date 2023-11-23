@@ -1,5 +1,4 @@
 <?php
-include '../connection_models/db_conn.php';
 include '../login_models/login_functions.php';
 require_once('../connection_models/db_conn.php');
 
@@ -15,7 +14,9 @@ if ($insert = $conn->prepare($query)) {
         $response = array("success" => true);
         echo json_encode($response);
         $conn->close();
+        $conn = new mysqli("localhost", "secureUser", "P4sswordLungaMaSicura!", "squisito_db", 3306);
         login($_POST['email'], $pwd, $conn);
+        $conn->close();
     } else {
         $response = array("success" => false);
         echo json_encode($response);

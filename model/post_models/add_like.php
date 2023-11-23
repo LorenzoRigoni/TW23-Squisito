@@ -1,5 +1,4 @@
 <?php
-include '../connection_models/db_conn.php';
 include '../login_models/login_functions.php';
 require_once('../connection_models/db_conn.php');
 
@@ -8,7 +7,7 @@ $query = "INSERT INTO mi_piace (IDPost, EmailUtente)
 
 if (checkLogin($conn)) {
     if ($insertQuery = $conn->prepare($query)) {
-        $insertQuery->bind_param("is", $_POST['IDPost'], $_SESSION['userEmail']);
+        $insertQuery->bind_param("is", $_GET['IDPost'], $_GET['email']);
         if ($insertQuery->execute()) {
             echo json_encode(array("response" => true));
         } else {

@@ -1,5 +1,4 @@
 <?php
-include '../connection_models/db_conn.php';
 include '../login_models/login_functions.php';
 require_once('../connection_models/db_conn.php');
 
@@ -8,7 +7,7 @@ $query = "DELETE FROM mi_piace
 
 if (checkLogin($conn)) {
     if ($deleteQuery = $conn->prepare($query)) {
-        $deleteQuery->bind_param("is", $_POST['IDPost'], $_SESSION['userEmail']);
+        $deleteQuery->bind_param("is", $_GET['IDPost'], $_GET['email']);
         if ($deleteQuery->execute()) {
             echo json_encode(array("response" => true));
         } else {
