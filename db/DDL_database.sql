@@ -26,8 +26,10 @@ CREATE TABLE post(
 CREATE TABLE commenti(
     IDCommento INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     IDPost INT NOT NULL,
+    EmailUtente VARCHAR(50) NOT NULL,
     Contenuto VARCHAR(100) NOT NULL,
-    FOREIGN KEY (IDPost) REFERENCES post(IDPost)
+    FOREIGN KEY (IDPost) REFERENCES post(IDPost),
+    FOREIGN KEY (EmailUtente) REFERENCES utenti(Email)
 );
 
 CREATE TABLE tentativi_login(
