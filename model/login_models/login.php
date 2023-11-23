@@ -4,11 +4,10 @@ include "../connection_models/db_conn.php";
 include "login_functions.php";
 include "../session_models/create_session.php";
 
-start_session();
+session_start();
 if(isset($_POST['email'], $_POST['password'])) {
     if(login($_POST['email'], $_POST['password'], $conn)) {
         $response = array("success" => true);
-        header("Location: ../../view/home.html");
     } else {
         $response = array("success" => false);
     }

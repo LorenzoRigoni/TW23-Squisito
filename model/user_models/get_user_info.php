@@ -6,7 +6,7 @@ require_once("../connection_models/db_conn.php");
 $query = "SELECT U.Username, U.Nome, U.FotoProfilo, U.Bio
         FROM utente U
         WHERE U.Email = ?";
-
+session_start();
 if (checkLogin($conn)) {
     if ($selectQuery = $conn->prepare($query)) {
         $selectQuery->bind_param("s", $_GET['email']);
