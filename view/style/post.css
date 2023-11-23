@@ -2,12 +2,18 @@ html,
 body {
   height: 100%;
 }
-
+.container {
+  max-width: 100% !important;
+}
+/*------LEFT SIDE---------*/
 .hero-image {
   background-image: url("https://www.unafamigliaincucina.com/wp-content/uploads/2021/02/IMG_5322-scaled.jpg");
   background-position: center;
   background-size: cover;
   height: 100%;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .back-button {
@@ -44,14 +50,21 @@ body {
   width: 40px;
   height: 30px;
 }
-.fixed-row-bottom { 
+
+.fixed-row-bottom {
   position: fixed;
   bottom: 0;
 }
-.container {
-  max-width: 100% !important;
+.like {
+  font-size: 1.5em;
+  color: red;
+  border-radius: 50%;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.75);
+  width: auto;
 }
-
+/*-------------------*/
+/*--------RIGHT------*/
 .line-1 {
   height: 1px;
   background: rgba(0, 0, 0, 0.1)
@@ -65,26 +78,46 @@ body {
 .follow:focus {
   background-color: rgba(170, 170, 170, 0.8);
 }
-.like {
-  font-size: 1.5em;
-  color: red;
-  border-radius: 50%;
-  padding: 10px;
-  background-color: rgba(255, 255, 255, 0.75);
-}
+
 .post-time {
   font-size: smaller;
   color: rgba(0, 0, 0, 0.75);
 }
+
 .posts {
+  height: 60vh;
   overflow-x: hidden;
   overflow-y: auto;
 }
+
+.leave-comment {
+  display: flex;
+  padding: 12px 16px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid #7C8089;
+}
+
+.leave-comment>textarea {
+  max-height: 30px;
+  border: 0;
+  background-color: transparent;
+}
+.pubblica {
+  background-color: transparent;
+  color: rgba(229, 103, 23, 0.8);
+  font-size: large;
+  font-weight: bold;
+  border: 0;
+}
+/*-------------------------*/
 @media (max-width: 768px) {
   .hero-image {
     height: 50%;
   }
-  .fixed-row-bottom { 
+
+  .fixed-row-bottom {
     position: fixed;
     bottom: 50%;
   }

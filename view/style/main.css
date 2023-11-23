@@ -14,3 +14,23 @@ body {
 .far:hover, .fas:hover {
   color: #f26e21;
 }
+/*-------------SCROLLBAR-----------*/
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #d99053 #E5E5E5;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #E5E5E5;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #d99053;
+  border-radius: 10px;
+}
