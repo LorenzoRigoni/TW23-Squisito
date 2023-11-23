@@ -3,6 +3,11 @@ CREATE DATABASE squisito_DB;
 CREATE USER 'secureUser'@'localhost' IDENTIFIED BY 'P4sswordLungaMaSicura!';
 GRANT SELECT, INSERT, UPDATE, DELETE ON `squisito_db`.* TO 'secureUser'@'localhost';
 
+CREATE TABLE nazioni(
+    IDNazione INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(50) NOT NULL
+);
+
 CREATE TABLE utenti(
     Email VARCHAR(50) NOT NULL PRIMARY KEY,
     Username VARCHAR(30) NOT NULL,
@@ -19,8 +24,9 @@ CREATE TABLE post(
     Titolo VARCHAR(30) NOT NULL,
     Foto BLOB,
     Ricetta VARCHAR(500) NOT NULL,
-    Nazione VARCHAR(50) NOT NULL,
-    FOREIGN KEY (EmailUtente) REFERENCES utenti(Email)
+    IDNazione INT NOT NULL,
+    FOREIGN KEY (EmailUtente) REFERENCES utenti(Email),
+    FOREIGN KEY (IDNazione) REFERENCES nazioni(IDNazione)
 );
 
 CREATE TABLE commenti(
