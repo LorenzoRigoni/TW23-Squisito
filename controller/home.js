@@ -8,7 +8,7 @@ window.addEventListener('load', function() {
             "email" : user
         },
         success:function(result){
-            console.log(result);
+            console.log("RESULT",result);
         }
     });
 });

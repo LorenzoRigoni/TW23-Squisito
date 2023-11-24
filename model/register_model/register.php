@@ -9,7 +9,9 @@ $pwd = hash('sha512', $pwd . $random_salt);
 $query = "INSERT INTO utenti(Email, Username, Nome, FotoProfilo, Bio, Pwd, Salt) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 if ($insert = $conn->prepare($query)) {
-    $insert->bind_param('sssbsss', $_POST['email'], $_POST['username'], $_POST['nome'], $_POST['fotoProfilo'], $_POST['bio'], $pwd, $random_salt);
+    $image = NULL;
+    $insert->bind_param('sssbsss', $_POST['email'], $_POST['username'], $_POST['nome'], $image, $_POST['bio'], $pwd, $random_salt);
+    $insert->send_long_data(3,file_get_contents($_FILES['fotoProfilo']['tmp_name']));
     if ($insert->execute()) {
         $response = array("success" => true);
         echo json_encode($response);
