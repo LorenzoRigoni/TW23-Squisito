@@ -1,5 +1,4 @@
 <?php
-include '../connection_models/db_conn.php';
 include '../login_models/login_functions.php';
 require_once('../connection_models/db_conn.php');
 
@@ -7,6 +6,7 @@ $query = "SELECT U.Username
         FROM utenti U INNER JOIN mi_piace M ON U.Email = M.EmailUtente
         WHERE M.IDPost = ?";
 
+session_start();
 if (checkLogin($conn)) {
     if ($selectQuery = $conn->prepare($query)) {
         $selectQuery->bind_param("i", $_GET['IDPost']);

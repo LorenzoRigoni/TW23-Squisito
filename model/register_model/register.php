@@ -8,6 +8,7 @@ $pwd = hash('sha512', $pwd . $random_salt);
 
 $query = "INSERT INTO utenti(Email, Username, Nome, FotoProfilo, Bio, Pwd, Salt) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
+session_start();
 if ($insert = $conn->prepare($query)) {
     $image = NULL;
     $insert->bind_param('sssbsss', $_POST['email'], $_POST['username'], $_POST['nome'], $image, $_POST['bio'], $pwd, $random_salt);

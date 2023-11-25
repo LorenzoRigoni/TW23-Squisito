@@ -2,7 +2,7 @@
 require('../connection_models/db_conn.php');
 
 /**
- * This function is for the login of the user.
+ * Function for the login of the user.
  * @param string $email The email of the user
  * @param string $pwd The password of the user
  * @param mysqli $conn The connection to the database
@@ -64,7 +64,7 @@ function checkBruteForce($email, $conn)
 }
 
 /**
- * This function checks if the user is connected at the moment.
+ * Function that checks if the user is connected at the moment.
  * @param mysqli $conn The connection to the database
  * @return bool True if the user is logged, false otherwise.
  */
@@ -74,20 +74,18 @@ function checkLogin($conn)
     $password = "";
     if (isset($_SESSION['userEmail'])) {
         if ($query = $conn->prepare("SELECT pwd FROM utenti WHERE email = ? LIMIT 1")) {
-            $query->bind_param('i', $_SESSION['userEmail']);
+            $query->bind_param('s', $_SESSION['userEmail']);
             $query->execute();
             $query->store_result();
-
             if ($query->num_rows == 1) { 
                 $query->bind_result($password);
                 $query->fetch();
                 $login_check = hash('sha512', $password.$_SERVER['HTTP_USER_AGENT']);
-                return true;
-                /*if ($login_check == $_SESSION['login_string']) {
+                if ($login_check == $_SESSION['login_string']) {
                     return true;
                 } else {
                     return false;
-                }*/
+                }
             } else {
                 return false;
             }
