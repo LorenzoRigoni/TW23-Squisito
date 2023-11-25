@@ -15,6 +15,7 @@ session_start();
 if (checkLogin($conn)) {
     if ($selectQuery = $conn->prepare($query)) {
         $selectQuery->bind_param("s", $_SESSION['userEmail']);
+        $selectQuery->bind_param("s", $_SESSION['userEmail']);
         if ($selectQuery->execute()) {
             $response = $selectQuery->get_result();
             echo json_encode($response->fetch_all(MYSQLI_ASSOC));

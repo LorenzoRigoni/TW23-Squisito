@@ -11,7 +11,9 @@ $query = "INSERT INTO utenti(Email, Username, Nome, FotoProfilo, Bio, Pwd, Salt)
 if ($insert = $conn->prepare($query)) {
     $image = NULL;
     $insert->bind_param('sssbsss', $_POST['email'], $_POST['username'], $_POST['nome'], $image, $_POST['bio'], $pwd, $random_salt);
+    if($_FILES['fotoProfilo']['error'] == 0){
     $insert->send_long_data(3,file_get_contents($_FILES['fotoProfilo']['tmp_name']));
+    }
     if ($insert->execute()) {
         $response = array("success" => true);
         echo json_encode($response);
