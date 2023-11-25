@@ -4,7 +4,7 @@ include '../login_models/login_functions.php';
 require_once("../connection_models/db_conn.php");
 
 $query = "SELECT U.Username, U.Nome, U.FotoProfilo, U.Bio
-        FROM utente U
+        FROM utenti U
         WHERE U.Email = ?";
 session_start();
 if (checkLogin($conn)) {
@@ -12,16 +12,16 @@ if (checkLogin($conn)) {
         $selectQuery->bind_param("s", $_GET['email']);
         if ($selectQuery->execute()) {
             $results = $selectQuery->get_result();
-            $posts = array();
+            $users = array();
             while ($row = $results->fetch_assoc()) {
-                $posts[] = array(
-                    'Username' => $row['Username'],
-                    'Nome' => $row['Nome'],
-                    'FotoProfilo' => $row['FotoProfilo'],
-                    'Bio' => $row['Bio'],
+                $users = array(
+                    "Username" => $row['Username'],
+                    "Nome" => $row['Nome'],
+                    "FotoProfilo" => base64_encode($row['FotoProfilo']),
+                    "Bio" => $row['Bio'],
                 );
             }
-            echo json_encode($posts);
+            echo json_encode($users);
         } else {
             echo json_encode(array("error" => $selectQuery->error));
         }

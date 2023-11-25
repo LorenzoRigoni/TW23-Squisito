@@ -5,7 +5,7 @@
             var xhr = new XMLHttpRequest();
 
             // Configurare la richiesta
-            xhr.open("GET", "get_followed_post.php", true);
+            xhr.open("GET", "/tw23-squisito/model/post_models/get_followed_post.php", true);
 
             // Inviare la richiesta
             xhr.send();
