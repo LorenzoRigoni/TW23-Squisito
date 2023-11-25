@@ -12,16 +12,7 @@ if (checkLogin($conn)) {
         $selectQuery->bind_param("s", $_GET['email']);
         if ($selectQuery->execute()) {
             $results = $selectQuery->get_result();
-            $posts = array();
-            while ($row = $results->fetch_assoc()) {
-                $posts[] = array(
-                    'Username' => $row['Username'],
-                    'Nome' => $row['Nome'],
-                    'FotoProfilo' => $row['FotoProfilo'],
-                    'Bio' => $row['Bio'],
-                );
-            }
-            echo json_encode($posts);
+            echo json_encode($results->fetch_all(MYSQLI_ASSOC));
         } else {
             echo json_encode(array("error" => $selectQuery->error));
         }

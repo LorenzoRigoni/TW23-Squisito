@@ -12,13 +12,7 @@ if (checkLogin($conn)) {
         $selectQuery->bind_param("i", $_GET['IDPost']);
         if ($selectQuery->execute()) {
             $results = $selectQuery->get_result();
-            $users = array();
-            while ($row = $results->fetch_assoc()) {
-                $users[] = array(
-                    'Username' => $row['Username']
-                );
-            }
-            echo json_encode($users);
+            echo json_encode($results->fetch_all(MYSQLI_ASSOC));
         } else {
             echo json_encode(array("error" => $selectQuery->error));
         }

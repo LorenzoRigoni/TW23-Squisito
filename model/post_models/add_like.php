@@ -5,9 +5,10 @@ require_once('../connection_models/db_conn.php');
 $query = "INSERT INTO mi_piace (IDPost, EmailUtente)
         VALUES (?, ?)";
 
+session_start();
 if (checkLogin($conn)) {
     if ($insertQuery = $conn->prepare($query)) {
-        $insertQuery->bind_param("is", $_GET['IDPost'], $_GET['email']);
+        $insertQuery->bind_param("is", $_GET['IDPost'], $_SESSION['userEmail']);
         if ($insertQuery->execute()) {
             echo json_encode(array("response" => true));
         } else {

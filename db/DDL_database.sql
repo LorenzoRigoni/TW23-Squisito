@@ -12,7 +12,7 @@ CREATE TABLE utenti(
     Email VARCHAR(50) NOT NULL PRIMARY KEY,
     Username VARCHAR(30) NOT NULL,
     Nome VARCHAR(50) NOT NULL,
-    FotoProfilo BLOB,
+    FotoProfilo LONGBLOB,
     Bio VARCHAR(100),
     Pwd CHAR(128) NOT NULL,
     Salt CHAR(128) NOT NULL
@@ -22,7 +22,7 @@ CREATE TABLE post(
     IDPost INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     EmailUtente VARCHAR(50) NOT NULL,
     Titolo VARCHAR(30) NOT NULL,
-    Foto BLOB,
+    Foto LONGBLOB,
     Ricetta VARCHAR(500) NOT NULL,
     IDNazione INT NOT NULL,
     FOREIGN KEY (EmailUtente) REFERENCES utenti(Email),

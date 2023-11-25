@@ -5,9 +5,10 @@ require_once('../connection_models/db_conn.php');
 $query = "DELETE FROM mi_piace
         WHERE IDPost = ? AND EmailUtente = ?";
 
+session_start();
 if (checkLogin($conn)) {
     if ($deleteQuery = $conn->prepare($query)) {
-        $deleteQuery->bind_param("is", $_GET['IDPost'], $_GET['email']);
+        $deleteQuery->bind_param("is", $_GET['IDPost'], $_SESSION['userEmail']);
         if ($deleteQuery->execute()) {
             echo json_encode(array("response" => true));
         } else {
