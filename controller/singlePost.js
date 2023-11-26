@@ -188,7 +188,7 @@ contenitorePost.appendChild(profileCol);
     commentTextCol.className = "col-auto my-auto";
 
     var commentText = document.createElement("div");
-    commentText.textContent = datiJSON[i].Commento;
+    commentText.textContent = datiJSON[i].Contenuto;
 
     // Aggiungere gli elementi alla struttura HTML del commento
     avatarCol.appendChild(avatarImage);
