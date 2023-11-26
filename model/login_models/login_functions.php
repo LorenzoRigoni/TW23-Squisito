@@ -70,7 +70,6 @@ function checkBruteForce($email, $conn)
  */
 function checkLogin($conn)
 {
-    session_start();
     $password = "";
     if (isset($_SESSION['userEmail'])) {
         if ($query = $conn->prepare("SELECT pwd FROM utenti WHERE email = ? LIMIT 1")) {

@@ -12,7 +12,9 @@ if (checkLogin($conn)) {
         $selectQuery->bind_param("s", $_GET['email']);
         if ($selectQuery->execute()) {
             $results = $selectQuery->get_result();
-            echo json_encode($results->fetch_all(MYSQLI_ASSOC));
+            $temp = $results->fetch_all(MYSQLI_ASSOC);
+            $temp[0]['FotoProfilo'] = base64_encode($temp[0]['FotoProfilo']);
+            echo json_encode($temp);
         } else {
             echo json_encode(array("error" => $selectQuery->error));
         }
