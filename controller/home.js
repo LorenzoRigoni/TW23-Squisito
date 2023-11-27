@@ -18,3 +18,15 @@ window.addEventListener('load', function() {
 function postClick(event) {
     window.location.href = '../view/post.html?id='+event.currentTarget.id;
 }
+function likeClick(event) {
+   $.ajax({
+        url:"/tw23-squisito/model/post_models/add_like.php",  
+        type: "GET",   
+        data: {
+            "IDPost" : event.currentTarget.id
+        },
+        success:function(result){
+            alert("Hai messo Mi Piace al Post");
+        }
+    });
+}
