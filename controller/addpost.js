@@ -27,14 +27,14 @@ function loadOptions() {
           id: option.Shortname,
         });
 
-        // Aggiungi l'evento click all'elemento option
-        newOption.on("click", function () {
-          var customAttributeValue = $(this).attr("id");
-          onSelectionChange(customAttributeValue);
-        });
-
         // Aggiungi l'opzione al menu a discesa
         $("#sel1").append(newOption);
+      });
+
+      $("#sel1").on("change", function () {
+        var selectedOptionId = $(this).find(":selected").attr("id");
+		var nomeNazione = $(this).find(":selected").text();
+        onSelectionChange(selectedOptionId,nomeNazione);
       });
 
       // Opzionale: Aggiorna il menu a discesa (richiede il plugin Bootstrap)
@@ -46,10 +46,11 @@ function loadOptions() {
   });
 }
 
-function onSelectionChange(idcountry) {
-  alert("DENTRO");
+function onSelectionChange(idcountry,nomeNazione) {
   let flagElement = document.getElementById("flag");
-  flagElement.src ="tw23-squisito/view/style/flags/ + " + idcountry + ".png)";
+  let label = document.getElementById("CountryName");
+  label.textContent=nomeNazione;
+  flagElement.src = "/tw23-squisito/view/style/flags/" + idcountry + ".png";
 }
 
 // Chiama la funzione loadOptions quando la pagina è pronta
