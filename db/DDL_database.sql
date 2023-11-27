@@ -4,8 +4,9 @@ CREATE USER 'secureUser'@'localhost' IDENTIFIED BY 'P4sswordLungaMaSicura!';
 GRANT SELECT, INSERT, UPDATE, DELETE ON `squisito_db`.* TO 'secureUser'@'localhost';
 
 CREATE TABLE nazioni(
-    IDNazione INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    Nome VARCHAR(50) NOT NULL
+    IDNazione INT NOT NULL PRIMARY KEY,
+    Shortname VARCHAR(3) NOT NULL,
+    Nome VARCHAR(150) NOT NULL
 );
 
 CREATE TABLE utenti(
