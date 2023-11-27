@@ -93,6 +93,8 @@ function caricaImmagini() {
         heartIcon.className = "list-inline-item m-0 pe-2";
         var heartSpan = document.createElement("span");
         heartSpan.className = "fas fa-heart social-link-clicked";
+        heartSpan.addEventListener("click",postClick,false);
+        card.setAttribute("id", datiJSON[i].IDPost);
         heartIcon.appendChild(heartSpan);
 
         // Creare il secondo elemento della lista (commento)
