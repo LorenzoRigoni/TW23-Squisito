@@ -26,13 +26,14 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/tw23-squisito/model/register_model/register.ph', 
+                url: '/tw23-squisito/model/register_model/register.php', 
                 data: formData,
                 contentType: false,
                 processData: false,
                 success: function(response) {
                     // Gestisci la risposta del server
                     console.log(response);
+                 alert("Ti sei registrato con Successo");
                 },
                 error: function(error) {
                     // Gestisci l'errore
