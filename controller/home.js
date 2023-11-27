@@ -20,7 +20,7 @@ function postClick(event) {
 }
 function likeClick(event) {
    $.ajax({
-        url:"/tw23-squisito/model/post_models/add_like.php",  
+        url:"/tw23-squisito/model/post_models/like_models.php",  
         type: "GET",   
         data: {
             "IDPost" : event.currentTarget.id
