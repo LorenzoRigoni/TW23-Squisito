@@ -10,7 +10,8 @@ if (checkLogin($conn)) {
     if ($selectQuery = $conn->prepare($query)) {
         if ($selectQuery->execute()) {
             $results = $selectQuery->get_result();
-            echo json_encode($results->fetch_all(MYSQLI_ASSOC));
+            $temp =$results->fetch_all(MYSQLI_ASSOC);
+            echo json_encode($temp);
         } else {
             echo json_encode(array("error" => $selectQuery->error));
         }
