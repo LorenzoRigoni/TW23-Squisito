@@ -24,7 +24,7 @@ function loadOptions() {
         var newOption = $("<option>", {
           value: option.Shortname,
           text: option.Nome,
-          id: option.IDNazione,
+          id: option.Shortname,
         });
 
         // Aggiungi l'evento click all'elemento option
