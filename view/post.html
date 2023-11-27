@@ -16,7 +16,7 @@
 
 <body class="wrapper container">
     <div class="row h-100 d-flex" id="row h-100 d-flex">
-        <div class="col-12 col-md-6 d-inline-block hero-image">
+        <div id="immagineMain" class="col-12 col-md-6 d-inline-block hero-image">
             <div class="row justify-content-between">
                 <div class="col-1">
                     <div class="back-button">
@@ -25,8 +25,8 @@
                 </div>
                 <div class="col-5">
                     <div class="place float-end">
-                        <img src="https://cdn-icons-png.flaticon.com/512/940/940188.png" alt="country" class="flag">
-                        <span>Paris, Francia</span>
+                        <img id="flag" src="https://cdn-icons-png.flaticon.com/512/940/940188.png" alt="country" class="flag">
+                        <span id="Paese">Paris, Francia</span>
                     </div>
                 </div>
             </div>
@@ -37,72 +37,25 @@
         <div class="col-12 col-md-6 d-inline-block">
             <div class="row p-2 pt-5">
                 <div class="col-auto">
-                    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp" alt="profile-image"
+                    <img id="fotoUtentePost" src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp" alt="profile-image"
                         class="avatar avatar-64 rounded-circle my-auto">
                 </div>
                 <div class="col-auto d-flex my-auto">
                     <strong>
-                        <h5>Ana Caroline </h5>
+                        <h5 id="nomeUtente">Ana Caroline </h5>
                     </strong>
                     <input type="button" class="btn btn-sm mx-4 follow" value="Follow">
                 </div>
                 <div class="line-1 my-4"></div>
-                <div class="row py-3">
+                <div id="testoRicetta" class="row py-3">
                     Oggi una ricetta dolce al punto giusto per festeggiare una giornata piena d'amore come San
                     Valentino: i MACARONS! #paris #france #iloveit
                 </div>
                 <div class="row post-time">
                     Posted 2hr ago
                 </div>
-                <div class="row ps-5 p-3 posts">
-                    <div class="row comment py-3">
-                        <div class="col-auto">
-                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/5.webp" alt="profile-image"
-                                class="avatar avatar-32 rounded-circle my-auto">
-                        </div>
-                        <div class="col-auto my-auto p-0">
-                            <strong>
-                                <p class="m-0">Lauren</p>
-                            </strong>
-                        </div>
-                        <div class="col-auto my-auto">
-                            Non è la prima volta che un prodotto #fashion faccia scaldare gli animi delle persone.
-                            Questa volta è toccato alla gonna asciugamano di #Balenciaga, tanto discussa quanto
-                            desiderata.
-
-                            Infatti, in questi giorni, la gonna #Towel è diventata ormai virale. La gonna è un vero e
-                            proprio asciugamano per avvolgere il corpo, ma con due bottoni e un cinturino di tessuto
-                            all’interno. Il capo d’abbigliamento è in pre-ordine sul sito ufficiale del brand alla cifra
-                            di 675 euro.
-
-                            Perché mai una persona dovrebbe spendere così tanto per un asciugamano? Una risposta precisa
-                            non c’è. Spesso nel mondo fashion, il fine ultimo non è tanto quello di vendere, ma far
-                            parlare di sé e tener sempre vivo l’hype per il brand.
-
-                            E’ quasi un’abitudine quella di Demna, designer georgiano della maison, di catturare
-                            l’attenzione del pubblico in modo provocatorio, a tal punto da dividere l'opinione pubblica.
-                            Ricordiamo la Trash bag, borsa in pelle ispirata ad un sacco della spazzatura oppure le
-                            sneakers distrutte a 1450 euro.
-
-                            Non è mancata la risposta ironica del colosso svedese #Ikea, che presenta la sua versione
-                            della gonna asciugamano ad un prezzo decisamente minore ma comunque di qualità.
-                            L’asciugamano da bagno #Virnan, indossato a mo' di gonna da un modello che posa tra le
-                            corsie del negozio, viene presentato come capo fondamentale per la prossima primavera, dato
-                            che la spugna sarà di tendenza il prossimo anno.
-
-                            Ma non è la prima volta che i due brand si trovano in situazioni di questo tipo. Il primo
-                            botta e risposta, infatti, c’è stato nel 2017, quando Balenciaga aveva creato una maxi borsa
-                            in pelle con gli iconici colori giallo e blu e gli stessi doppi manici tipici della shopper
-                            Ikea, ad un prezzo decisamente maggiore.
-
-                            Magari in futuro i due marchi ci regaleranno una collaborazione fuori dagli schemi. E tu
-                            cosa ne pensi? Team Ikea o team Balenciaga? Dicci la tua nei commenti.
-
-                            Articolo di @danielanajm
-
-                            #worldy
-                        </div>
-                    </div>
+                <div id="row ps-5 p-3 posts" class="row ps-5 p-3 posts">
+                    
                 </div>
                 <div class="row p-3">
                     <div class="col-auto">
@@ -119,7 +72,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
-        <script src="/tw23-squisito/controller/post.js"></script>
+        <script src="/tw23-squisito/controller/SinglePost.js"></script>
 </body>
 
 </html>
