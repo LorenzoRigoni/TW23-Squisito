@@ -26,6 +26,7 @@ CREATE TABLE post(
     Foto LONGBLOB,
     Ricetta VARCHAR(500) NOT NULL,
     IDNazione INT NOT NULL,
+    DataPost DATE NOT NULL,
     FOREIGN KEY (EmailUtente) REFERENCES utenti(Email),
     FOREIGN KEY (IDNazione) REFERENCES nazioni(IDNazione)
 );
@@ -35,6 +36,7 @@ CREATE TABLE commenti(
     IDPost INT NOT NULL,
     EmailUtente VARCHAR(50) NOT NULL,
     Contenuto VARCHAR(100) NOT NULL,
+    DataCommento DATE NOT NULL,
     FOREIGN KEY (IDPost) REFERENCES post(IDPost),
     FOREIGN KEY (EmailUtente) REFERENCES utenti(Email)
 );
@@ -66,5 +68,6 @@ CREATE TABLE notifiche(
 CREATE TABLE mi_piace(
     EmailUtente VARCHAR(50) NOT NULL,
     IDPost INT NOT NULL,
+    DataLike DATE NOT NULL,
     PRIMARY KEY (EmailUtente, IDPost)
 );

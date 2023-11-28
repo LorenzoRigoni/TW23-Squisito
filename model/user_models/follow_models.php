@@ -13,8 +13,8 @@ if (checkLogin($conn)) {
             $conn->close();
             $query = "";
             if ($isLiked->num_rows() == 0) {
-                $query = "INSERT INTO seguiti (EmailFollower, EmailSeguito)
-                        VALUES (?, ?)";
+                $query = "INSERT INTO seguiti (EmailFollower, EmailSeguito, DataInizio)
+                        VALUES (?, ?, CURRENT_DATE())";
             } else {
                 $query = "DELETE FROM seguiti
                         WHERE EmailFollower = ? AND EmailSeguito = ?";
