@@ -7,7 +7,7 @@ body {
 }
 /*------LEFT SIDE---------*/
 .hero-image {
-  background-image: url("https://www.unafamigliaincucina.com/wp-content/uploads/2021/02/IMG_5322-scaled.jpg");
+  background-image: url('');
   background-position: center;
   background-size: cover;
   height: 100%;
@@ -37,6 +37,20 @@ body {
   text-align: center;
   vertical-align: middle;
 }
+
+.place {
+  margin: 5px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.75);
+  padding: 5px;
+  width: fit-content;
+}
+
+.flag {
+  width: 40px;
+  height: 30px;
+}
+
 /*-------------------*/
 /*--------RIGHT------*/
 .line-1 {

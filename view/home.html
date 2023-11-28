@@ -2,6 +2,7 @@
 <html lang="it">
 
 <head>
+    <link rel="icon" href="/tw23-squisito/view/resource/logo.svg" type="image/x-icon">
     <title>Home</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -28,7 +29,7 @@
                 <div class="nav">
                     <span class="fas fa-house active fa-xl"></span>
                     <span class="fas fa-globe fa-xl"></span>
-                    <span class="far fa-square-plus fa-xl"></span>
+                    <span class="far fa-square-plus fa-xl" onclick="addpost()"></span>
                     <span class="fas fa-magnifying-glass fa-xl"></span>
                     <img id="user-photo-large" alt="profile-image"
                         class="avatar avatar-32 rounded-circle p-1 d-md-none">
@@ -63,7 +64,9 @@
                 <p id="bio"></p>
             </div>
             <div class="create">
-                <input type="button" class="btn create-post" id="create-post" value="Create Post">
+                <form action="/tw23-squisito/view/addpost.html">
+                <input type="submit" class="btn create-post" id="create-post" value="Create Post">
+                </form>
             </div>
         </aside>
     </div>

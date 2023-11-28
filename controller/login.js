@@ -27,7 +27,7 @@ $('#login').on("click",function() {
 			const responseObj = JSON.parse(result);
 			if (responseObj.success) {
 				sessionStorage.setItem("email",$("#email").val());
-				window.location.replace = '../view/home.html';
+				window.location.href = '../view/home.html';
 			}
         }
     });

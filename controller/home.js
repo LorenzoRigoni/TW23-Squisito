@@ -10,13 +10,16 @@ window.addEventListener('load', function() {
             const responseObj = JSON.parse(result);
             $("#user-photo-small").attr("src", "data:image/png;base64,"+responseObj[0].FotoProfilo);    
             $("#user-photo-large").attr("src", "data:image/png;base64,"+responseObj[0].FotoProfilo);   
-            $('#username').text(responseObj.Username)
-            $('#bio').text(responseObj.Bio)
+            $('#username').text(responseObj[0].Username)
+            $('#bio').text(responseObj[0].Bio)
         }
     });
 });
 function postClick(event) {
     window.location.href = '../view/post.html?id='+event.currentTarget.id;
+}
+function addpost() {
+    window.location.href = '../view/addpost.html';
 }
 function likeClick(event) {
    $.ajax({
