@@ -41,22 +41,27 @@
                 <span class="fas fa-bell fa-2xl"></span>
             </div>
             <div class="profile-info">
-                <img id="user-photo-small" alt="Avatar"
-                    class="avatar avatar-128 rounded-circle p-1">
+                <img id="user-photo-small" alt="Avatar" class="avatar avatar-128 rounded-circle p-1">
                 <p id="username"></p><br>
                 <input type="button" class="btn btn-dark" id="edit-profile" value="Edit">
             </div>
             <div class="row follow">
                 <div class="col-4">
-                    <strong><p class="m-0">15</p></strong>
+                    <strong>
+                        <p class="m-0" id="number_post"></p>
+                    </strong>
                     <p class="m-0">Post</p>
                 </div>
                 <div class="col-4">
-                    <strong><p class="m-0">500</p></strong>
+                    <strong>
+                        <p class="m-0" id="number_follower"></p>
+                    </strong>
                     <p class="m-0">Follower</p>
                 </div>
                 <div class="col-4">
-                    <strong><p class="m-0">150</p></strong>
+                    <strong>
+                        <p class="m-0" id="number_seguiti"></p>
+                    </strong>
                     <p class="m-0">Seguiti</p>
                 </div>
             </div>
@@ -65,7 +70,7 @@
             </div>
             <div class="create">
                 <form action="/tw23-squisito/view/addpost.html">
-                <input type="submit" class="btn create-post" id="create-post" value="Create Post">
+                    <input type="submit" class="btn create-post" id="create-post" value="Create Post">
                 </form>
             </div>
         </aside>

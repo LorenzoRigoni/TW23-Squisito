@@ -1,8 +1,8 @@
 window.addEventListener('load', function() {
     let user = sessionStorage.getItem('email');
     $.ajax({
-        url:"/tw23-squisito/model/user_models/get_user_info.php",    //the page containing php script
-        type: "GET",    //request type,
+        url:"/tw23-squisito/model/user_models/get_user_info.php",
+        type: "GET",
         data: {
             "email" : user
         },
@@ -12,6 +12,20 @@ window.addEventListener('load', function() {
             $("#user-photo-large").attr("src", "data:image/png;base64,"+responseObj[0].FotoProfilo);   
             $('#username').text(responseObj[0].Username)
             $('#bio').text(responseObj[0].Bio)
+        }
+    });
+    $.ajax({
+        url:"/tw23-squisito/model/user_models/get_numbers_of_user.php",
+        type: "GET",
+        data: {
+            "email" : user
+        },
+        success:function(result){
+            const responseObj = JSON.parse(result);
+            $('#number_post').text(responseObj[0].NumPosts)
+            $('#number_follower').text(responseObj[1].NumFollowers)
+            $('#number_seguiti').text(responseObj[2].NumSeguiti)
+
         }
     });
 });

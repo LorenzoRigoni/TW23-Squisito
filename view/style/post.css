@@ -110,6 +110,9 @@ body {
   font-weight: bold;
   border: 0;
 }
+.avatar {
+  object-fit: contain;
+}
 /*-------------------------*/
 @media (max-width: 768px) {
   .hero-image {

@@ -40,7 +40,7 @@ if (checkLogin($conn)) {
 function executeQuery($query) {
     require('../connection_models/db_conn.php');
     if ($selectQuery = $conn->prepare($query)) {
-        $selectQuery->bind_param("s", $_SESSION['userEmail']);
+        $selectQuery->bind_param("s", $_GET['email']);
         if ($selectQuery->execute()) {
             return $selectQuery->get_result()->fetch_all(MYSQLI_ASSOC);
         } else {
