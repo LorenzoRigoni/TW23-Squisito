@@ -33,7 +33,7 @@ $("#sendPostButton").on("click", function () {
   });
 });
 
-function loadOptions() {
+window.addEventListener('load', function() {
   $.ajax({
     url: "/tw23-squisito/model/post_models/get_nations.php",
     type: "GET",
@@ -54,6 +54,9 @@ function loadOptions() {
 
         // Aggiungi l'opzione al menu a discesa
         $("#sel1").append(newOption);
+        //Set italia di default
+        onSelectionChange('IT','Italy');
+        $('#sel1 option[value="107"]').attr("selected",true);
       });
 
       $("#sel1").on("change", function () {
@@ -64,19 +67,14 @@ function loadOptions() {
 
     },
     error: function (error) {
-      console.log("Errore nella richiesta AJAX:", error);
+      console.log("Errore nella richiesta al server:", error);
     },
   });
-}
+});
 
 function onSelectionChange(idcountry, nomeNazione) {
   let flagElement = document.getElementById("flag");
   let label = document.getElementById("CountryName");
   label.textContent = nomeNazione;
-  flagElement.src = "/tw23-squisito/view/style/flags/" + idcountry + ".png";
+  flagElement.src = "/tw23-squisito/view/resource/flags/" + idcountry + ".png";
 }
-
-// Chiama la funzione loadOptions quando la pagina è pronta
-$(document).ready(function () {
-  loadOptions();
-});

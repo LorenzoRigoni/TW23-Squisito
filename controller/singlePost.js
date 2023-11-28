@@ -35,7 +35,7 @@ window.addEventListener("load", function () {
           datiJSON[0]["Ricetta"];
         var flagElement = document.getElementById("flag");
         flagElement.src =
-          "/tw23-squisito/view/style/flags/" +
+          "/tw23-squisito/view/resource/flags/" +
           datiJSON[0]["Shortname"] +
           ".png";
         var fotoProfiloPost = document.getElementById("fotoUtentePost");
