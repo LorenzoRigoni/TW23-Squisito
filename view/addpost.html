@@ -41,26 +41,26 @@
             <div class="col-12 col-md-6 d-inline-block h-50">
                 <div class="container-fluid">
                     <div class="row justify-content-center pt-5">
-                        <form class="p-3 form">
+                        <form class="p-3 form" action="/tw23-squisito/model/post_models/add_post.php" enctype="multipart/form-data" method="post">
                             <div class="mb-3">
                                 <label for="titolo" class="form-label">Titolo</label>
-                                <input type="text" class="form-control" id="titolo">
+                                <input type="text" name="Titolo" class="form-control" id="titolo">
                             </div>
                             <div class="mb-3">
                                 <label for="choose-image" class="form-label">Foto</label>
-                                <input type="file" class="form-control" accept="image/png, image/jpeg"
-                                    id="choose-image">
+                                <input type="file" name="Foto" class="form-control" accept="image/png, image/jpeg"
+                                    id="Foto">
                             </div>
                             <div class="mb-3">
                                 <label for="sel1" class="form-label">Nazione</label>
-                                <select class="selectpicker form-select" id="sel1" name="sellist1">
+                                <select class="selectpicker form-select" name="IDNazione"id="sel1" name="sellist1">
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="ricetta" class="form-label">Ricetta</label>
-                                <textarea class="form-control" id="ricetta"></textarea>
+                                <textarea name="Ricetta" class="form-control" id="ricetta"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary">Crea</button>
+                            <button  type="submit" class="btn btn-primary">Crea</button>
                         </form>
                     </div>
                 </div>
