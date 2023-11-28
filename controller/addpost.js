@@ -11,30 +11,26 @@ $("#choose-image").change(function () {
 });
 
 $("#sendPostButton").on("click", function () {
-	 const fileInputValue = $("#choose-image").val();
-     const selectCountry = $("#sel1").val();
-	 const recipe = $("#recepi").val();
-	 const title = $("#titlePost").val();
-	$.ajax({
-            type: "POST",
-			url: "/tw23-squisito/model/post_models/add_post.php", 
-            data: {
-                    Foto: fileInputValue,
-                    IDNazione: selectCountry,
-					Ricetta: recipe,
-					Titolo: title
-					
-                    },
-                    success: function (response) {
-                        
-                        alert("Post Creato");
-                    },
-                    error: function (error) {
-                       
-                        console.error(error);
-                    }
-                });
-
+  const fileInputValue = $("#choose-image").val();
+  const selectCountry = $("#sel1").val();
+  const recipe = $("#recepi").val();
+  const title = $("#titlePost").val();
+  $.ajax({
+    type: "POST",
+    url: "/tw23-squisito/model/post_models/add_post.php",
+    data: {
+      Foto: fileInputValue,
+      IDNazione: selectCountry,
+      Ricetta: recipe,
+      Titolo: title,
+    },
+    success: function (response) {
+      alert("Post Creato");
+    },
+    error: function (error) {
+      console.error(error);
+    },
+  });
 });
 
 function loadOptions() {
@@ -43,6 +39,7 @@ function loadOptions() {
     type: "GET",
     dataType: "json",
     success: function (data) {
+
       // Rimuovi le opzioni esistenti
       $("#sel1").empty();
 
@@ -52,8 +49,7 @@ function loadOptions() {
         var newOption = $("<option>", {
           value: option.IDNazione,
           text: option.Nome,
-          id: option.Shortname
-		  
+          id: option.Shortname,
         });
 
         // Aggiungi l'opzione al menu a discesa
@@ -62,12 +58,10 @@ function loadOptions() {
 
       $("#sel1").on("change", function () {
         var selectedOptionId = $(this).find(":selected").attr("id");
-		var nomeNazione = $(this).find(":selected").text();
-        onSelectionChange(selectedOptionId,nomeNazione);
+        var nomeNazione = $(this).find(":selected").text();
+        onSelectionChange(selectedOptionId, nomeNazione);
       });
 
-      // Opzionale: Aggiorna il menu a discesa (richiede il plugin Bootstrap)
-      //$("#sel1").selectpicker("refresh");
     },
     error: function (error) {
       console.log("Errore nella richiesta AJAX:", error);
@@ -75,10 +69,10 @@ function loadOptions() {
   });
 }
 
-function onSelectionChange(idcountry,nomeNazione) {
+function onSelectionChange(idcountry, nomeNazione) {
   let flagElement = document.getElementById("flag");
   let label = document.getElementById("CountryName");
-  label.textContent=nomeNazione;
+  label.textContent = nomeNazione;
   flagElement.src = "/tw23-squisito/view/style/flags/" + idcountry + ".png";
 }
 
@@ -86,4 +80,3 @@ function onSelectionChange(idcountry,nomeNazione) {
 $(document).ready(function () {
   loadOptions();
 });
-

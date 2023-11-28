@@ -2,7 +2,7 @@
 <html lang="it">
 
 <head>
-	<link rel="icon" href="/tw23-squisito/view/resource/logo.svg" type="image/x-icon">
+    <link rel="icon" href="/tw23-squisito/view/resource/logo.svg" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-avatar@latest/dist/avatar.min.css" rel="stylesheet">
@@ -18,7 +18,10 @@
 </head>
 
 <body class="wrapper container">
-    <div class="row h-100 d-flex" id="row h-100 d-flex">
+    <div class="row title">
+        <p>Squisito</p>
+    </div>
+    <div class="row h-90 d-flex" id="row h-90 d-flex">
         <div class="col-12 col-md-6 d-inline-block hero-image" id="hero-image">
             <div class="row justify-content-between">
                 <div class="col-1">
@@ -36,10 +39,25 @@
         </div>
         <div class="col-12 col-md-6 d-inline-block h-50">
             <div class="row p-2 pt-5">
-                <form>
-                    <input type="file" accept="image/png, image/jpeg" id="choose-image">
-                    <select class="selectpicker" id="sel1" name="sellist1">
-                    </select>
+                <form class="p-3">
+                    <div class="mb-3">
+                        <label for="titolo" class="form-label">Titolo</label>
+                        <input type="text" class="form-control" id="titolo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="choose-image" class="form-label">Foto</label>
+                        <input type="file" class="form-control" accept="image/png, image/jpeg" id="choose-image">
+                    </div>
+                    <div class="mb-3">
+                        <label for="sel1" class="form-label">Nazione</label>
+                        <select class="selectpicker" id="sel1" name="sellist1">
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="ricetta" class="form-label">Ricetta</label>
+                        <textarea class="form-control" id="ricetta"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Crea</button>
                 </form>
             </div>
         </div>
