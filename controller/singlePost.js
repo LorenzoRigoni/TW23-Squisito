@@ -85,7 +85,7 @@ $(".pubblica").on("click", function() {
 				url:"/tw23-squisito/model/post_models/send_comment.php",  
 				type: "POST",   
 				data: {
-					Contenuto : document.getElementById("textArea").val(),
+					Contenuto : document.getElementById("textArea").value,
 					IDPost : $('#textArea').attr("data_IDPost")
 				},
 				success:function(result){
