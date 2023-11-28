@@ -5,7 +5,7 @@ require('../connection_models/db_conn.php');
 $query = "SELECT P.IDPost, P.Titolo,P.Foto, P.Ricetta, N.Nome AS Nazione,Shortname, U.Email, U.Username,U.FotoProfilo, COUNT(M.EmailUtente) AS NumLike
         FROM post P INNER JOIN utenti U ON U.Email = P.EmailUtente
             INNER JOIN nazioni N ON P.IDNazione = N.IDNazione
-            INNER JOIN mi_piace M ON P.IDPost = M.IDPost
+            LEFT JOIN mi_piace M ON P.IDPost = M.IDPost
         WHERE P.IDPost = ?
         GROUP BY M.IDPost";
 
