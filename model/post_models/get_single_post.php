@@ -2,14 +2,12 @@
 include '../login_models/login_functions.php';
 require('../connection_models/db_conn.php');
 
-$query = "SELECT P.IDPost, P.Titolo,P.Foto, P.Ricetta, N.Nome AS Nazione, N.Shortname, P.DataPost, U.Email, U.Username,U.FotoProfilo, 
-            COUNT(M.EmailUtente) AS NumLike, 
+$query = "SELECT P.IDPost, P.Titolo,P.Foto, P.Ricetta, N.Nome AS Nazione, N.Shortname, P.DataPost, U.Email, U.Username,U.FotoProfilo,
+            (SELECT COUNT(*) FROM mi_piace M WHERE M.IDPost = P.IDPost) AS NumLike,
             (SELECT COUNT(*) FROM mi_piace M WHERE M.EmailUtente = ? AND M.IDPost = P.IDPost) AS IsLiked
         FROM post P INNER JOIN utenti U ON U.Email = P.EmailUtente
             INNER JOIN nazioni N ON P.IDNazione = N.IDNazione
-            LEFT JOIN mi_piace M ON P.IDPost = M.IDPost
-        WHERE P.IDPost = ?
-        GROUP BY M.IDPost";
+        WHERE P.IDPost = ?";
 
 session_start();
 if (checkLogin($conn)) {
