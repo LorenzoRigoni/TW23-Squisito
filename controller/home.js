@@ -14,6 +14,27 @@ window.addEventListener('load', function() {
             $('#bio').text(responseObj[0].Bio)
         }
     });
+	
+	$.ajax({
+    url: "/tw23-squisito/model/user_models/get_follower_list.php",
+    type: "GET",
+    success: function (response) {
+        var data = JSON.parse(response);
+
+        // Verifica se l'oggetto ha dati
+        if (data && data.length > 0) {
+			let followerElement = document.getElementById("Follower");
+			followerElement.innerText = data.length; 
+			
+            // Ora puoi iterare attraverso i dati se necessario
+        } else {
+            console.log("Nessun dato restituito.");
+        }
+    },
+    error: function (error) {
+        console.error(error);
+    }
+});
 });
 function postClick(event) {
     window.location.href = '../view/post.html?id='+event.currentTarget.id;
