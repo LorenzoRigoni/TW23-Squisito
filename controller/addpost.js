@@ -9,6 +9,34 @@ $("#choose-image").change(function () {
   } else {
   }
 });
+
+$("#sendPostButton").on("click", function () {
+	 const fileInputValue = $("#choose-image").val();
+     const selectCountry = $("#sel1").val();
+	 const recipe = $("#recepi").val();
+	 const title = $("#titlePost").val();
+	$.ajax({
+            type: "POST",
+			url: "/tw23-squisito/model/post_models/add_post.php", 
+            data: {
+                    Foto: fileInputValue,
+                    IDNazione: selectCountry,
+					Ricetta: recipe,
+					Titolo: title
+					
+                    },
+                    success: function (response) {
+                        
+                        alert("Post Creato");
+                    },
+                    error: function (error) {
+                       
+                        console.error(error);
+                    }
+                });
+
+});
+
 function loadOptions() {
   $.ajax({
     url: "/tw23-squisito/model/post_models/get_nations.php",
@@ -25,6 +53,7 @@ function loadOptions() {
           value: option.IDNazione,
           text: option.Nome,
           id: option.Shortname
+		  
         });
 
         // Aggiungi l'opzione al menu a discesa
@@ -57,3 +86,4 @@ function onSelectionChange(idcountry,nomeNazione) {
 $(document).ready(function () {
   loadOptions();
 });
+
