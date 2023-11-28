@@ -80,19 +80,19 @@ function caricaPost() {
         // Aggiunta del commento al documento
       }
     });
- $(".pubblica").on("click", function() {
+$(".pubblica").on("click", function() {
 			$.ajax({
 				url:"/tw23-squisito/model/post_models/send_comment.php",  
 				type: "POST",   
 				data: {
 					Contenuto : document.getElementById("textArea").val(),
-					IDPost : $('#textArea').attr("data_IDPost");
+					IDPost : $('#textArea').attr("data_IDPost")
 				},
 				success:function(result){
 				
 				}
 			});
-		}
+		});
  
   let user = sessionStorage.getItem('email');
     $.ajax({
