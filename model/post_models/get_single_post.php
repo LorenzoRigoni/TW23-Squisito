@@ -29,7 +29,7 @@ if (checkLogin($conn)) {
                     "DataPost" => $row["DataPost"]
                 );
             }
-            $conn->close();
+           // $conn->close();
 
             require("../connection_models/db_conn.php");
             $query = "SELECT C.IDCommento, U.FotoProfilo, U.Username, C.Contenuto, C.DataCommento
