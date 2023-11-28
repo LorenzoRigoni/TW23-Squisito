@@ -10,11 +10,13 @@ if (checkLogin($conn)) {
     if ($isLiked = $conn->prepare($query)) {
         $isLiked->bind_param("si", $_SESSION['userEmail'], $_GET['IDPost']);
         if ($isLiked->execute()) {
+			$isLiked->store_result(); 
             $conn->close();
             $query = "";
             if ($isLiked->num_rows() == 0) {
                 $query = "INSERT INTO mi_piace (IDPost, EmailUtente)
                         VALUES (?, ?)";
+						
             } else {
                 $query = "DELETE FROM mi_piace
                         WHERE IDPost = ? AND EmailUtente = ?";
