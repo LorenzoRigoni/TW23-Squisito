@@ -80,12 +80,12 @@ function caricaPost() {
         // Aggiunta del commento al documento
       }
     });
-  function sendComment(event) {
+ $(".pubblica").on("click", function() {
 			$.ajax({
 				url:"/tw23-squisito/model/post_models/send_comment.php",  
 				type: "POST",   
 				data: {
-					Contenuto : document.getElementById("commentText").val(),
+					Contenuto : document.getElementById("textArea").val(),
 					IDPost : $('#textArea').attr("data_IDPost");
 				},
 				success:function(result){
