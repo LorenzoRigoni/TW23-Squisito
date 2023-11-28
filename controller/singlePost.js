@@ -80,25 +80,20 @@ function caricaPost() {
         // Aggiunta del commento al documento
       }
     });
-  // Configurare la richiesta
-  //xhr.open("GET", url, true);
-
-  // Inviare la richiesta
-  //xhr.send();
-
-  // Definire la funzione di gestione degli eventi per la risposta
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      // Ottenere i dati JSON dalla risposta
-      //alert(xhr.responseText);
-      // const datiJSON = JSON.parse(xhr.responseText);
-
-      alert(post);
-
-      //document.getElementById("profileImage").src = "data:image/jpeg;base64," + datiJSON.FotoUtente;
-      // Creare il contenitore per le immagini
-    }
-  };
+  function sendComment(event) {
+			$.ajax({
+				url:"/tw23-squisito/model/post_models/send_comment.php",  
+				type: "POST",   
+				data: {
+					Contenuto : document.getElementById("commentText").val(),
+					IDPost : $('#textArea').attr("data_IDPost");
+				},
+				success:function(result){
+				
+				}
+			});
+		}
+ 
   let user = sessionStorage.getItem('email');
     $.ajax({
         url:"/tw23-squisito/model/user_models/get_user_info.php",    //the page containing php script
@@ -112,6 +107,5 @@ function caricaPost() {
         }
     });
 }
-//mainRowDiv.appendChild(contenitoreCommenti);
 // Chiamare la funzione quando la pagina è pronta
 window.onload = caricaPost;
