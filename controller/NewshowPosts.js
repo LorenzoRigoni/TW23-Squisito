@@ -26,10 +26,10 @@ function caricaImmagini() {
       for (var i = 0; i < datiJSON.length; i++) {
         // Creare la card di Bootstrap
         var cardCol = document.createElement("div");
-        cardCol.className = "col-sm-4 py-2";
+        cardCol.className = "col-sm-3 py-2";
 
         var card = document.createElement("div");
-        card.className = "card shadow-sm border-0 rounded p-2";
+        card.className = "card shadow-sm border-0 rounded p-2 m-2";
         card.setAttribute("id", datiJSON[i].IDPost);
         card.addEventListener("click",postClick,false);
         var cardBody = document.createElement("div");
@@ -40,7 +40,7 @@ function caricaImmagini() {
         row1.className = "row p-0";
 
         var profileImageCol = document.createElement("div");
-        profileImageCol.className = "col-2";
+        profileImageCol.className = "col-auto";
 
         var profileImage = document.createElement("img");
         profileImage.src = "data:image/jpeg;base64," + datiJSON[i].FotoProfilo;
@@ -48,7 +48,7 @@ function caricaImmagini() {
         profileImage.className = "avatar avatar-32 rounded-circle p-1";
 
         var userInfoCol = document.createElement("div");
-        userInfoCol.className = "col-10";
+        userInfoCol.className = "col-auto";
 
         var userName = document.createElement("h6");
         userName.className = "mb-0";
@@ -68,7 +68,7 @@ function caricaImmagini() {
         // Creare la seconda riga con l'immagine principale
         var row2 = document.createElement("div");
         row2.className = "row p-0";
-        row2.style = "width: 90% ; margin-left: 2%;"; // Imposta la larghezza al 90%
+        row2.style = "margin: 1vh;";
 
         var mainImage = document.createElement("img");
         mainImage.src = "data:image/jpeg;base64," + datiJSON[i].Foto;

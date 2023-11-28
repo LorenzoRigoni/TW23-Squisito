@@ -17,63 +17,22 @@
 </head>
 
 <body>
-    <div class="row box">
-        <div class="col-md-9 col-sm-12">
-            <div class="row title">
-                <p>Squisito</p>
-            </div>
-            <div class="row posts-box" id="row posts-box">
-
-            </div>
-            <nav class="row">
-                <div class="nav">
-                    <span class="fas fa-house active fa-xl"></span>
-                    <span class="fas fa-globe fa-xl"></span>
-                    <span class="far fa-square-plus fa-xl" onclick="addpost()"></span>
-                    <span class="fas fa-magnifying-glass fa-xl"></span>
-                    <img id="user-photo-large" alt="profile-image"
-                        class="avatar avatar-32 rounded-circle p-1 d-md-none">
-                </div>
-            </nav>
+    <div class="row  box">
+        <div class="row title gx-0">
+            <p>Squisito</p>
         </div>
-        <aside class="col-md-3 d-none d-md-block">
-            <div class="notification">
-                <span class="fas fa-bell fa-2xl"></span>
+        <div class="row gx-0 posts-box" id="row posts-box">
+
+        </div>
+        <nav class="row gx-0">
+            <div class="nav">
+                <span class="fas fa-house active fa-xl"></span>
+                <span class="fas fa-globe fa-xl"></span>
+                <span class="far fa-square-plus fa-xl" onclick="addpost()"></span>
+                <span class="fas fa-magnifying-glass fa-xl"></span>
+                <img id="user-photo-small" alt="profile-image" class="avatar avatar-32 rounded-circle p-1">
             </div>
-            <div class="profile-info">
-                <img id="user-photo-small" alt="Avatar" class="avatar avatar-128 rounded-circle p-1">
-                <p id="username"></p><br>
-                <input type="button" class="btn btn-dark" id="edit-profile" value="Edit">
-            </div>
-            <div class="row follow">
-                <div class="col-4">
-                    <strong>
-                        <p class="m-0" id="number_post"></p>
-                    </strong>
-                    <p class="m-0">Post</p>
-                </div>
-                <div class="col-4">
-                    <strong>
-                        <p class="m-0" id="number_follower"></p>
-                    </strong>
-                    <p class="m-0">Follower</p>
-                </div>
-                <div class="col-4">
-                    <strong>
-                        <p class="m-0" id="number_seguiti"></p>
-                    </strong>
-                    <p class="m-0">Seguiti</p>
-                </div>
-            </div>
-            <div class="bio">
-                <p id="bio"></p>
-            </div>
-            <div class="create">
-                <form action="/tw23-squisito/view/addpost.html">
-                    <input type="submit" class="btn create-post" id="create-post" value="Create Post">
-                </form>
-            </div>
-        </aside>
+        </nav>
     </div>
     <script src="/tw23-squisito/controller/NewshowPosts.js"></script>
     <script src="/tw23-squisito/controller/home.js"></script>

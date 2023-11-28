@@ -1,7 +1,6 @@
 .box {
     margin: 0;
 }
-
 /*---------------TITOLO------------------*/
 .title>p {
     color: #000;
@@ -65,59 +64,4 @@ nav.row {
 }
 .liked {
     font-size: x-small;
-}
-
-/*--------ASIDE------------*/
-aside {
-    background-color: white;
-    border-left: 1px solid #d9bfaf;
-    text-align: center;
-}
-
-.profile-info>.avatar {
-    display: block;
-    margin: auto;
-    margin-top: 40px;
-    margin-bottom: 20px;
-}
-
-.notification {
-    display: block;
-    padding: 10px;
-    margin: 10px 0px;
-}
-
-.fa-bell {
-    float: right;
-}
-
-.profile-info>.avatar:hover {
-    transform: scale(1.2);
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.16) 0px 3px 6px;
-}
-
-#username {
-    margin: 20px 0px;
-    font-weight: bold;
-    font-size: 20px;
-}
-
-.follow {
-    margin: 10px 0px;
-    padding: 0px 30px;
-}
-
-.bio>p {
-    text-align: left;
-}
-.create {
-    margin: 20% 0;
-}
-.create-post {
-    border-radius: 5px;
-    background: linear-gradient(99deg, #ff601c -35.3%, rgba(253, 96, 28, 0.74) 66.33%, #dec224 138.45%);
-    width: 80%;
-    color: white;
-    font-size: 20px;
-    font-weight: 400;
 }

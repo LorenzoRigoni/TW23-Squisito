@@ -9,23 +9,6 @@ window.addEventListener('load', function() {
         success:function(result){
             const responseObj = JSON.parse(result);
             $("#user-photo-small").attr("src", "data:image/png;base64,"+responseObj[0].FotoProfilo);    
-            $("#user-photo-large").attr("src", "data:image/png;base64,"+responseObj[0].FotoProfilo);   
-            $('#username').text(responseObj[0].Username)
-            $('#bio').text(responseObj[0].Bio)
-        }
-    });
-    $.ajax({
-        url:"/tw23-squisito/model/user_models/get_numbers_of_user.php",
-        type: "GET",
-        data: {
-            "email" : user
-        },
-        success:function(result){
-            const responseObj = JSON.parse(result);
-            $('#number_post').text(responseObj[0].NumPosts)
-            $('#number_follower').text(responseObj[1].NumFollowers)
-            $('#number_seguiti').text(responseObj[2].NumSeguiti)
-
         }
     });
 });
@@ -45,6 +28,7 @@ function likeClick(event) {
         },
         success:function(result){
             alert("Hai messo Mi Piace al Post");
+            //TODO: cambia colore/classe cuore
         }
     });
 }
