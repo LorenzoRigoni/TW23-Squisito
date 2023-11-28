@@ -22,9 +22,9 @@ function loadOptions() {
       data.forEach(function (option) {
         // Crea l'elemento option
         var newOption = $("<option>", {
-          value: option.Shortname,
+          value: option.IDNazione,
           text: option.Nome,
-          id: option.Shortname,
+          id: option.Shortname
         });
 
         // Aggiungi l'opzione al menu a discesa
