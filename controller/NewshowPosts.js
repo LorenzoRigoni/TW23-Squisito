@@ -101,10 +101,12 @@ function caricaImmagini() {
         var commentIcon = document.createElement("li");
         commentIcon.className = "list-inline-item m-0 px-2";
         var commentLink = document.createElement("a");
-        commentLink.href = "/commenti.html";
+        //commentLink.href = "/commenti.html";
         commentLink.title = "comments link";
         var commentSpan = document.createElement("span");
         commentSpan.className = "far fa-comment social-link";
+		commentSpan.id = datiJSON[i].IDPost;
+		commentSpan.addEventListener("click",postClick,false);
         commentLink.appendChild(commentSpan);
         commentIcon.appendChild(commentLink);
 

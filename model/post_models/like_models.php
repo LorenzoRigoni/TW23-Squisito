@@ -14,8 +14,8 @@ if (checkLogin($conn)) {
             $conn->close();
             $query = "";
             if ($isLiked->num_rows() == 0) {
-                $query = "INSERT INTO mi_piace (IDPost, EmailUtente)
-                        VALUES (?, ?)";
+                $query = "INSERT INTO mi_piace (IDPost, EmailUtente, DataLike)
+                        VALUES (?, ?, CURRENT_DATE())";
 						
             } else {
                 $query = "DELETE FROM mi_piace
