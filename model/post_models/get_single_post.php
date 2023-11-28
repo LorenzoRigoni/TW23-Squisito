@@ -2,7 +2,9 @@
 include '../login_models/login_functions.php';
 require('../connection_models/db_conn.php');
 
-$query = "SELECT P.IDPost, P.Titolo,P.Foto, P.Ricetta, N.Nome AS Nazione, N.Shortname, P.DataPost, U.Email, U.Username,U.FotoProfilo, COUNT(M.EmailUtente) AS NumLike
+$query = "SELECT P.IDPost, P.Titolo,P.Foto, P.Ricetta, N.Nome AS Nazione, N.Shortname, P.DataPost, U.Email, U.Username,U.FotoProfilo, 
+            COUNT(M.EmailUtente) AS NumLike, 
+            (SELECT COUNT(*) FROM mi_piace M WHERE M.EmailUtente = ? AND M.IDPost = P.IDPost) AS IsLiked
         FROM post P INNER JOIN utenti U ON U.Email = P.EmailUtente
             INNER JOIN nazioni N ON P.IDNazione = N.IDNazione
             LEFT JOIN mi_piace M ON P.IDPost = M.IDPost
@@ -12,7 +14,7 @@ $query = "SELECT P.IDPost, P.Titolo,P.Foto, P.Ricetta, N.Nome AS Nazione, N.Shor
 session_start();
 if (checkLogin($conn)) {
     if ($selectQuery = $conn->prepare($query)) {
-        $selectQuery->bind_param("i", $_GET['IDPost']);
+        $selectQuery->bind_param("si", $_SESSION['userEmail'], $_GET['IDPost']);
         if ($selectQuery->execute()) {
             $post = $selectQuery->get_result(); //->fetch_all(MYSQLI_ASSOC);
             $conn->close();
@@ -26,10 +28,10 @@ if (checkLogin($conn)) {
                     "FotoProfilo" => base64_encode($row["FotoProfilo"]),
                     "FotoRicetta" => base64_encode($row["Foto"]),
                     "UsernamePost" => $row["Username"],
-                    "DataPost" => $row["DataPost"]
+                    "DataPost" => $row["DataPost"],
+                    "IsLiked" => $row["IsLiked"]
                 );
             }
-           // $conn->close();
 
             require("../connection_models/db_conn.php");
             $query = "SELECT C.IDCommento, U.FotoProfilo, U.Username, C.Contenuto, C.DataCommento
