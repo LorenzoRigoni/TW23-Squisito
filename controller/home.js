@@ -46,7 +46,7 @@ function sendNotification(postId,tipo) {
         type: "POST",   
         data: {
             "IDPost" : postId,
-            "TipoNotifica" : "tipo
+            "TipoNotifica" : tipo
         },
         success:function(result){
         }
