@@ -137,6 +137,7 @@ function likeClick(event) {
             $(".fa-heart").removeClass("clicked");
           } else {
             $(".fa-heart").addClass("clicked");
+	    //sendNotification(event.currentTarget.id,"Like");	 
           } 
         }
     });
@@ -164,6 +165,7 @@ function sendFollow(event) {
         },
         success:function(result){
 	if(!result.alreadyFollow){
+		//sendNotification(event.currentTarget.id,"Follow");	 
                 alert("Hai Inizato a seguirlo");
          }else {
  		alert("Hai smesso di seguirlo");
