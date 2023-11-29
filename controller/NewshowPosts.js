@@ -96,7 +96,7 @@ function caricaImmagini() {
         heartSpan.addEventListener("click",likeClick,false);
         heartSpan.setAttribute("id", datiJSON[i].IDPost);
         heartIcon.appendChild(heartSpan);
-        if(datiJSON[0]['IsLiked']){
+        if(datiJSON[i]['IsLiked']){
           heartSpan.classList.add('clicked');
         }
         // Creare il secondo elemento della lista (commento)
