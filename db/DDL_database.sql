@@ -60,6 +60,7 @@ CREATE TABLE notifiche(
     IDPost INT,
     DataNotifica DATE,
     TipoNotifica VARCHAR(30),
+    Visualizzato TINYINT(1) DEFAULT FALSE,
     FOREIGN KEY (EmailMittente) REFERENCES utenti(Email),
     FOREIGN KEY (EmailDestinatario) REFERENCES utenti(Email),
     FOREIGN KEY (IDPost) REFERENCES post(IDPost)

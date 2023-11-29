@@ -1,5 +1,6 @@
 <?php
 include '../login_models/login_functions.php';
+include 'add_notification.php';
 require('../connection_models/db_conn.php');
 
 session_start();
@@ -8,7 +9,7 @@ if (checkLogin($conn)) {
             FROM mi_piace M
             WHERE M.EmailUtente = ? AND M.IDPost = ?";
     if ($isLiked = $conn->prepare($query)) {
-        $isLiked->bind_param("si", $_SESSION['userEmail'], $_GET['IDPost']);
+        $isLiked->bind_param("si", $_SESSION['userEmail'], $_POST['IDPost']);
         if ($isLiked->execute()) {
             $query = "";
             if ($isLiked->get_result()->num_rows == 0) {
@@ -21,6 +22,10 @@ if (checkLogin($conn)) {
             $conn->close();
             $result = executeQuery($query);
             echo json_encode($result);
+            if ($isLiked->get_result()->num_rows == 0) {
+                $emailReceiver = getReceiverEmail();
+                echo json_encode(addNotification($_POST['IDPost'], $_SESSION['userEmail'], $emailReceiver, "Like"));
+            }
         } else {
             echo json_encode(array("error" => $isLiked->error));
         }
@@ -40,7 +45,7 @@ function executeQuery($query)
 {
     require('../connection_models/db_conn.php');
     if ($selectQuery = $conn->prepare($query)) {
-        $selectQuery->bind_param("is", $_GET['IDPost'], $_SESSION['userEmail']);
+        $selectQuery->bind_param("is", $_POST['IDPost'], $_SESSION['userEmail']);
         if ($selectQuery->execute()) {
             if (explode(" ", $query)[0] == "INSERT") {
                 return array("alreadyLiked" => false);
@@ -56,4 +61,25 @@ function executeQuery($query)
     $conn->close();
 }
 
+/**
+ * Function for getting the email of the user who created the post.
+ * @return string The email of the user.
+ */
+function getReceiverEmail() {
+    require('../connection_models/db_conn.php');
+    $query = "SELECT P.EmailUtente
+            FROM post P
+            WHERE P.IDPost = ?";
+    if ($selectQuery = $conn->prepare($query)) {
+        $selectQuery->bind_param("i", $_POST['IDPost']);
+        if ($selectQuery->execute()) {
+            return $selectQuery->get_result()->fetch_assoc()['EmailUtente'];
+        } else {
+            return $selectQuery->error;
+        }
+    } else {
+        return $selectQuery->error;
+    }
+    $conn->close();
+}
 ?>

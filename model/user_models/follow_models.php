@@ -1,9 +1,10 @@
 <?php
 include '../login_models/login_functions.php';
+include '../post_models/add_notification.php';
 
 session_start();
 if (checkLogin($conn)) {
-    $followingEmail = getEmailFollowing();
+    $followingEmail = getFollowingEmail();
     require('../connection_models/db_conn.php');
     $query = "SELECT *
         FROM seguiti S
@@ -22,6 +23,9 @@ if (checkLogin($conn)) {
             $conn->close();
             $result = executeQuery($query, $followingEmail);
             echo json_encode($result);
+            if ($isFollowed->get_result()->num_rows == 0) {
+                echo json_encode(addNotification(null, $_SESSION['userEmail'], $followingEmail, "Follow"));
+            }
         } else {
             echo json_encode(array("error" => $isFollowed->error));
         }
@@ -61,15 +65,15 @@ function executeQuery($query, $followingEmail) {
  * Function for getting the email of the user who created a post.
  * @return string The email of the user.
  */
-function getEmailFollowing() {
+function getFollowingEmail() {
     require('../connection_models/db_conn.php');
     $query = "SELECT P.EmailUtente
             FROM post P
             WHERE P.IDPost = ?";
     if ($selectQuery = $conn->prepare($query)) {
-        $selectQuery->bind_param("i", $_GET['IDPost']);
+        $selectQuery->bind_param("i", $_POST['IDPost']);
         if ($selectQuery->execute()) {
-            return $selectQuery->get_result()->fetch_assoc()['IDPost'];
+            return $selectQuery->get_result()->fetch_assoc()['EmailUtente'];
         } else {
             return $selectQuery->error;
         }
