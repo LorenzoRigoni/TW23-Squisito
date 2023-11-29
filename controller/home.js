@@ -38,3 +38,16 @@ function likeClick(event) {
     },
   });
 }
+function sendNotification(postId,tipo) {
+    //event.stopPropagation();
+   $.ajax({
+        url:"/tw23-squisito/model/post_models/add_notification.php",  
+        type: "POST",   
+        data: {
+            "IDPost" : postId,
+            "TipoNotifica" : "tipo
+        },
+        success:function(result){
+        }
+    });
+}
