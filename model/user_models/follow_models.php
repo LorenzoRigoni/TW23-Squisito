@@ -7,22 +7,22 @@ if (checkLogin($conn)) {
     $query = "SELECT *
         FROM seguiti S
         WHERE S.EmailSeguito = ? AND S.EmailFollower = ?";
-    if ($isLiked = $conn->prepare($query)) {
-        $isLiked->bind_param("ss", $_GET['emailSeguito'], $_SESSION['userEmail'], );
-        if ($isLiked->execute()) {
-            $conn->close();
+    if ($isFollowed = $conn->prepare($query)) {
+        $isFollowed->bind_param("ss", $_GET['emailSeguito'], $_SESSION['userEmail'], );
+        if ($isFollowed->execute()) {
             $query = "";
-            if ($isLiked->num_rows() == 0) {
+            if ($isFollowed->get_result()->num_rows == 0) {
                 $query = "INSERT INTO seguiti (EmailFollower, EmailSeguito, DataInizio)
                         VALUES (?, ?, CURRENT_DATE())";
             } else {
                 $query = "DELETE FROM seguiti
                         WHERE EmailFollower = ? AND EmailSeguito = ?";
             }
+            $conn->close();
             $result = executeQuery($query);
             echo json_encode($result);
         } else {
-            echo json_encode(array("error" => $isLiked->error));
+            echo json_encode(array("error" => $isFollowed->error));
         }
     } else {
         echo json_encode(array("error" => $conn->error));
