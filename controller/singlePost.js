@@ -128,7 +128,7 @@ function likeClick(event) {
   event.stopPropagation();                                                
    $.ajax({
         url:"/tw23-squisito/model/post_models/like_models.php",  
-        type: "GET",   
+        type: "POST",   
         data: {
             IDPost : event.currentTarget.id,
         },
