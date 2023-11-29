@@ -9,13 +9,13 @@
  * @return array An associative array with success or the SQL error
  */
 function addNotification($idPost, $emailMitt, $emailDest, $tipoNot) {
-    include '../login_models/login_functions.php';
-    require_once('../connection_models/db_conn.php');
+    //include '../login_models/login_functions.php';
+    require('../connection_models/db_conn.php');
     
     $query = "INSERT INTO notifiche (IDPost, EmailMittente, EmailDestinatario, TipoNotifica, DataNotifica)
             VALUES (?, ?, ?, ?, CURRENT_DATE())";
 
-    session_start();
+    //session_start();
     if (checkLogin($conn)) {
         if ($insert = $conn->prepare($query)) {
             $insert->bind_param("isss", $idPost, $emailMitt, $emailDest, $tipoNot);
