@@ -28,7 +28,7 @@ window.addEventListener("load", function () {
         var contenitorePost = document.getElementById("row h-100 d-flex");
 
          var heart = document.getElementById("heart");
-        if(datiJSON[0]['AlreadyLiked']){
+        if(datiJSON[0]['IsLiked']){
           heart.style.color = 'red';
         }
         var contenitoreCommenti = document.getElementById("row ps-5 p-3 posts");
