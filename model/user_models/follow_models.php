@@ -13,7 +13,8 @@ if (checkLogin($conn)) {
         $isFollowed->bind_param("ss", $followingEmail, $_SESSION['userEmail'], );
         if ($isFollowed->execute()) {
             $query = "";
-            if ($isFollowed->get_result()->num_rows == 0) {
+			$res=$isFollowed->get_result();
+            if ($res->num_rows == 0) {
                 $query = "INSERT INTO seguiti (EmailFollower, EmailSeguito, DataInizio)
                         VALUES (?, ?, CURRENT_DATE())";
             } else {
@@ -23,7 +24,7 @@ if (checkLogin($conn)) {
             $conn->close();
             $result = executeQuery($query, $followingEmail);
             echo json_encode($result);
-            if ($isFollowed->get_result()->num_rows == 0) {
+            if ($res->num_rows == 0) {
                 echo json_encode(addNotification(null, $_SESSION['userEmail'], $followingEmail, "Follow"));
             }
         } else {
