@@ -28,6 +28,8 @@ window.addEventListener("load", function () {
         var contenitorePost = document.getElementById("row h-100 d-flex");
 
          var heart = document.getElementById("heart");
+        heart.addEventListener("click",likeClick,false);
+        heart.setAttribute("id", datiJSON[0].IDPost);
         if(datiJSON[0]['IsLiked']){
           heart.style.color = 'red';
         }
