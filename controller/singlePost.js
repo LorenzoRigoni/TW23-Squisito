@@ -27,6 +27,10 @@ window.addEventListener("load", function () {
         const datiJSON = JSON.parse(text); //datiJSON[0]['Nazione'];
         var contenitorePost = document.getElementById("row h-100 d-flex");
 
+         var heart = document.getElementById("heart");
+        if(datiJSON[0]['AlreadyLiked']){
+          heart.style.color = 'red';
+        }
         var contenitoreCommenti = document.getElementById("row ps-5 p-3 posts");
         // Creare la card di Bootstrap
         document.getElementById("nomeUtente").textContent =
