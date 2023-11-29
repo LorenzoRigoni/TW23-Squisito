@@ -20,6 +20,7 @@ if (checkLogin($conn)) {
 
             while ($row = $post->fetch_assoc()) {
                 $mergedData[] = array(
+                    "IDPost" => $row["IDPost"],
                     "Ricetta" => $row["Ricetta"],
                     "Nazione" => $row["Nazione"],
                     "Shortname" => $row["Shortname"],

@@ -62,7 +62,6 @@ nav.row {
 }
 .social-link.clicked {
     color: #ff0000;
-    -webkit-text-stroke-width: 1px;
 }
 .liked {
     font-size: x-small;
