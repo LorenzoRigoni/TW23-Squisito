@@ -122,3 +122,20 @@ window.addEventListener("load", function () {
     });
   }
 });
+function likeClick(event) {
+                                                             
+   $.ajax({
+        url:"/tw23-squisito/model/post_models/like_models.php",  
+        type: "GET",   
+        data: {
+            "IDPost" : event.currentTarget.id
+        },
+        success:function(result){
+            if(!result.alreadyLiked){
+                //sendNotification(event.currentTarget.id);
+            }
+            alert("Hai messo Mi Piace al Post");
+            
+        }
+    });
+}
