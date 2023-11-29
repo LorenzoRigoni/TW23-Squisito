@@ -97,7 +97,7 @@ function caricaImmagini() {
         heartSpan.setAttribute("id", datiJSON[i].IDPost);
         heartIcon.appendChild(heartSpan);
         if(datiJSON[0]['IsLiked']){
-          heartSpan.style.color = 'red';
+          heartSpan.classList.add('clicked');
         }
         // Creare il secondo elemento della lista (commento)
         var commentIcon = document.createElement("li");

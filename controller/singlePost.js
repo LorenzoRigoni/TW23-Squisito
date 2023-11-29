@@ -31,7 +31,7 @@ window.addEventListener("load", function () {
         heart.addEventListener("click",likeClick,false);
         heart.setAttribute("id", datiJSON[0].IDPost);
         if(datiJSON[0]['IsLiked']){
-          heart.style.color = 'red';
+          heart.classList.add('clicked');
         }
         var contenitoreCommenti = document.getElementById("row ps-5 p-3 posts");
         // Creare la card di Bootstrap
@@ -123,19 +123,21 @@ window.addEventListener("load", function () {
       },
     });
   }
-});
-function likeClick(event) {                                                        
+});                                                        
+function likeClick(event) {
+  event.stopPropagation();                                                
    $.ajax({
         url:"/tw23-squisito/model/post_models/like_models.php",  
         type: "GET",   
         data: {
-            "IDPost" : event.currentTarget.id
+            IDPost : event.currentTarget.id,
         },
         success:function(result){
-            if(!result.alreadyLiked){
-                //sendNotification(event.currentTarget.id,"Like");
-            }
-            alert("Hai messo Mi Piace al Post");   
+          if ($(".fa-heart").hasClass("clicked")) {
+            $(".fa-heart").removeClass("clicked");
+          } else {
+            $(".fa-heart").addClass("clicked");
+          } 
         }
     });
 }
@@ -148,6 +150,11 @@ function sendNotification(postId,tipo) {
             "TipoNotifica" : tipo
         },
         success:function(result){
+          if ($(".fa-heart").hasClass("clicked")) {
+            $(".fa-heart").removeClass("clicked");
+          } else {
+            $(".fa-heart").addClass("clicked");
+          }    
         }
     });
 }

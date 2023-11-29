@@ -22,7 +22,6 @@ function addpost() {
   window.location.href = "../view/addpost.html";
 }
 function likeClick(event) {
-    let b = event;
   event.stopPropagation();
   $.ajax({
     url: "/tw23-squisito/model/post_models/like_models.php",
@@ -31,7 +30,11 @@ function likeClick(event) {
       IDPost: event.currentTarget.id,
     },
     success: function (result) {
-        $('.fa-heart').toggleClass("clicked");
+      if ($(".fa-heart").hasClass("clicked")) {
+        $(".fa-heart").removeClass("clicked");
+      } else {
+        $(".fa-heart").addClass("clicked");
+      }
     },
   });
 }
