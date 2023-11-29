@@ -158,3 +158,20 @@ function sendNotification(postId,tipo) {
         }
     });
 }
+function sendFollow(event) {
+   $.ajax({
+        url:"/tw23-squisito/model/post_models/add_notification.php",  
+        type: "POST",   
+        data: {
+            "IDPost" : event.currentTarget.id,
+	    "TipoNotifica" : "Follow"
+        },
+        success:function(result){
+	if(!result.alreadyFollow){
+                alert("Hai Inizato a seguirlo");
+         }else {
+ 		alert("Hai smesso di seguirlo");
+	 }  
+        }
+    });
+}
