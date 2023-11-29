@@ -34,6 +34,7 @@ function likeClick(event) {
         $(".fa-heart").removeClass("clicked");
       } else {
         $(".fa-heart").addClass("clicked");
+        //sendNotification(event.currentTarget.id,"Like");
       }
     },
   });
