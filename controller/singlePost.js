@@ -150,11 +150,7 @@ function sendNotification(postId,tipo) {
             "TipoNotifica" : tipo
         },
         success:function(result){
-          if ($(".fa-heart").hasClass("clicked")) {
-            $(".fa-heart").removeClass("clicked");
-          } else {
-            $(".fa-heart").addClass("clicked");
-          }    
+             
         }
     });
 }
