@@ -12,7 +12,8 @@ if (checkLogin($conn)) {
         $isLiked->bind_param("si", $_SESSION['userEmail'], $_POST['IDPost']);
         if ($isLiked->execute()) {
             $query = "";
-            if ($isLiked->get_result()->num_rows == 0) {
+			$res =$isLiked->get_result();
+            if ($res->num_rows == 0) {
                 $query = "INSERT INTO mi_piace (IDPost, EmailUtente, DataLike)
                         VALUES (?, ?, CURRENT_DATE())";
             } else {
@@ -22,7 +23,7 @@ if (checkLogin($conn)) {
             $conn->close();
             $result = executeQuery($query);
             echo json_encode($result);
-            if ($isLiked->get_result()->num_rows == 0) {
+            if ($res->num_rows == 0) {
                 $emailReceiver = getReceiverEmail();
                 echo json_encode(addNotification($_POST['IDPost'], $_SESSION['userEmail'], $emailReceiver, "Like"));
             }
