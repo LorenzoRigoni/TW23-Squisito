@@ -92,11 +92,13 @@ function caricaImmagini() {
         var heartIcon = document.createElement("li");
         heartIcon.className = "list-inline-item m-0 pe-2";
         var heartSpan = document.createElement("span");
-        heartSpan.className = "fas fa-heart social-link-clicked";
+        heartSpan.className = "fas fa-heart social-link";
         heartSpan.addEventListener("click",likeClick,false);
         heartSpan.setAttribute("id", datiJSON[i].IDPost);
         heartIcon.appendChild(heartSpan);
-
+        if(datiJSON[0]['IsLiked']){
+          heartSpan.style.color = 'red';
+        }
         // Creare il secondo elemento della lista (commento)
         var commentIcon = document.createElement("li");
         commentIcon.className = "list-inline-item m-0 px-2";

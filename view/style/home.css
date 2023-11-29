@@ -55,10 +55,14 @@ nav.row {
 }
 .social-link {
     color: #000000;
+    transition:0.5s ease;
+    -moz-transition:0.5s ease;
+    -webkit-transition:0.5s ease;
     -webkit-text-stroke-width: 1px;
 }
-.social-link-clicked {
+.social-link.clicked {
     color: #ff0000;
+    -webkit-text-stroke-width: 1px;
 }
 .liked {
     font-size: x-small;

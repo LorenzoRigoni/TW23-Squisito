@@ -17,7 +17,7 @@ if (checkLogin($conn)) {
         $selectQuery->bind_param("ss", $_SESSION['userEmail'], $_SESSION['userEmail']);
         if ($selectQuery->execute()) {
             $response = $selectQuery->get_result();
-            if ($response->num_rows > 1) {
+            if ($response->num_rows >= 1) {
                 $temp = $response->fetch_all(MYSQLI_ASSOC);
                 for ($i = 0; $i < count($temp); $i++) {
                     $temp[$i]['Foto'] = base64_encode($temp[$i]['Foto']);
