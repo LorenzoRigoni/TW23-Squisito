@@ -157,11 +157,10 @@ function sendNotification(postId,tipo) {
 }
 function sendFollow(event) {
    $.ajax({
-        url:"/tw23-squisito/model/post_models/add_notification.php",  
+        url:"/tw23-squisito/model/post_models/follow_model.php",  
         type: "POST",   
         data: {
-            "IDPost" : event.currentTarget.id,
-	    "TipoNotifica" : "Follow"
+            "IDPost" : event.currentTarget.id
         },
         success:function(result){
 	if(!result.alreadyFollow){
