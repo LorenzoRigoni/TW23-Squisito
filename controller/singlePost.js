@@ -1,6 +1,5 @@
-// Funzione per caricare e visualizzare le immagini
+
 window.addEventListener("load", function () {
-  // Creare un oggetto XMLHttpRequest
   let searchParams = new URLSearchParams(window.location.search);
   if (searchParams.has("id")) {
     // true
@@ -12,7 +11,7 @@ window.addEventListener("load", function () {
     formData.append("IDPost", IDPost);
     var textareaElement = document.getElementById("textArea");
     textareaElement.setAttribute("data_IDPost", IDPost);
-     $("#followBtn").attr("id",IDPost);    
+	
 
     // Effettuare una richiesta fetch per inviare i dati al server
     fetch(url, {})
@@ -27,6 +26,13 @@ window.addEventListener("load", function () {
         const datiJSON = JSON.parse(text); //datiJSON[0]['Nazione'];
         var contenitorePost = document.getElementById("row h-100 d-flex");
 
+var followBtn = document.getElementById("followBtn");
+    followBtn.setAttribute("data_id", datiJSON[0].IDPost);
+        
+	 followBtn.addEventListener("click", function(event) {
+    sendFollow(event);
+}, false);
+	 
          var heart = document.getElementById("heart");
         heart.addEventListener("click",likeClick,false);
         heart.setAttribute("id", datiJSON[0].IDPost);
@@ -102,15 +108,14 @@ window.addEventListener("load", function () {
           IDPost: $("#textArea").attr("data_IDPost"),
         },
         success: function (result) {
-          //sendNotification($("#textArea").attr("data_IDPost"),"Commento");
         },
       });
     });
 
     let user = sessionStorage.getItem("email");
     $.ajax({
-      url: "/tw23-squisito/model/user_models/get_user_info.php", //the page containing php script
-      type: "GET", //request type,
+      url: "/tw23-squisito/model/user_models/get_user_info.php", 
+      type: "GET", 
       data: {
         email: user,
       },
@@ -124,7 +129,7 @@ window.addEventListener("load", function () {
     });
   }
 });                                                        
-function likeClick(event) {                                              
+function likeClick(event) {                                               
    $.ajax({
         url:"/tw23-squisito/model/post_models/like_models.php",  
         type: "POST",   
@@ -132,38 +137,25 @@ function likeClick(event) {
             IDPost : event.currentTarget.id,
         },
         success:function(result){
+			alert(result);
           if ($(".fa-heart").hasClass("clicked")) {
             $(".fa-heart").removeClass("clicked");
           } else {
-            $(".fa-heart").addClass("clicked");
-	    //sendNotification(event.currentTarget.id,"Like");	 
+            $(".fa-heart").addClass("clicked"); 
           } 
-        }
-    });
-}
-function sendNotification(postId,tipo) {
-   $.ajax({
-        url:"/tw23-squisito/model/post_models/add_notification.php",  
-        type: "POST",   
-        data: {
-            "IDPost" : postId,
-            "TipoNotifica" : tipo
-        },
-        success:function(result){
-             
         }
     });
 }
 function sendFollow(event) {
    $.ajax({
-        url:"/tw23-squisito/model/post_models/follow_model.php",  
+        url:"/tw23-squisito/model/user_models/follow_models.php",  
         type: "POST",   
         data: {
-            "IDPost" : event.currentTarget.id
+            "IDPost" : event.currentTarget.getAttribute("data_id"),
         },
         success:function(result){
-	if(!result.alreadyFollow){
-		//sendNotification(event.currentTarget.id,"Follow");	 
+			alert(result);
+	if(!result.alreadyFollow){	 
                 alert("Hai Inizato a seguirlo");
          }else {
  		alert("Hai smesso di seguirlo");
