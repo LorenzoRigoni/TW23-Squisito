@@ -101,7 +101,9 @@ window.addEventListener("load", function () {
           Contenuto: document.getElementById("textArea").value,
           IDPost: $("#textArea").attr("data_IDPost"),
         },
-        success: function (result) {},
+        success: function (result) {
+          //sendNotification($("#textArea").attr("data_IDPost"),"Commento");
+        },
       });
     });
 
@@ -122,8 +124,7 @@ window.addEventListener("load", function () {
     });
   }
 });
-function likeClick(event) {
-                                                             
+function likeClick(event) {                                                        
    $.ajax({
         url:"/tw23-squisito/model/post_models/like_models.php",  
         type: "GET",   
@@ -132,10 +133,21 @@ function likeClick(event) {
         },
         success:function(result){
             if(!result.alreadyLiked){
-                //sendNotification(event.currentTarget.id);
+                //sendNotification(event.currentTarget.id,"Like");
             }
-            alert("Hai messo Mi Piace al Post");
-            
+            alert("Hai messo Mi Piace al Post");   
+        }
+    });
+}
+function sendNotification(postId,tipo) {
+   $.ajax({
+        url:"/tw23-squisito/model/post_models/add_notification.php",  
+        type: "POST",   
+        data: {
+            "IDPost" : postId,
+            "TipoNotifica" : tipo
+        },
+        success:function(result){
         }
     });
 }
