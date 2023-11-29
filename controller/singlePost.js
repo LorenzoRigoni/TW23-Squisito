@@ -12,6 +12,7 @@ window.addEventListener("load", function () {
     formData.append("IDPost", IDPost);
     var textareaElement = document.getElementById("textArea");
     textareaElement.setAttribute("data_IDPost", IDPost);
+     $("#followBtn").attr("id",IDPost);    
 
     // Effettuare una richiesta fetch per inviare i dati al server
     fetch(url, {})
