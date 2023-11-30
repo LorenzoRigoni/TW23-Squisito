@@ -21,6 +21,12 @@ function postClick(event) {
 function addpost() {
   window.location.href = "../view/addpost.html";
 }
+function explore() {
+  window.location.href = "../view/explore.html";
+}
+function profile() {
+  window.location.href = "../view/profile.html?id="+sessionStorage.getItem("email");
+}
 function likeClick(event) {
   event.stopPropagation();
   var $heartSpan = $(event.currentTarget);

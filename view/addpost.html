@@ -14,7 +14,7 @@
     <link href="./style/main.css" rel="stylesheet">
     <link href="./style/addpost.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/ce8df11f13.js" crossorigin="anonymous"></script>
-    <title>Macaron</title>
+    <title>AddPost</title>
 </head>
 
 <body>
@@ -68,11 +68,11 @@
         </div>
         <nav class="row gx-0">
             <div class="nav">
-                <span class="fas fa-house active fa-xl"></span>
-                <span class="fas fa-globe fa-xl"></span>
-                <span class="far fa-square-plus fa-xl" onclick="addpost()"></span>
+                <span class="fas fa-house fa-xl" onclick="home()"></span>
+                <span class="fas fa-globe fa-xl" onclick="explore()"></span>
+                <span class="far fa-square-plus active fa-xl"></span>
                 <span class="fas fa-magnifying-glass fa-xl"></span>
-                <img id="user-photo-small" alt="profile-image" class="avatar avatar-32 rounded-circle p-1">
+                <img id="user-photo-small" alt="profile-image" class="avatar avatar-32 rounded-circle p-1" onclick="profile()">
             </div>
         </nav>
     </div>

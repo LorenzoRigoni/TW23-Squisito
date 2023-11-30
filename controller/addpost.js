@@ -34,15 +34,30 @@ $("#sendPostButton").on("click", function () {
 });
 
 window.addEventListener('load', function() {
+  //load image profile
+  let user = sessionStorage.getItem("email");
+  $.ajax({
+    url: "/tw23-squisito/model/user_models/get_user_info.php",
+    type: "GET",
+    data: {
+      email: user,
+    },
+    success: function (result) {
+      const responseObj = JSON.parse(result);
+      $("#user-photo-small").attr(
+        "src",
+        "data:image/png;base64," + responseObj[0].FotoProfilo
+      );
+    },
+  });
+
   $.ajax({
     url: "/tw23-squisito/model/post_models/get_nations.php",
     type: "GET",
     dataType: "json",
     success: function (data) {
-
       // Rimuovi le opzioni esistenti
       $("#sel1").empty();
-
       // Aggiungi le nuove opzioni
       data.forEach(function (option) {
         // Crea l'elemento option
@@ -51,20 +66,17 @@ window.addEventListener('load', function() {
           text: option.Nome,
           id: option.Shortname,
         });
-
         // Aggiungi l'opzione al menu a discesa
         $("#sel1").append(newOption);
         //Set italia di default
         onSelectionChange('IT','Italy');
         $('#sel1 option[value="107"]').attr("selected",true);
       });
-
       $("#sel1").on("change", function () {
         var selectedOptionId = $(this).find(":selected").attr("id");
         var nomeNazione = $(this).find(":selected").text();
         onSelectionChange(selectedOptionId, nomeNazione);
       });
-
     },
     error: function (error) {
       console.log("Errore nella richiesta al server:", error);
@@ -77,4 +89,13 @@ function onSelectionChange(idcountry, nomeNazione) {
   let label = document.getElementById("CountryName");
   label.textContent = nomeNazione;
   flagElement.src = "/tw23-squisito/view/resource/flags/" + idcountry + ".png";
+}
+function home() {
+  window.location.href = "../view/home.html";
+}
+function profile() {
+  window.location.href = "../view/profile.html?id="+sessionStorage.getItem("email");
+}
+function explore() {
+  window.location.href = "../view/explore.html";
 }
