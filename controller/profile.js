@@ -52,7 +52,7 @@ window.addEventListener("load", function () {
   });
   
   $.ajax({
-    url: "/tw23-squisito/model/posts_model/get_posts_of_user.php",
+     url: "/tw23-squisito/model/post_models/get_posts_of_user.php",
     type: "GET",
     data: {
       email: IDUser,
