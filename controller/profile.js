@@ -50,6 +50,31 @@ window.addEventListener("load", function () {
       $("#seguiti-number").text(responseObj[2].NumSeguiti);
     },
   });
+  
+  $.ajax({
+    url: "/tw23-squisito/model/posts_model/get_posts_of_user.php",
+    type: "GET",
+    data: {
+      email: IDUser,
+    },
+    success: function (result) {
+      const datiJSON = JSON.parse(result);
+	  let postSpace = document.getElementById("postSpace");
+     for (var i = 0; i < datiJSON.length; i++) {
+        var cardCol = document.createElement("div");
+        cardCol.className = "col-sm-6 col-md-4 col-lg-3 item py-2";
+		cardCol.setAttribute("id", datiJSON[i].IDPost);
+
+        var cardImg = document.createElement("img");
+        cardImg.className = "img-fluid rounded";
+        cardImg.setAttribute("src","data:image/jpeg;base64,"+ datiJSON[i].Foto);
+		cardCol.appendChild(cardImg);
+		cardCol.addEventListener("click",postClick,false);
+		postSpace.appendChild(cardCol);
+
+    }
+    },
+  });
   }
 });
 function home() {
@@ -60,4 +85,7 @@ function addpost() {
 }
 function explore() {
   window.location.href = "../view/explore.html";
+}
+function postClick(event) {
+  window.location.href = "../view/post.html?id=" + event.currentTarget.id;
 }
