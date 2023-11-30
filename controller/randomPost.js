@@ -6,7 +6,6 @@ window.addEventListener("load", function () {
     type: "GET",
    
     success: function (result) {
-		alert(result);
       const datiJSON = JSON.parse(result);
       let postSpace = document.getElementById("postSpace");
 		for (var i = 0; i < datiJSON.length; i++) {
@@ -21,7 +20,6 @@ window.addEventListener("load", function () {
 		cardCol.appendChild(cardImg);
 		cardCol.addEventListener("click",postClick,false);
 		postSpace.appendChild(cardCol);
-
     }
   }
 });
