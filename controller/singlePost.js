@@ -159,9 +159,15 @@ function sendFollow(event) {
 		var alreadyFollowedObject = JSON.parse('{' + alreadyFollowedSubstring + '}');		
 	if(!alreadyFollowedObject.alreadyFollowed){	 
                 alert("Hai Inizato a seguirlo");
-         }else {
+				 $("#followBtn").removeClass("follow");
+				 $("#followBtn").addClass("follow:focus");
+    }else {
  		alert("Hai smesso di seguirlo");
+		 $("#followBtn").removeClass("follow:focus");
+		 $("#followBtn").addClass("follow");
+		
 	 }  
         }
     });
 }
+
