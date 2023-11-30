@@ -154,12 +154,20 @@ function sendFollow(event) {
             "IDPost" : event.currentTarget.getAttribute("data_id"),
         },
         success:function(result){
-			alert(result);
-	if(!result.alreadyFollow){	 
+		var alreadyFollowedIndex = result.indexOf('"alreadyFollowed":');
+		var alreadyFollowedSubstring = result.slice(alreadyFollowedIndex, result.indexOf('}', alreadyFollowedIndex) );
+		var alreadyFollowedObject = JSON.parse('{' + alreadyFollowedSubstring + '}');		
+	if(!alreadyFollowedObject.alreadyFollowed){	 
                 alert("Hai Inizato a seguirlo");
-         }else {
+				 $("#followBtn").removeClass("follow");
+				 $("#followBtn").addClass("follow:focus");
+    }else {
  		alert("Hai smesso di seguirlo");
+		 $("#followBtn").removeClass("follow:focus");
+		 $("#followBtn").addClass("follow");
+		
 	 }  
         }
     });
 }
+
