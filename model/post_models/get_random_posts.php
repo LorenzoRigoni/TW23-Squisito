@@ -7,10 +7,11 @@ $query = "SELECT P.IDPost, P.Titolo, P.Foto, P.Ricetta, N.Nome AS Nazione, U.Ema
             (SELECT COUNT(*) FROM mi_piace M2 WHERE M2.EmailUtente = ? AND M2.IDPost = P.IDPost) AS IsLiked
         FROM post P INNER JOIN utenti U ON U.Email = P.EmailUtente
             INNER JOIN nazioni N ON P.IDNazione = N.IDNazione
-        WHERE P.EmailUtente IN (SELECT EmailSeguito
+        WHERE P.EmailUtente NOT IN (SELECT EmailSeguito
                                 FROM seguiti
                                 WHERE EmailFollower = ?)
-        ORDER BY RAND()";
+        ORDER BY RAND()
+        LIMIT 20";
 
 session_start();
 if (checkLogin($conn)) {
