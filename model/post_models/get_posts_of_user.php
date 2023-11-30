@@ -13,7 +13,7 @@ $query = "SELECT P.IDPost, P.Titolo, P.Foto, P.Ricetta, N.Nome AS Nazione, U.Ema
 session_start();
 if (checkLogin($conn)) {
     if ($selectQuery = $conn->prepare($query)) {
-        $selectQuery->bind_param("ss", $_SESSION['userEmail'], $_SESSION['userEmail']);
+        $selectQuery->bind_param("ss", $_GET['email'], $_GET['email']);
         if ($selectQuery->execute()) {
             $response = $selectQuery->get_result();
             if ($response->num_rows >= 1) {
