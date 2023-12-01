@@ -27,7 +27,7 @@ if (checkLogin($conn)) {
             echo json_encode($result);
             if ($res->num_rows == 0) {
                 echo json_encode(addNotification(null, $_SESSION['userEmail'], $followingEmail, "Follow"));
-                pushNotification();
+                pushNotification($followingEmail);
             }
         } else {
             echo json_encode(array("error" => $isFollowed->error));
