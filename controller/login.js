@@ -27,6 +27,7 @@ $('#login').on("click",function() {
 			const responseObj = JSON.parse(result);
 			if (responseObj.success) {
 				sessionStorage.setItem("email",$("#email").val());
+				sessionStorage.setItem("close_notify", JSON.stringify([]));
 				window.location.href = '../view/home.html';
 			}
         }

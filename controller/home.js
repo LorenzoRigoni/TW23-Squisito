@@ -1,5 +1,6 @@
 window.addEventListener("load", function () {
   let user = sessionStorage.getItem("email");
+  loadNotification();
   $.ajax({
     url: "/tw23-squisito/model/user_models/get_user_info.php",
     type: "GET",
@@ -15,6 +16,36 @@ window.addEventListener("load", function () {
     },
   });
 });
+var close_notify = [];
+function loadNotification() {
+  $.ajax({
+    url: "/tw23-squisito/model/post_models/get_notifications.php",
+    type: "GET",
+    success: function (result) {
+      let not = JSON.parse(result);
+      let div = "";
+      let action;
+      let close = JSON.parse(sessionStorage.getItem('close_notify')) || [];
+      not.forEach((element) => {
+        if (!close.map(Number).includes(element.IDNotifica)) {
+          switch (element.TipoNotifica) {
+            case "Like":
+              action =
+                element.EmailMittente + " ha messo mi piace alla tua foto";
+              break;
+          }
+          div +=
+            '<div class="notibox">' +
+            action +
+            "<div id=" +
+            element.IDNotifica +
+            ' class="cancel">✕</div></div>';
+        }
+      });
+      $("#notifiche").html(div);
+    },
+  });
+}
 function postClick(event) {
   window.location.href = "../view/post.html?id=" + event.currentTarget.id;
 }
@@ -38,10 +69,15 @@ $("#notification").click(function () {
 $("#close-notification").click(function () {
   $(".sidebar").removeClass("active");
 });
-$(".cancel").click(function () {
+$(document).on("click", ".cancel", function () {
   console.log("toggling visibility");
+  var close = [];
+  close = JSON.parse(sessionStorage.getItem('close_notify')) || [];
+  close.push($(this).attr("id"));
+  sessionStorage.setItem('close_notify', JSON.stringify(close));
   $(this).parent().toggleClass("gone");
 });
+
 function likeClick(event) {
   event.stopPropagation();
   var $heartSpan = $(event.currentTarget);
@@ -71,7 +107,6 @@ var pusher = new Pusher("a7d0c7ac2e467a01cd1b", {
 var channel = pusher.subscribe("my-channel");
 channel.bind("my-event", function (data) {
   if (user == data) {
-    var div='<div class="notibox">'+JSON.stringify(data)+'<div class="cancel">✕</div></div>';
-    $('#notifiche').html(div);
+    loadNotification();
   }
 });
