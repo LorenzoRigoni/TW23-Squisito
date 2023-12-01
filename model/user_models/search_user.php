@@ -4,7 +4,7 @@ require_once("../connection_models/db_conn.php");
 
 $query = "SELECT U.Username, U.FotoProfilo
         FROM utenti U 
-        WHERE  U.Username LIKE '? AND U.Email != ?";
+        WHERE  U.Username LIKE ? AND U.Email != ?";
 
 session_start();
 if (checkLogin($conn)) {
