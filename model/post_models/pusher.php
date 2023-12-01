@@ -18,7 +18,8 @@ function pushNotification($receiverEmail) {
         '1717839',
         $options
       );
-      $pusher->trigger('my-channel', 'my-event', $receiverEmail);
+      $trimmed = trim($receiverEmail, "'");
+      $pusher->trigger('my-channel', 'my-event', $trimmed);
 
   }
 ?>
