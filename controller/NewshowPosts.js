@@ -55,7 +55,7 @@ function caricaImmagini() {
         userName.textContent = datiJSON[i].Username;
 
         var userLocation = document.createElement("p");
-        userLocation.className = "country-posts text-muted";
+        userLocation.className = "country-posts text-muted m-0";
         userLocation.textContent = datiJSON[i].Nazione;
 
         // Aggiungere elementi alla prima riga
@@ -67,8 +67,7 @@ function caricaImmagini() {
 
         // Creare la seconda riga con l'immagine principale
         var row2 = document.createElement("div");
-        row2.className = "row p-0";
-        row2.style = "margin: 1vh;";
+        row2.className = "row p-0 mx-1";
 
         var mainImage = document.createElement("img");
         mainImage.src = "data:image/jpeg;base64," + datiJSON[i].Foto;
