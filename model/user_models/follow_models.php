@@ -1,6 +1,7 @@
 <?php
 include '../login_models/login_functions.php';
 include '../post_models/add_notification.php';
+include '../post_models/pusher.php';
 
 session_start();
 if (checkLogin($conn)) {
@@ -26,6 +27,7 @@ if (checkLogin($conn)) {
             echo json_encode($result);
             if ($res->num_rows == 0) {
                 echo json_encode(addNotification(null, $_SESSION['userEmail'], $followingEmail, "Follow"));
+                pushNotification();
             }
         } else {
             echo json_encode(array("error" => $isFollowed->error));

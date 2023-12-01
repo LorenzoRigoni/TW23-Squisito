@@ -1,6 +1,7 @@
 <?php
 include '../login_models/login_functions.php';
 include 'add_notification.php';
+include 'pusher.php';
 require('../connection_models/db_conn.php');
 
 $query = "INSERT INTO commenti(EmailUtente, IDPost, Contenuto, DataCommento)
@@ -15,6 +16,7 @@ if (checkLogin($conn)) {
             $conn->close();
             $emailReceiver = getReceiverEmail();
             echo json_encode(addNotification($_POST['IDPost'], $_SESSION['userEmail'], $emailReceiver, "Commento"));
+            pushNotification();
         } else {
             echo json_encode(array("error" => $insert->error));
         }

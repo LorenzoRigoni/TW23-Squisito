@@ -2,9 +2,9 @@
 include '../login_models/login_functions.php';
 require('../connection_models/db_conn.php');
 
-$query = "SELECT N.IDPost, N.TipoNotifica, U.Username, U.FotoProfilo, N.DataNotifica
+$query = "SELECT N.IDPost, N.TipoNotifica, U.Username, U.FotoProfilo, N.DataNotifica, N.Visualizzato
         FROM notifiche N INNER JOIN utenti U ON N.EmailMittente = U.Email
-        WHERE N.EmailDestinatario = ? AND N.Visualizzato = FALSE";
+        WHERE N.EmailDestinatario = ?";
 
 session_start();
 if (checkLogin($conn)) {

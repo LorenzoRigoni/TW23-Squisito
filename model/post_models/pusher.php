@@ -1,10 +1,10 @@
 <?php
-  require __DIR__ . '../../../vendor/autoload.php';
 
-  /**
-   * Function to push the notification.
-   */
-  function pushNotification() {
+/**
+ * Function to push the notification.
+ */
+function pushNotification() {
+    require __DIR__ . '../../../vendor/autoload.php';
 
       $options = array(
         'cluster' => 'eu',
@@ -17,9 +17,7 @@
         '1717839',
         $options
       );
-    
-      $data['message'] = 'hello world';
-      $pusher->trigger('my-channel', 'my-event', $data);
+      $pusher->trigger('my-channel', 'my-event', "");
 
   }
 ?>
