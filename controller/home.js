@@ -25,22 +25,22 @@ function explore() {
   window.location.href = "../view/explore.html";
 }
 function profile() {
-  window.location.href = "../view/profile.html?id="+sessionStorage.getItem("email");
+  window.location.href =
+    "../view/profile.html?id=" + sessionStorage.getItem("email");
 }
 function search() {
   window.location.href = "../view/search.html";
 }
 
 $("#notification").click(function () {
-  $(".sidebar").toggleClass('active');
+  $(".sidebar").toggleClass("active");
 });
 $("#close-notification").click(function () {
-  $(".sidebar").removeClass('active');
+  $(".sidebar").removeClass("active");
 });
 $(".cancel").click(function () {
   console.log("toggling visibility");
-    $(this).parent().toggleClass('gone');
-
+  $(this).parent().toggleClass("gone");
 });
 function likeClick(event) {
   event.stopPropagation();
@@ -52,7 +52,7 @@ function likeClick(event) {
       IDPost: event.currentTarget.id,
     },
     success: function (result) {
-       if ($heartSpan.hasClass("clicked")) {
+      if ($heartSpan.hasClass("clicked")) {
         $heartSpan.removeClass("clicked");
       } else {
         $heartSpan.addClass("clicked");
@@ -60,3 +60,18 @@ function likeClick(event) {
     },
   });
 }
+let user = sessionStorage.getItem("email");
+// Enable pusher logging - don't include this in production
+Pusher.logToConsole = true;
+
+var pusher = new Pusher("a7d0c7ac2e467a01cd1b", {
+  cluster: "eu",
+});
+
+var channel = pusher.subscribe("my-channel");
+channel.bind("my-event", function (data) {
+  if (user == data) {
+    var div='<div class="notibox">'+JSON.stringify(data)+'<div class="cancel">✕</div></div>';
+    $('#notifiche').html(div);
+  }
+});
