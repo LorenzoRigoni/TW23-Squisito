@@ -99,3 +99,6 @@ function profile() {
 function explore() {
   window.location.href = "../view/explore.html";
 }
+function search() {
+  window.location.href = "../view/search.html";
+}

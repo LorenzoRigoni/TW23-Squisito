@@ -86,6 +86,9 @@ function addpost() {
 function explore() {
   window.location.href = "../view/explore.html";
 }
+function search() {
+  window.location.href = "../view/search.html";
+}
 function postClick(event) {
   window.location.href = "../view/post.html?id=" + event.currentTarget.id;
 }

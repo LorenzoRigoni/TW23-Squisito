@@ -27,6 +27,9 @@ function explore() {
 function profile() {
   window.location.href = "../view/profile.html?id="+sessionStorage.getItem("email");
 }
+function search() {
+  window.location.href = "../view/search.html";
+}
 function likeClick(event) {
   event.stopPropagation();
   var $heartSpan = $(event.currentTarget);
