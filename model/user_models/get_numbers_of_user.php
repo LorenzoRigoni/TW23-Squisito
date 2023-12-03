@@ -1,4 +1,8 @@
 <?php
+/**
+ * This file contains the model for getting number of posts, number of followers and number of following users.
+ */
+
 include '../login_models/login_functions.php';
 
 session_start();

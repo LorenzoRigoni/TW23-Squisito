@@ -1,4 +1,8 @@
 <?php
+/**
+ * This file contains the model for getting random posts for the "explore" zone.
+ */
+
 include '../login_models/login_functions.php';
 require_once('../connection_models/db_conn.php');
 

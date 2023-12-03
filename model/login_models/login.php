@@ -1,4 +1,8 @@
 <?php
+/**
+ * This file contains the model for the login of user.
+ */
+
 require_once("../connection_models/db_conn.php");
 include "../connection_models/db_conn.php";
 include "login_functions.php";

@@ -1,4 +1,8 @@
 <?php
+/**
+ * This file contains the model for getting the number of likes of a post.
+ */
+
 include '../login_models/login_functions.php';
 require_once('../connection_models/db_conn.php');
 

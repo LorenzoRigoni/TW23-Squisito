@@ -1,4 +1,7 @@
 <?php
+/**
+ * This file contains the function for add a notification to the database.
+ */
 
 /**
  * Function to add a notification in the database.

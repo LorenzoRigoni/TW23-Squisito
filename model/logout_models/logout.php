@@ -1,4 +1,8 @@
 <?php
+/**
+ * This file contains the model for the logout of user.
+ */
+
 include '../login_models/login_functions.php';
 include '../session_models/create_sec_session.php';
 

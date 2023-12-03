@@ -1,4 +1,8 @@
 <?php
+/**
+ * This file contains the functions for the login of user.
+ */
+
 require('../connection_models/db_conn.php');
 
 /**

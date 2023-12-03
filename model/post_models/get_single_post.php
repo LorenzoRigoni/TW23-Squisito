@@ -1,4 +1,8 @@
 <?php
+/**
+ * This file contains the model for getting the info of one post.
+ */
+
 include '../login_models/login_functions.php';
 require('../connection_models/db_conn.php');
 

@@ -1,4 +1,7 @@
 <?php
+/**
+ * This file contains the PHP plug-in for pushing the notifications.
+ */
 
 /**
  * Function to push the notification.

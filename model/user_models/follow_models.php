@@ -1,4 +1,8 @@
 <?php
+/**
+ * This file contains the model for follow/defollow a user.
+ */
+
 include '../login_models/login_functions.php';
 include '../post_models/add_notification.php';
 include '../post_models/pusher.php';

@@ -1,4 +1,8 @@
 <?php
+/**
+ * This file contains the model for getting the follower users list.
+ */
+
 include '../login_models/login_functions.php';
 require_once("../connection_models/db_conn.php");
 

@@ -1,4 +1,8 @@
 <?php
+/**
+ * This file contains the model for insert a new comment in a post.
+ */
+
 include '../login_models/login_functions.php';
 include 'add_notification.php';
 include 'pusher.php';
