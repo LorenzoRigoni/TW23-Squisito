@@ -9,7 +9,7 @@ window.addEventListener("load", function () {
 
     const formData = new FormData();
     formData.append("IDPost", IDPost);
-    var textareaElement = document.getElementById("textArea");
+    let textareaElement = document.getElementById("textArea");
     textareaElement.setAttribute("data_IDPost", IDPost);
 	
 
@@ -17,76 +17,69 @@ window.addEventListener("load", function () {
     fetch(url, {})
       .then((response) => response.text())
       .then((text) => {
-        //alert(text);
-        //const startIndex = text.indexOf('[{');
-
-        // Estrai solo la parte della stringa che inizia dal secondo oggetto JSON
-        //const jsonString = text.substring(startIndex);
-
         const datiJSON = JSON.parse(text); //datiJSON[0]['Nazione'];
-        var contenitorePost = document.getElementById("row h-100 d-flex");
+        let contenitorePost = document.getElementById("row h-100 d-flex");
 
-var followBtn = document.getElementById("followBtn");
+    let followBtn = document.getElementById("followBtn");
     followBtn.setAttribute("data_id", datiJSON[0].IDPost);
         
-	 followBtn.addEventListener("click", function(event) {
-    sendFollow(event);
-}, false);
+    followBtn.addEventListener("click", function(event) {
+    	sendFollow(event);
+	}, false);
 	 
-         var heart = document.getElementById("heart");
+        let heart = document.getElementById("heart");
         heart.addEventListener("click",likeClick,false);
         heart.setAttribute("id", datiJSON[0].IDPost);
         if(datiJSON[0]['IsLiked']){
           heart.classList.add('clicked');
         }
-        var contenitoreCommenti = document.getElementById("row ps-5 p-3 posts");
+        let contenitoreCommenti = document.getElementById("row ps-5 p-3 posts");
         // Creare la card di Bootstrap
         document.getElementById("nomeUtente").textContent =
           datiJSON[0]["UsernamePost"];
         document.getElementById("Paese").textContent = datiJSON[0]["Nazione"];
         document.getElementById("testoRicetta").textContent =
           datiJSON[0]["Ricetta"];
-        var flagElement = document.getElementById("flag");
+        let flagElement = document.getElementById("flag");
         flagElement.src =
           "/tw23-squisito/view/resource/flags/" +
           datiJSON[0]["Shortname"] +
           ".png";
-        var fotoProfiloPost = document.getElementById("fotoUtentePost");
+        let fotoProfiloPost = document.getElementById("fotoUtentePost");
         fotoProfiloPost.src =
           "data:image/jpeg;base64," + datiJSON[0]["FotoProfilo"];
 
-        var heroImage = document.getElementById("immagineMain");
+        let heroImage = document.getElementById("immagineMain");
 
         // Imposta il nuovo URL come sfondo dell'immagine
-        //heroImage.src  = "data:image/jpg;base64,"+ datiJSON[0]["FotoRicetta"];
-        var prova = "data:image/jpg;base64," + datiJSON[0]["FotoRicetta"];
-        heroImage.style.backgroundImage = 'url("' + prova + '")';
-        for (var i = 1; i < datiJSON.length; i++) {
+        let  immagine = "data:image/jpg;base64," + datiJSON[0]["FotoRicetta"];
+        heroImage.style.backgroundImage = 'url("' + immagine + '")';
+        for (let i = 1; i < datiJSON.length; i++) {
           // Creare la struttura HTML del commento
-          var commentContainer = document.createElement("div");
+          let commentContainer = document.createElement("div");
           commentContainer.className = "row comment py-3";
 
-          var avatarCol = document.createElement("div");
+          let avatarCol = document.createElement("div");
           avatarCol.className = "col-auto";
-          var avatar = document.createElement("img");
+          let avatar = document.createElement("img");
           avatar.src =
             "data:image/jpeg;base64," + datiJSON[i]["FotoProfiloCom"];
           avatar.alt = "profile-image";
           avatar.className = "avatar avatar-32 rounded-circle my-auto";
           avatarCol.appendChild(avatar);
 
-          var usernameCol = document.createElement("div");
+          let usernameCol = document.createElement("div");
           usernameCol.className = "col-auto my-auto p-0";
-          var strong = document.createElement("strong");
-          var usernameParagraph = document.createElement("p");
+          let strong = document.createElement("strong");
+          let usernameParagraph = document.createElement("p");
           usernameParagraph.className = "m-0";
           usernameParagraph.textContent = datiJSON[i]["Username"];
           strong.appendChild(usernameParagraph);
           usernameCol.appendChild(strong);
 
-          var contentCol = document.createElement("div");
+          let contentCol = document.createElement("div");
           contentCol.className = "col-auto my-auto";
-          var contentParagraph = document.createElement("p");
+          let contentParagraph = document.createElement("p");
           contentParagraph.textContent = datiJSON[i]["Contenuto"];
           contentCol.appendChild(contentParagraph);
 
@@ -154,9 +147,9 @@ function sendFollow(event) {
             "IDPost" : event.currentTarget.getAttribute("data_id"),
         },
         success:function(result){
-		var alreadyFollowedIndex = result.indexOf('"alreadyFollowed":');
-		var alreadyFollowedSubstring = result.slice(alreadyFollowedIndex, result.indexOf('}', alreadyFollowedIndex) );
-		var alreadyFollowedObject = JSON.parse('{' + alreadyFollowedSubstring + '}');		
+		const alreadyFollowedIndex = result.indexOf('"alreadyFollowed":');
+		const alreadyFollowedSubstring = result.slice(alreadyFollowedIndex, result.indexOf('}', alreadyFollowedIndex) );
+		let alreadyFollowedObject = JSON.parse('{' + alreadyFollowedSubstring + '}');		
 	if(!alreadyFollowedObject.alreadyFollowed){	 
                 alert("Hai Inizato a seguirlo");
 				 $("#followBtn").removeClass("follow");
