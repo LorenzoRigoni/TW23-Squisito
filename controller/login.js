@@ -16,12 +16,15 @@
 		})
 })()
 $('#login').on("click",function() {
+	const checkbox = document.getElementById("remember");
+	var checkboxValue = checkbox.checked;
 	$.ajax({
         url:"/tw23-squisito/model/login_models/login.php",
         type: "POST",
         data: {
             "email" : $("#email").val(),
-			"password": $("#password").val()
+			"password": $("#password").val(),
+		"ricordami": checkboxValue
         },
         success:function(result){
 			const responseObj = JSON.parse(result);
