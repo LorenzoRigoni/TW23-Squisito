@@ -16,7 +16,7 @@ window.addEventListener("load", function () {
     },
   });
 });
-var close_notify = [];
+let close_notify = [];
 function loadNotification() {
   $.ajax({
     url: "/tw23-squisito/model/post_models/get_notifications.php",
@@ -71,7 +71,7 @@ $("#close-notification").click(function () {
 });
 $(document).on("click", ".cancel", function () {
   console.log("toggling visibility");
-  var close = [];
+  let close = [];
   close = JSON.parse(sessionStorage.getItem('close_notify')) || [];
   close.push($(this).attr("id"));
   sessionStorage.setItem('close_notify', JSON.stringify(close));
@@ -80,7 +80,7 @@ $(document).on("click", ".cancel", function () {
 
 function likeClick(event) {
   event.stopPropagation();
-  var $heartSpan = $(event.currentTarget);
+  let $heartSpan = $(event.currentTarget);
   $.ajax({
     url: "/tw23-squisito/model/post_models/like_models.php",
     type: "POST",
@@ -100,11 +100,11 @@ let user = sessionStorage.getItem("email");
 // Enable pusher logging - don't include this in production
 Pusher.logToConsole = true;
 
-var pusher = new Pusher("a7d0c7ac2e467a01cd1b", {
+let pusher = new Pusher("a7d0c7ac2e467a01cd1b", {
   cluster: "eu",
 });
 
-var channel = pusher.subscribe("my-channel");
+let channel = pusher.subscribe("my-channel");
 channel.bind("my-event", function (data) {
   if (user == data) {
     loadNotification();
