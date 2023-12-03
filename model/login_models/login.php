@@ -4,8 +4,8 @@ include "../connection_models/db_conn.php";
 include "login_functions.php";
 
 session_start();
-if(isset($_POST['email'], $_POST['password'])) {
-    if(login($_POST['email'], $_POST['password'], $conn)) {
+if(isset($_POST['email'], $_POST['password'], $_POST['ricordami'])) {
+    if(login($_POST['email'], $_POST['password'], $conn, $_POST['ricordami'])) {
         $response = array(
             "success" => true,
             "emailUtente" => $_POST['email']

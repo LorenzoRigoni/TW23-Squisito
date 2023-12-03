@@ -13,9 +13,9 @@ $query = "SELECT P.IDPost, P.Titolo,P.Foto, P.Ricetta, N.Nome AS Nazione, N.Shor
 session_start();
 if (checkLogin($conn)) {
     if ($selectQuery = $conn->prepare($query)) {
-        $selectQuery->bind_param("ssi", $_SESSION['userEmail'], $_SESSION['userEmail'], $_GET['IDPost']);
+        $selectQuery->bind_param("ssi", getSessionOrCookie(), getSessionOrCookie(), $_GET['IDPost']);
         if ($selectQuery->execute()) {
-            $post = $selectQuery->get_result(); //->fetch_all(MYSQLI_ASSOC);
+            $post = $selectQuery->get_result();
             $conn->close();
             $mergedData = array();
 
@@ -43,7 +43,6 @@ if (checkLogin($conn)) {
                 $commQuery->bind_param("i", $_GET['IDPost']);
                 if ($commQuery->execute()) {
                     $comments  = $commQuery->get_result();
-                    //$comments = $result->fetch_all(MYSQLI_ASSOC);
 
                     $immagini = array();
                     if (!empty($comments)) {
@@ -57,19 +56,12 @@ if (checkLogin($conn)) {
                         }
                         header("Content-Type: application/json");
                         echo json_encode(array_merge($mergedData, $immagini));
-                        //echo json_encode($immagini);
-
-                        //echo $comments[0]['Username'];
-                        // echo json_encode($comments[0]);
                     } else {
                         echo json_encode(['message' => 'No comments found']);
                     }
                 } else {
                     echo json_encode(['message' => 'Query preparation failed']);
                 }
-                //echo ($comments[0]['Username']);
-                // echo json_encode(array_merge( $post[0], $comments[0]));
-
             }
         } else {
             echo json_encode(array("error" => $commQuery->error));
@@ -83,4 +75,15 @@ if (checkLogin($conn)) {
 
 $conn->close();
 
+/**
+ * Function for getting the value of session variable or cookie variable.
+ * @return string The variable value.
+ */
+function getSessionOrCookie() {
+    if (isset($_COOKIE['userEmail'])) {
+        return $_COOKIE['userEmail'];
+    } else {
+        return $_SESSION['userEmail'];
+    }
+}
 ?>

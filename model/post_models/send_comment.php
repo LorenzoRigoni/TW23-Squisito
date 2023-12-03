@@ -10,12 +10,12 @@ $query = "INSERT INTO commenti(EmailUtente, IDPost, Contenuto, DataCommento)
 session_start();
 if (checkLogin($conn)) {
     if ($insert = $conn->prepare($query)) {
-        $insert->bind_param("sis", $_SESSION['userEmail'], $_POST['IDPost'], $_POST['Contenuto']);
+        $insert->bind_param("sis", getSessionOrCookie(), $_POST['IDPost'], $_POST['Contenuto']);
         if ($insert->execute()) {
             echo json_encode(array("success" => true));
             $conn->close();
             $emailReceiver = getReceiverEmail();
-            echo json_encode(addNotification($_POST['IDPost'], $_SESSION['userEmail'], $emailReceiver, "Commento"));
+            echo json_encode(addNotification($_POST['IDPost'], getSessionOrCookie(), $emailReceiver, "Commento"));
             pushNotification($emailReceiver);
         } else {
             echo json_encode(array("error" => $insert->error));
@@ -45,5 +45,17 @@ function getReceiverEmail() {
         return $selectQuery->error;
     }
     $conn->close();
+}
+
+/**
+ * Function for getting the value of session variable or cookie variable.
+ * @return string The variable value.
+ */
+function getSessionOrCookie() {
+    if (isset($_COOKIE['userEmail'])) {
+        return $_COOKIE['userEmail'];
+    } else {
+        return $_SESSION['userEmail'];
+    }
 }
 ?>

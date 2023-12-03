@@ -6,9 +6,10 @@ require('../connection_models/db_conn.php');
  * @param string $email The email of the user
  * @param string $pwd The password of the user
  * @param mysqli $conn The connection to the database
+ * @param bool $remindMe A boolean that says if the user wants to be reminded
  * @return bool True if the user is succesfully logged, false otherwise
  */
-function login($email, $pwd, $conn)
+function login($email, $pwd, $conn, $remindMe)
 {
     $userEmail = "";
     $query = "SELECT Email, Username, Nome, FotoProfilo, Pwd, Salt FROM utenti WHERE Email = ? LIMIT 1";
@@ -25,8 +26,13 @@ function login($email, $pwd, $conn)
                 return false;
             } else {
                 if ($pwd == $userPwd) {
-                    $_SESSION['userEmail'] = $userEmail;
-                    $_SESSION['login_string'] = hash('sha512', $pwd.$_SERVER['HTTP_USER_AGENT']);
+                    if ($remindMe) {
+                        $_COOKIE['userEmail'] = $userEmail;
+                        $_COOKIE['login_string'] = hash('sha512', $pwd.$_SERVER['HTTP_USER_AGENT']);
+                    } else {
+                        $_SESSION['userEmail'] = $userEmail;
+                        $_SESSION['login_string'] = hash('sha512', $pwd.$_SERVER['HTTP_USER_AGENT']);
+                    }
                     return true;
                 } else {
                     $now = time();
@@ -71,7 +77,7 @@ function checkBruteForce($email, $conn)
 function checkLogin($conn)
 {
     $password = "";
-    if (isset($_SESSION['userEmail'])) {
+    if (isset($_SESSION['userEmail']) || isset($_COOKIE['userEmail'])) {
         if ($query = $conn->prepare("SELECT pwd FROM utenti WHERE email = ? LIMIT 1")) {
             $query->bind_param('s', $_SESSION['userEmail']);
             $query->execute();
@@ -80,7 +86,7 @@ function checkLogin($conn)
                 $query->bind_result($password);
                 $query->fetch();
                 $login_check = hash('sha512', $password.$_SERVER['HTTP_USER_AGENT']);
-                if ($login_check == $_SESSION['login_string']) {
+                if ($login_check == $_SESSION['login_string'] || $login_check == $_COOKIE['login_string']) {
                     return true;
                 } else {
                     return false;

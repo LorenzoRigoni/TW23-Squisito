@@ -9,7 +9,7 @@ session_start();
 if (checkLogin($conn)) {
     if ($insert = $conn->prepare($query)) {
         $image = NULL;
-        $insert->bind_param('sssbi', $_SESSION['userEmail'], $_POST['Titolo'], $_POST['Ricetta'], $image, $_POST['IDNazione']);
+        $insert->bind_param('sssbi', getSessionOrCookie(), $_POST['Titolo'], $_POST['Ricetta'], $image, $_POST['IDNazione']);
         if($_FILES['Foto']['error'] == 0){
             $insert->send_long_data(3,file_get_contents($_FILES['Foto']['tmp_name']));
         }
@@ -25,4 +25,16 @@ if (checkLogin($conn)) {
     echo json_encode(array("error" => "The user is not logged"));
 }
 $conn->close();
+
+/**
+ * Function for getting the value of session variable or cookie variable.
+ * @return string The variable value.
+ */
+function getSessionOrCookie() {
+    if (isset($_COOKIE['userEmail'])) {
+        return $_COOKIE['userEmail'];
+    } else {
+        return $_SESSION['userEmail'];
+    }
+}
 ?>

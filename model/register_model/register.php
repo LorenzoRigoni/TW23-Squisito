@@ -20,7 +20,7 @@ if ($insert = $conn->prepare($query)) {
         echo json_encode($response);
         $conn->close();
         require('../connection_models/db_conn.php');
-        login($_POST['email'], $pwd, $conn);
+        login($_POST['email'], $pwd, $conn, false);
         $conn->close();
     } else {
         $response = array("success" => false);

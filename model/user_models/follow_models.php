@@ -11,7 +11,7 @@ if (checkLogin($conn)) {
         FROM seguiti S
         WHERE S.EmailSeguito = ? AND S.EmailFollower = ?";
     if ($isFollowed = $conn->prepare($query)) {
-        $isFollowed->bind_param("ss", $followingEmail, $_SESSION['userEmail'], );
+        $isFollowed->bind_param("ss", $followingEmail, getSessionOrCookie());
         if ($isFollowed->execute()) {
             $query = "";
 			$res=$isFollowed->get_result();
@@ -26,7 +26,7 @@ if (checkLogin($conn)) {
             $result = executeQuery($query, $followingEmail);
             echo json_encode($result);
             if ($res->num_rows == 0) {
-                echo json_encode(addNotification(null, $_SESSION['userEmail'], $followingEmail, "Follow"));
+                echo json_encode(addNotification(null, getSessionOrCookie(), $followingEmail, "Follow"));
                 pushNotification($followingEmail);
             }
         } else {
@@ -48,7 +48,7 @@ if (checkLogin($conn)) {
 function executeQuery($query, $followingEmail) {
     require('../connection_models/db_conn.php');
     if ($selectQuery = $conn->prepare($query)) {
-        $selectQuery->bind_param("ss", $_SESSION['userEmail'], $followingEmail);
+        $selectQuery->bind_param("ss", getSessionOrCookie(), $followingEmail);
         if ($selectQuery->execute()) {
             if (explode(" ", $query)[0] == "INSERT") {
                 return array("alreadyFollowed" => false);
@@ -84,5 +84,17 @@ function getFollowingEmail() {
         return $selectQuery->error;
     }
     $conn->close();
+}
+
+/**
+ * Function for getting the value of session variable or cookie variable.
+ * @return string The variable value.
+ */
+function getSessionOrCookie() {
+    if (isset($_COOKIE['userEmail'])) {
+        return $_COOKIE['userEmail'];
+    } else {
+        return $_SESSION['userEmail'];
+    }
 }
 ?>

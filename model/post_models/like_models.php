@@ -10,7 +10,7 @@ if (checkLogin($conn)) {
             FROM mi_piace M
             WHERE M.EmailUtente = ? AND M.IDPost = ?";
     if ($isLiked = $conn->prepare($query)) {
-        $isLiked->bind_param("si", $_SESSION['userEmail'], $_POST['IDPost']);
+        $isLiked->bind_param("si", getSessionOrCookie(), $_POST['IDPost']);
         if ($isLiked->execute()) {
             $query = "";
 			$res =$isLiked->get_result();
@@ -26,7 +26,7 @@ if (checkLogin($conn)) {
             echo json_encode($result);
             if ($res->num_rows == 0) {
                 $emailReceiver = getReceiverEmail();
-                echo json_encode(addNotification($_POST['IDPost'], $_SESSION['userEmail'], $emailReceiver, "Like"));
+                echo json_encode(addNotification($_POST['IDPost'], getSessionOrCookie(), $emailReceiver, "Like"));
                 pushNotification($emailReceiver);
             }
         } else {
@@ -48,7 +48,7 @@ function executeQuery($query)
 {
     require('../connection_models/db_conn.php');
     if ($selectQuery = $conn->prepare($query)) {
-        $selectQuery->bind_param("is", $_POST['IDPost'], $_SESSION['userEmail']);
+        $selectQuery->bind_param("is", $_POST['IDPost'], getSessionOrCookie());
         if ($selectQuery->execute()) {
             if (explode(" ", $query)[0] == "INSERT") {
                 return array("alreadyLiked" => false);
@@ -84,5 +84,17 @@ function getReceiverEmail() {
         return $selectQuery->error;
     }
     $conn->close();
+}
+
+/**
+ * Function for getting the value of session variable or cookie variable.
+ * @return string The variable value.
+ */
+function getSessionOrCookie() {
+    if (isset($_COOKIE['userEmail'])) {
+        return $_COOKIE['userEmail'];
+    } else {
+        return $_SESSION['userEmail'];
+    }
 }
 ?>
