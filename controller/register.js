@@ -1,11 +1,11 @@
  function checkPasswords() {
-            var email = document.getElementById('email').value;
-            var username = document.getElementById('username').value;
-            var nome = document.getElementById('nome').value;
-            var fotoProfilo = document.getElementById('fotoProfilo').files[0];
-            var bio = document.getElementById('bio').value;
-            var password1 = document.getElementById('password').value;
-            var password2 = document.getElementById('password2').value;
+            const email = document.getElementById('email').value;
+            const username = document.getElementById('username').value;
+            const nome = document.getElementById('nome').value;
+            const fotoProfilo = document.getElementById('fotoProfilo').files[0];
+            const bio = document.getElementById('bio').value;
+            const password1 = document.getElementById('password').value;
+            const password2 = document.getElementById('password2').value;
 
             if (password1 === password2) {
                 // Passwords match, send data to PHP
@@ -16,7 +16,7 @@
         }
 
         function sendDataToPHP(email, username, nome, fotoProfilo, bio, password) {
-            var formData = new FormData();
+            let formData = new FormData();
             formData.append('email', email);
             formData.append('username', username);
             formData.append('nome', nome);
