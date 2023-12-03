@@ -1,6 +1,6 @@
 $("#choose-image").change(function () {
-  var file = this.files[0];
-  var reader = new FileReader();
+  const file = this.files[0];
+  let reader = new FileReader();
   reader.onloadend = function () {
     $("#hero-image").css("background-image", 'url("' + reader.result + '")');
   };
@@ -61,7 +61,7 @@ window.addEventListener('load', function() {
       // Aggiungi le nuove opzioni
       data.forEach(function (option) {
         // Crea l'elemento option
-        var newOption = $("<option>", {
+        let newOption = $("<option>", {
           value: option.IDNazione,
           text: option.Nome,
           id: option.Shortname,
@@ -73,8 +73,8 @@ window.addEventListener('load', function() {
         $('#sel1 option[value="107"]').attr("selected",true);
       });
       $("#sel1").on("change", function () {
-        var selectedOptionId = $(this).find(":selected").attr("id");
-        var nomeNazione = $(this).find(":selected").text();
+        const selectedOptionId = $(this).find(":selected").attr("id");
+        const nomeNazione = $(this).find(":selected").text();
         onSelectionChange(selectedOptionId, nomeNazione);
       });
     },
