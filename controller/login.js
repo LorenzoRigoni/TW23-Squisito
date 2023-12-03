@@ -1,7 +1,7 @@
 (function () {
 	'use strict'
 
-	var forms = document.querySelectorAll('.login-validation')
+	let forms = document.querySelectorAll('.login-validation')
 
 	Array.prototype.slice.call(forms)
 		.forEach(function (form) {
@@ -17,7 +17,7 @@
 })()
 $('#login').on("click",function() {
 	const checkbox = document.getElementById("remember");
-	var checkboxValue = checkbox.checked;
+	const checkboxValue = checkbox.checked;
 	$.ajax({
         url:"/tw23-squisito/model/login_models/login.php",
         type: "POST",
