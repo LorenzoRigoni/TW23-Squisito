@@ -28,7 +28,7 @@ window.addEventListener("load", function () {
     window.location.href = "../view/explore.html";
   }
   $("#search_bar").change(function () {
-    var user = $("#search_bar").val();
+    const user = $("#search_bar").val();
     $("#postSpace").empty();
     if (user) {
       $.ajax({
@@ -41,11 +41,11 @@ window.addEventListener("load", function () {
           if (result) {
             const datiJSON = JSON.parse(result);
             let postSpace = document.getElementById("postSpace");
-            for (var i = 0; i < datiJSON.length; i++) {
-              var cardCol = document.createElement("div");
+            for (let i = 0; i < datiJSON.length; i++) {
+              let cardCol = document.createElement("div");
               cardCol.className = "col-sm-6 col-md-4 col-lg-3 item py-2";
               cardCol.setAttribute("id", datiJSON[i].Username);
-              var cardImg = document.createElement("img");
+              let cardImg = document.createElement("img");
               cardImg.className = "img-fluid rounded";
               cardImg.setAttribute(
                 "src",
