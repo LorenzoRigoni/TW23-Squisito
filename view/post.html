@@ -16,7 +16,7 @@
 </head>
 
 <body class="wrapper container">
-    <div class="row h-100 d-flex" id="row h-100 d-flex">
+    <div class="row h-100 d-flex" id="post-box">
         <div id="immagineMain" class="col-12 col-md-6 d-inline-block hero-image">
             <div class="row justify-content-between">
                 <div class="col-1">
@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-5">
                     <div class="place float-end">
-                        <img id="flag" alt="country" class="flag">
+                        <img id="flag" alt="country" class="flag"  src="/tw23-squisito/view/resource/flags/it.png">
                         <span id="Paese"></span>
                     </div>
                 </div>
@@ -38,14 +38,12 @@
         <div class="col-12 col-md-6 d-inline-block">
             <div class="row p-2 pt-5">
                 <div class="col-auto">
-                    <img id="fotoUtentePost" alt="profile-image"
-                        class="avatar avatar-64 rounded-circle my-auto">
+                    <img id="fotoUtentePost" alt="profile-image" class="avatar avatar-64 rounded-circle my-auto"  src="/tw23-squisito/view/resource/basic_user.png">
                 </div>
                 <div class="col-auto d-flex my-auto">
-                    <strong>
-                        <h5 id="nomeUtente"></h5>
-                    </strong>
-                    <input type="button" onclick="sendFollow()" id="followBtn" class="btn btn-sm mx-4 follow" value="Follow">
+                        <h5 id="nomeUtente">User</h5>
+                    <input type="button" onclick="sendFollow()" id="followBtn" class="btn btn-sm mx-4 follow"
+                        value="Follow">
                 </div>
                 <div class="line-1 my-4"></div>
                 <div id="testoRicetta" class="row py-3">
@@ -53,25 +51,26 @@
                 <div class="row post-time">
                     Posted 2hr ago
                 </div>
-                <div id="row ps-5 p-3 posts" class="row ps-5 p-3 posts">
-                    
+                <div id="comment" class="row ps-5 p-3 posts">
+
                 </div>
                 <div class="row p-3">
                     <div class="col-auto">
-                        <img id="photo_comment" alt="profile-image"
-                            class="avatar avatar-32 rounded-circle my-auto">
+                        <img id="photo_comment" alt="profile-image" class="avatar avatar-32 rounded-circle my-auto" src="/tw23-squisito/view/resource/basic_user.png">
                     </div>
                     <div class="col-10 leave-comment">
-                        <textarea id="textArea" data_IDPost="1" class="w-100 me-3" placeholder="Commenta"></textarea>
+                        <label hidden for="textArea" class="form-label">Commenta</label>
+                        <textarea id="textArea" name="1" class="w-100 me-3" placeholder="Commenta"></textarea>
                         <input type="button" class="pubblica" value="Pubblica">
                     </div>
                 </div>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
-        <script src="/tw23-squisito/controller/SinglePost.js"></script>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="/tw23-squisito/controller/SinglePost.js"></script>
 </body>
 
 </html>

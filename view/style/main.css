@@ -2,9 +2,6 @@
 @import url('https://fonts.googleapis.com/css?family=Kaushan Script');
 @import url('https://fonts.googleapis.com/css?family=Muli');
 
-.selector-for-some-widget {
-    box-sizing: content-box;
-  }
 body {
     font-family: 'Inter';
     font-size: 1rem;

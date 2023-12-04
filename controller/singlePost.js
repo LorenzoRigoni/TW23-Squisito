@@ -10,7 +10,7 @@ window.addEventListener("load", function () {
     const formData = new FormData();
     formData.append("IDPost", IDPost);
     let textareaElement = document.getElementById("textArea");
-    textareaElement.setAttribute("data_IDPost", IDPost);
+    textareaElement.setAttribute("name", IDPost);
 	
 
     // Effettuare una richiesta fetch per inviare i dati al server
@@ -18,7 +18,7 @@ window.addEventListener("load", function () {
       .then((response) => response.text())
       .then((text) => {
         const datiJSON = JSON.parse(text); //datiJSON[0]['Nazione'];
-        let contenitorePost = document.getElementById("row h-100 d-flex");
+        let contenitorePost = document.getElementById("post-box");
 
     let followBtn = document.getElementById("followBtn");
     followBtn.setAttribute("data_id", datiJSON[0].IDPost);
@@ -33,7 +33,7 @@ window.addEventListener("load", function () {
         if(datiJSON[0]['IsLiked']){
           heart.classList.add('clicked');
         }
-        let contenitoreCommenti = document.getElementById("row ps-5 p-3 posts");
+        let contenitoreCommenti = document.getElementById("comment");
         // Creare la card di Bootstrap
         document.getElementById("nomeUtente").textContent =
           datiJSON[0]["UsernamePost"];
@@ -98,7 +98,7 @@ window.addEventListener("load", function () {
         type: "POST",
         data: {
           Contenuto: document.getElementById("textArea").value,
-          IDPost: $("#textArea").attr("data_IDPost"),
+          IDPost: $("#textArea").attr("name"),
         },
         success: function (result) {
         },

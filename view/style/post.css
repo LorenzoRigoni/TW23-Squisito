@@ -62,8 +62,6 @@ body {
   background-color: rgba(255, 255, 255, 0.75);
   width: auto;
   transition:0.5s ease;
-  -moz-transition:0.5s ease;
-  -webkit-transition:0.5s ease;
 }
 .like.clicked {
   color: #ff0000;
@@ -118,6 +116,9 @@ body {
 }
 .avatar {
   object-fit: contain;
+}
+#nomeUtente {
+  font-weight: bold;
 }
 /*-------------------------*/
 @media (max-width: 768px) {
