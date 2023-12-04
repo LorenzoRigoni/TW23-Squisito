@@ -36,3 +36,9 @@ $('#login').on("click",function() {
         }
     });
   });
+
+window.addEventListener('load', function() {
+ if(!isset($_COOKIE['userEmail'])) {
+    window.location.href = '../view/home.html';
+}    
+  });
