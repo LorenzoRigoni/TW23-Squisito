@@ -14,7 +14,7 @@ session_start();
 if (checkLogin($conn)) {
     if ($selectQuery = $conn->prepare($query)) {
         $param = $_GET['name'] . '%';
-        $selectQuery->bind_param("ss", $param, getSessionOrCookie());
+        $selectQuery->bind_param("ss", $param, $_SESSION['userEmail']);
         if ($selectQuery->execute()) {
             $results = $selectQuery->get_result();
             if ($results->num_rows > 0) {
@@ -33,16 +33,4 @@ if (checkLogin($conn)) {
 }
 
 $conn->close();
-
-/**
- * Function for getting the value of session variable or cookie variable.
- * @return string The variable value.
- */
-function getSessionOrCookie() {
-    if (isset($_COOKIE['userEmail'])) {
-        return $_COOKIE['userEmail'];
-    } else {
-        return $_SESSION['userEmail'];
-    }
-}
 ?>

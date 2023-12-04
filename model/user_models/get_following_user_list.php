@@ -13,7 +13,7 @@ $query = "SELECT U.Email, U.Username, U.FotoProfilo
 session_start();
 if (checkLogin($conn)) {
     if ($selectQuery = $conn->prepare($query)) {
-        $selectQuery->bind_param("s", getSessionOrCookie());
+        $selectQuery->bind_param("s", $_SESSION['userEmail']);
         if ($selectQuery->execute()) {
             $results = $selectQuery->get_result();
             $temp = $results->fetch_all(MYSQLI_ASSOC);
@@ -30,16 +30,4 @@ if (checkLogin($conn)) {
 }
 
 $conn->close();
-
-/**
- * Function for getting the value of session variable or cookie variable.
- * @return string The variable value.
- */
-function getSessionOrCookie() {
-    if (isset($_COOKIE['userEmail'])) {
-        return $_COOKIE['userEmail'];
-    } else {
-        return $_SESSION['userEmail'];
-    }
-}
 ?>

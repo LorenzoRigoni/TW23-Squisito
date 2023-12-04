@@ -13,7 +13,7 @@ $query = "SELECT N.IDNotifica, N.IDPost, N.EmailMittente, N.TipoNotifica, U.User
 session_start();
 if (checkLogin($conn)) {
     if ($selectQuery = $conn->prepare($query)) {
-        $selectQuery->bind_param("s", getSessionOrCookie());
+        $selectQuery->bind_param("s", $_SESSION['userEmail']);
         if ($selectQuery->execute()) {
             $results = $selectQuery->get_result();
             $temp =$results->fetch_all(MYSQLI_ASSOC);
@@ -42,21 +42,9 @@ function updateNotifications() {
         SET N.Visualizzato = TRUE
         WHERE N.EmailDestinatario = ?";
     if ($insert = $conn->prepare($query)) {
-        $insert->bind_param("s", getSessionOrCookie());
+        $insert->bind_param("s", $_SESSION['userEmail']);
         $insert->execute();
     }
     $conn->close();
-}
-
-/**
- * Function for getting the value of session variable or cookie variable.
- * @return string The variable value.
- */
-function getSessionOrCookie() {
-    if (isset($_COOKIE['userEmail'])) {
-        return $_COOKIE['userEmail'];
-    } else {
-        return $_SESSION['userEmail'];
-    }
 }
 ?>

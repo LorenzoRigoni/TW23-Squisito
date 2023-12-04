@@ -31,8 +31,10 @@ function login($email, $pwd, $conn, $remindMe)
             } else {
                 if ($pwd == $userPwd) {
                     if ($remindMe) {
-                        $_COOKIE['userEmail'] = $userEmail;
-                        $_COOKIE['login_string'] = hash('sha512', $pwd.$_SERVER['HTTP_USER_AGENT']);
+                        setcookie("userEmail", $email, time() + (86400 * 30), "/"); //Valid for 1 day
+                        setcookie("login_string", hash('sha512', $pwd.$_SERVER['HTTP_USER_AGENT']), time() + (86400 * 30), "/");
+                        $_SESSION['userEmail'] = $_COOKIE['userEmail'];
+                        $_SESSION['login_string'] = $_COOKIE['login_string'];
                     } else {
                         $_SESSION['userEmail'] = $userEmail;
                         $_SESSION['login_string'] = hash('sha512', $pwd.$_SERVER['HTTP_USER_AGENT']);
@@ -81,7 +83,7 @@ function checkBruteForce($email, $conn)
 function checkLogin($conn)
 {
     $password = "";
-    if (isset($_SESSION['userEmail']) || isset($_COOKIE['userEmail'])) {
+    if (isset($_SESSION['userEmail'])) {
         if ($query = $conn->prepare("SELECT pwd FROM utenti WHERE email = ? LIMIT 1")) {
             $query->bind_param('s', $_SESSION['userEmail']);
             $query->execute();
@@ -90,7 +92,7 @@ function checkLogin($conn)
                 $query->bind_result($password);
                 $query->fetch();
                 $login_check = hash('sha512', $password.$_SERVER['HTTP_USER_AGENT']);
-                if ($login_check == $_SESSION['login_string'] || $login_check == $_COOKIE['login_string']) {
+                if ($login_check == $_SESSION['login_string']) {
                     return true;
                 } else {
                     return false;

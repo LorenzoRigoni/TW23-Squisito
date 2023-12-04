@@ -17,7 +17,7 @@ $query = "SELECT P.IDPost, P.Titolo,P.Foto, P.Ricetta, N.Nome AS Nazione, N.Shor
 session_start();
 if (checkLogin($conn)) {
     if ($selectQuery = $conn->prepare($query)) {
-        $selectQuery->bind_param("ssi", getSessionOrCookie(), getSessionOrCookie(), $_GET['IDPost']);
+        $selectQuery->bind_param("ssi", $_SESSION['userEmail'], $_SESSION['userEmail'], $_GET['IDPost']);
         if ($selectQuery->execute()) {
             $post = $selectQuery->get_result();
             $conn->close();
@@ -78,16 +78,4 @@ if (checkLogin($conn)) {
 }
 
 $conn->close();
-
-/**
- * Function for getting the value of session variable or cookie variable.
- * @return string The variable value.
- */
-function getSessionOrCookie() {
-    if (isset($_COOKIE['userEmail'])) {
-        return $_COOKIE['userEmail'];
-    } else {
-        return $_SESSION['userEmail'];
-    }
-}
 ?>
