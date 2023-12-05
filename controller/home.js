@@ -107,7 +107,7 @@ function likeClick(event) {
     data: {
       IDPost: event.currentTarget.id,
     },
-    success: function (result) {
+    success: function () {
       if ($heartSpan.hasClass("clicked")) {
         $heartSpan.removeClass("clicked");
       } else {
