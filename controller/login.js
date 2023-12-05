@@ -15,9 +15,15 @@
     );
   });
 })();
+window.addEventListener("load", function () {
+  if (Cookies.get("userEmail")) {
+    sessionStorage.setItem("userEmail", Cookies.get("userEmail"));
+    sessionStorage.setItem("login_string", Cookies.get("login_string"));
+    window.location.href = "../view/home.html";
+  }
+});
 $("#login").on("click", function () {
-  const checkbox = document.getElementById("remember");
-  const checkboxValue = checkbox.checked;
+  const checkboxValue = $("#remember").is(":checked");
   $.ajax({
     url: "/tw23-squisito/model/login_models/login.php",
     type: "POST",
@@ -29,11 +35,11 @@ $("#login").on("click", function () {
     success: function (result) {
       const responseObj = JSON.parse(result);
       if (responseObj.success) {
-        sessionStorage.setItem("email", $("#email").val());
+        sessionStorage.setItem("userEmail", $("#email").val());
+        sessionStorage.setItem("login_string", responseObj.loginString);
         sessionStorage.setItem("close_notify", JSON.stringify([]));
         window.location.href = "../view/home.html";
       }
     },
   });
 });
-

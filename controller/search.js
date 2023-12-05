@@ -1,5 +1,11 @@
 window.addEventListener("load", function () {
-    let user = sessionStorage.getItem("email");
+  if (Cookies.get("userEmail")) {
+    sessionStorage.setItem("userEmail", Cookies.get("userEmail"));
+    sessionStorage.setItem("login_string", Cookies.get("login_string"));
+  } else if(!Cookies.get("userEmail") && !this.sessionStorage.getItem("userEmail")){
+    window.location.href = "../view/index.html";
+  }
+    let user = sessionStorage.getItem("userEmail");
     $.ajax({
       url: "/tw23-squisito/model/user_models/get_user_info.php",
       type: "GET",
@@ -19,7 +25,7 @@ window.addEventListener("load", function () {
     window.location.href = "../view/home.html";
   }
   function profile() {
-    window.location.href = "../view/profile.html?id="+sessionStorage.getItem("email");
+    window.location.href = "../view/profile.html?id="+sessionStorage.getItem("userEmail");
   } 
   function addpost() {
     window.location.href = "../view/addpost.html";

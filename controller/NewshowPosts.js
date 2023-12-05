@@ -5,8 +5,7 @@ function caricaImmagini() {
     url: "/tw23-squisito/model/post_models/get_followed_post.php",
     method: "GET",
     dataType: "json",
-    success: function (result) {
-      const datiJSON = JSON.parse(result);
+    success: function (datiJSON) {
       // Creare il contenitore per le immagini
       let contenitoreImmagini = document.getElementById("posts-box");
 

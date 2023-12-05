@@ -1,6 +1,12 @@
 window.addEventListener("load", function () {
+  if (Cookies.get("userEmail")) {
+    sessionStorage.setItem("userEmail", Cookies.get("userEmail"));
+    sessionStorage.setItem("login_string", Cookies.get("login_string"));
+  } else if(!Cookies.get("userEmail") && !this.sessionStorage.getItem("userEmail")){
+    window.location.href = "../view/index.html";
+  }
   //load user info
-  let user = sessionStorage.getItem("email");
+  let user = sessionStorage.getItem("userEmail");
   $.ajax({
     url: "/tw23-squisito/model/user_models/get_user_info.php",
     type: "GET",

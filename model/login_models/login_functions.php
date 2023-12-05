@@ -30,7 +30,7 @@ function login($email, $pwd, $conn, $remindMe)
                 return false;
             } else {
                 if ($pwd == $userPwd) {
-                    if ($remindMe) {
+                    if ($remindMe === 'true') {
                         setcookie("userEmail", $email, time() + (86400 * 30), "/"); //Valid for 1 day
                         setcookie("login_string", hash('sha512', $pwd.$_SERVER['HTTP_USER_AGENT']), time() + (86400 * 30), "/");
                         $_SESSION['userEmail'] = $_COOKIE['userEmail'];
