@@ -31,6 +31,7 @@ if (checkLogin($conn)) {
                     "Shortname" => $row["Shortname"],
                     "FotoProfilo" => base64_encode($row["FotoProfilo"]),
                     "FotoRicetta" => base64_encode($row["Foto"]),
+                    "Email" => $row["Email"],
                     "UsernamePost" => $row["Username"],
                     "DataPost" => $row["DataPost"],
                     "IsLiked" => $row["IsLiked"],

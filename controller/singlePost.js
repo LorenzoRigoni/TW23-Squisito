@@ -1,4 +1,5 @@
 window.addEventListener("load", function () {
+  //check cookie
   if (Cookies.get("userEmail")) {
     sessionStorage.setItem("userEmail", Cookies.get("userEmail"));
     sessionStorage.setItem("login_string", Cookies.get("login_string"));
@@ -8,6 +9,7 @@ window.addEventListener("load", function () {
   ) {
     window.location.href = "../view/index.html";
   }
+  //get id post from param
   let searchParams = new URLSearchParams(window.location.search);
   if (searchParams.has("id")) {
     // true
@@ -25,11 +27,8 @@ window.addEventListener("load", function () {
       .then((response) => response.text())
       .then((text) => {
         const datiJSON = JSON.parse(text); //datiJSON[0]['Nazione'];
-        let contenitorePost = document.getElementById("post-box");
-
         let followBtn = document.getElementById("followBtn");
         followBtn.setAttribute("data_id", datiJSON[0].IDPost);
-
         followBtn.addEventListener(
           "click",
           function (event) {
@@ -37,7 +36,6 @@ window.addEventListener("load", function () {
           },
           false
         );
-
         let heart = document.getElementById("heart");
         heart.addEventListener("click", likeClick, false);
         heart.setAttribute("id", datiJSON[0].IDPost);
@@ -62,10 +60,10 @@ window.addEventListener("load", function () {
             "data:image/jpeg;base64," + datiJSON[0]["FotoProfilo"];
         }
         let heroImage = document.getElementById("immagineMain");
-
         // Imposta il nuovo URL come sfondo dell'immagine
         let immagine = "data:image/jpg;base64," + datiJSON[0]["FotoRicetta"];
         heroImage.style.backgroundImage = 'url("' + immagine + '")';
+
         for (let i = 1; i < datiJSON.length; i++) {
           // Creare la struttura HTML del commento
           let commentContainer = document.createElement("div");
@@ -99,11 +97,15 @@ window.addEventListener("load", function () {
           commentContainer.appendChild(avatarCol);
           commentContainer.appendChild(usernameCol);
           commentContainer.appendChild(contentCol);
-
-          contenitoreCommenti.appendChild(commentContainer);
           // Aggiunta del commento al documento
+          contenitoreCommenti.appendChild(commentContainer);
+        }
+        //check if post is of focus user
+        if (datiJSON[0]["Email"] == sessionStorage.getItem("userEmail")) {
+          $("#delete_post").removeAttr("hidden");
         }
       });
+
     $(".pubblica").on("click", function () {
       $.ajax({
         url: "/tw23-squisito/model/post_models/send_comment.php",
@@ -116,6 +118,20 @@ window.addEventListener("load", function () {
       });
     });
 
+    //delete post
+    $("#delete_post").on("click", function () {
+      $.ajax({
+        url: "/tw23-squisito/model/post_models/delete_post.php",
+        type: "POST",
+        data: {
+          IDPost: searchParams.get("id"),
+        },
+        success: function () {
+          window.location.href =
+            "../view/profile.html?id=" + sessionStorage.getItem("userEmail");
+        },
+      });
+    });
     let user = sessionStorage.getItem("userEmail");
     $.ajax({
       url: "/tw23-squisito/model/user_models/get_user_info.php",

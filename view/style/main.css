@@ -326,7 +326,11 @@ nav.row {
   object-fit: contain;
 }
 #nomeUtente {
+  margin: 0;
+  padding-left: 5px;
+  padding-right: 5px;
   font-weight: bold;
+  line-height: 1.5;
 }
 /*-------------------------*/
 @media (max-width: 768px) {
