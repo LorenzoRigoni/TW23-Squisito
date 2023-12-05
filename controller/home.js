@@ -2,7 +2,10 @@ window.addEventListener("load", function () {
   if (Cookies.get("userEmail")) {
     sessionStorage.setItem("userEmail", Cookies.get("userEmail"));
     sessionStorage.setItem("login_string", Cookies.get("login_string"));
-  } else if(!Cookies.get("userEmail") && !this.sessionStorage.getItem("userEmail")){
+  } else if (
+    !Cookies.get("userEmail") &&
+    !this.sessionStorage.getItem("userEmail")
+  ) {
     window.location.href = "../view/index.html";
   }
   let user = sessionStorage.getItem("userEmail");
@@ -15,26 +18,29 @@ window.addEventListener("load", function () {
     },
     success: function (result) {
       const responseObj = JSON.parse(result);
-      if(responseObj[0].FotoProfilo != ""){
-      $("#user-photo-small").attr(
-        "src",
-        "data:image/png;base64," + responseObj[0].FotoProfilo
-      );
+      if (responseObj[0].FotoProfilo != "") {
+        $("#user-photo-small").attr(
+          "src",
+          "data:image/png;base64," + responseObj[0].FotoProfilo
+        );
       }
     },
   });
 });
 let close_notify = [];
 function loadNotification() {
+  let numberNot = 0;
   $.ajax({
     url: "/tw23-squisito/model/post_models/get_notifications.php",
-    type: "GET",
+    type: "POST",
+    data: {functionname: 'get'},
     success: function (result) {
-      let not = JSON.parse(result);
+      let notity = JSON.parse(result);
       let div = "";
       let action;
-      let close = JSON.parse(sessionStorage.getItem('close_notify')) || [];
-      not.forEach((element) => {
+      let close = JSON.parse(sessionStorage.getItem("close_notify")) || [];
+      notity.forEach((element) => {
+        if (!element.Visualizzato) numberNot++;
         if (!close.map(Number).includes(element.IDNotifica)) {
           switch (element.TipoNotifica) {
             case "Like":
@@ -50,6 +56,7 @@ function loadNotification() {
             ' class="cancel">✕</div></div>';
         }
       });
+      $("#number-notification").text(numberNot);
       $("#notifiche").html(div);
     },
   });
@@ -72,6 +79,11 @@ function search() {
 }
 
 $("#notification").click(function () {
+  $.ajax({
+    url: "/tw23-squisito/model/post_models/get_notifications.php",
+    type: "POST",
+    data: {functionname: 'update'}
+  });
   $(".sidebar").toggleClass("active");
 });
 $("#close-notification").click(function () {
@@ -80,9 +92,9 @@ $("#close-notification").click(function () {
 $(document).on("click", ".cancel", function () {
   console.log("toggling visibility");
   let close = [];
-  close = JSON.parse(sessionStorage.getItem('close_notify')) || [];
+  close = JSON.parse(sessionStorage.getItem("close_notify")) || [];
   close.push($(this).attr("id"));
-  sessionStorage.setItem('close_notify', JSON.stringify(close));
+  sessionStorage.setItem("close_notify", JSON.stringify(close));
   $(this).parent().toggleClass("gone");
 });
 

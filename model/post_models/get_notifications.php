@@ -5,38 +5,46 @@
 
 include '../login_models/login_functions.php';
 require('../connection_models/db_conn.php');
-
-$query = "SELECT N.IDNotifica, N.IDPost, N.EmailMittente, N.TipoNotifica, U.Username, U.FotoProfilo, N.DataNotifica, N.Visualizzato
+switch ($_POST['functionname']) {
+    case 'get':
+        $query = "SELECT N.IDNotifica, N.IDPost, N.EmailMittente, N.TipoNotifica, U.Username, U.FotoProfilo, N.DataNotifica, N.Visualizzato
         FROM notifiche N INNER JOIN utenti U ON N.EmailMittente = U.Email
         WHERE N.EmailDestinatario = ?";
 
-session_start();
-if (checkLogin($conn)) {
-    if ($selectQuery = $conn->prepare($query)) {
-        $selectQuery->bind_param("s", $_SESSION['userEmail']);
-        if ($selectQuery->execute()) {
-            $results = $selectQuery->get_result();
-            $temp =$results->fetch_all(MYSQLI_ASSOC);
-            for ($i = 0; $i < count($temp); $i++) {
-                $temp[$i]['FotoProfilo'] = base64_encode($temp[$i]['FotoProfilo']);
+        session_start();
+        if (checkLogin($conn)) {
+            if ($selectQuery = $conn->prepare($query)) {
+                $selectQuery->bind_param("s", $_SESSION['userEmail']);
+                if ($selectQuery->execute()) {
+                    $results = $selectQuery->get_result();
+                    $temp = $results->fetch_all(MYSQLI_ASSOC);
+                    for ($i = 0; $i < count($temp); $i++) {
+                        $temp[$i]['FotoProfilo'] = base64_encode($temp[$i]['FotoProfilo']);
+                    }
+                    $conn->close();
+                    echo json_encode($temp);
+                } else {
+                    echo json_encode(array("error" => $selectQuery->error));
+                }
+            } else {
+                echo json_encode(array("error" => $selectQuery->error));
             }
-            $conn->close();
-            updateNotifications();
-            echo json_encode($temp);
         } else {
-            echo json_encode(array("error" => $selectQuery->error));
+            echo json_encode(array("error" => "The user is not logged"));
         }
-    } else {
-        echo json_encode(array("error" => $selectQuery->error));
-    }
-} else {
-    echo json_encode(array("error" => "The user is not logged"));
+        break;
+    case 'update':
+        updateNotifications();
+        break;
 }
+
 
 /**
  * Function to update the notifications that the user has seen.
  */
-function updateNotifications() {
+function updateNotifications()
+{
+    session_start();
     require("../connection_models/db_conn.php");
     $query = "UPDATE notifiche N
         SET N.Visualizzato = TRUE
