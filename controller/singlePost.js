@@ -1,9 +1,11 @@
-
 window.addEventListener("load", function () {
   if (Cookies.get("userEmail")) {
     sessionStorage.setItem("userEmail", Cookies.get("userEmail"));
     sessionStorage.setItem("login_string", Cookies.get("login_string"));
-  } else if(!Cookies.get("userEmail") && !this.sessionStorage.getItem("userEmail")){
+  } else if (
+    !Cookies.get("userEmail") &&
+    !this.sessionStorage.getItem("userEmail")
+  ) {
     window.location.href = "../view/index.html";
   }
   let searchParams = new URLSearchParams(window.location.search);
@@ -17,7 +19,6 @@ window.addEventListener("load", function () {
     formData.append("IDPost", IDPost);
     let textareaElement = document.getElementById("textArea");
     textareaElement.setAttribute("name", IDPost);
-	
 
     // Effettuare una richiesta fetch per inviare i dati al server
     fetch(url, {})
@@ -26,18 +27,22 @@ window.addEventListener("load", function () {
         const datiJSON = JSON.parse(text); //datiJSON[0]['Nazione'];
         let contenitorePost = document.getElementById("post-box");
 
-    let followBtn = document.getElementById("followBtn");
-    followBtn.setAttribute("data_id", datiJSON[0].IDPost);
-        
-    followBtn.addEventListener("click", function(event) {
-    	sendFollow(event);
-	}, false);
-	 
+        let followBtn = document.getElementById("followBtn");
+        followBtn.setAttribute("data_id", datiJSON[0].IDPost);
+
+        followBtn.addEventListener(
+          "click",
+          function (event) {
+            sendFollow(event);
+          },
+          false
+        );
+
         let heart = document.getElementById("heart");
-        heart.addEventListener("click",likeClick,false);
+        heart.addEventListener("click", likeClick, false);
         heart.setAttribute("id", datiJSON[0].IDPost);
-        if(datiJSON[0]['IsLiked']){
-          heart.classList.add('clicked');
+        if (datiJSON[0]["IsLiked"]) {
+          heart.classList.add("clicked");
         }
         let contenitoreCommenti = document.getElementById("comment");
         // Creare la card di Bootstrap
@@ -52,13 +57,14 @@ window.addEventListener("load", function () {
           datiJSON[0]["Shortname"] +
           ".png";
         let fotoProfiloPost = document.getElementById("fotoUtentePost");
-        fotoProfiloPost.src =
-          "data:image/jpeg;base64," + datiJSON[0]["FotoProfilo"];
-
+        if (datiJSON[0]["FotoProfilo"] != "") {
+          fotoProfiloPost.src =
+            "data:image/jpeg;base64," + datiJSON[0]["FotoProfilo"];
+        }
         let heroImage = document.getElementById("immagineMain");
 
         // Imposta il nuovo URL come sfondo dell'immagine
-        let  immagine = "data:image/jpg;base64," + datiJSON[0]["FotoRicetta"];
+        let immagine = "data:image/jpg;base64," + datiJSON[0]["FotoRicetta"];
         heroImage.style.backgroundImage = 'url("' + immagine + '")';
         for (let i = 1; i < datiJSON.length; i++) {
           // Creare la struttura HTML del commento
@@ -106,67 +112,71 @@ window.addEventListener("load", function () {
           Contenuto: document.getElementById("textArea").value,
           IDPost: $("#textArea").attr("name"),
         },
-        success: function (result) {
-        },
+        success: function (result) {},
       });
     });
 
     let user = sessionStorage.getItem("userEmail");
     $.ajax({
-      url: "/tw23-squisito/model/user_models/get_user_info.php", 
-      type: "GET", 
+      url: "/tw23-squisito/model/user_models/get_user_info.php",
+      type: "GET",
       data: {
         email: user,
       },
       success: function (result) {
         const responseObj = JSON.parse(result);
-        $("#photo_comment").attr(
-          "src",
-          "data:image/png;base64," + responseObj[0].FotoProfilo
-        );
+        if (responseObj[0].FotoProfilo != "") {
+          $("#photo_comment").attr(
+            "src",
+            "data:image/png;base64," + responseObj[0].FotoProfilo
+          );
+        }
       },
     });
   }
-});                                                        
-function likeClick(event) {                                               
-   $.ajax({
-        url:"/tw23-squisito/model/post_models/like_models.php",  
-        type: "POST",   
-        data: {
-            IDPost : event.currentTarget.id,
-        },
-        success:function(result){
-			alert(result);
-          if ($(".fa-heart").hasClass("clicked")) {
-            $(".fa-heart").removeClass("clicked");
-          } else {
-            $(".fa-heart").addClass("clicked"); 
-          } 
-        }
-    });
+});
+function likeClick(event) {
+  $.ajax({
+    url: "/tw23-squisito/model/post_models/like_models.php",
+    type: "POST",
+    data: {
+      IDPost: event.currentTarget.id,
+    },
+    success: function (result) {
+      alert(result);
+      if ($(".fa-heart").hasClass("clicked")) {
+        $(".fa-heart").removeClass("clicked");
+      } else {
+        $(".fa-heart").addClass("clicked");
+      }
+    },
+  });
 }
 function sendFollow(event) {
-   $.ajax({
-        url:"/tw23-squisito/model/user_models/follow_models.php",  
-        type: "POST",   
-        data: {
-            "IDPost" : event.currentTarget.getAttribute("data_id"),
-        },
-        success:function(result){
-		const alreadyFollowedIndex = result.indexOf('"alreadyFollowed":');
-		const alreadyFollowedSubstring = result.slice(alreadyFollowedIndex, result.indexOf('}', alreadyFollowedIndex) );
-		let alreadyFollowedObject = JSON.parse('{' + alreadyFollowedSubstring + '}');		
-	if(!alreadyFollowedObject.alreadyFollowed){	 
-                alert("Hai Inizato a seguirlo");
-				 $("#followBtn").removeClass("follow");
-				 $("#followBtn").addClass("follow:focus");
-    }else {
- 		alert("Hai smesso di seguirlo");
-		 $("#followBtn").removeClass("follow:focus");
-		 $("#followBtn").addClass("follow");
-		
-	 }  
-        }
-    });
+  $.ajax({
+    url: "/tw23-squisito/model/user_models/follow_models.php",
+    type: "POST",
+    data: {
+      IDPost: event.currentTarget.getAttribute("data_id"),
+    },
+    success: function (result) {
+      const alreadyFollowedIndex = result.indexOf('"alreadyFollowed":');
+      const alreadyFollowedSubstring = result.slice(
+        alreadyFollowedIndex,
+        result.indexOf("}", alreadyFollowedIndex)
+      );
+      let alreadyFollowedObject = JSON.parse(
+        "{" + alreadyFollowedSubstring + "}"
+      );
+      if (!alreadyFollowedObject.alreadyFollowed) {
+        alert("Hai Inizato a seguirlo");
+        $("#followBtn").removeClass("follow");
+        $("#followBtn").addClass("follow:focus");
+      } else {
+        alert("Hai smesso di seguirlo");
+        $("#followBtn").removeClass("follow:focus");
+        $("#followBtn").addClass("follow");
+      }
+    },
+  });
 }
-

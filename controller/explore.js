@@ -14,10 +14,12 @@ window.addEventListener("load", function () {
     },
     success: function (result) {
       const responseObj = JSON.parse(result);
+      if(responseObj[0].FotoProfilo != ""){
       $("#user-photo-small").attr(
         "src",
         "data:image/png;base64," + responseObj[0].FotoProfilo
       );
+      }
     },
   });
   $.ajax({
