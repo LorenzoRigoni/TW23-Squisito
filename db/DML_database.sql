@@ -1,3 +1,46 @@
+/*INSERT UTENTI*/
+
+INSERT INTO utenti(Email, Username, Nome, FotoProfilo, Bio, Pwd, Salt)
+VALUES ("guido.lavespa@gmail.com", 
+        "guido_lavespa", 
+        "Guido La Vespa", 
+        NULL, 
+        "Guido ma mangio anche"
+        "fe299bc2a41ba215acae67139622b6667d83226d1486ce4dd6c99822798da
+        78b4647d60a7a54e6964248077984c3becb35b46b1f6e5ff794a2ab8fc0e3f
+        26ee2",
+        "2dfa7e860b66dc3133ff3e02bb73200d21bf3604244366638b5679474e2d4
+        f13db6c0da10ba1354e6475e88791ccfb754729e1f8f6bb09141fd420ebe4f
+        ad213"); /*Ciao1234*/
+
+INSERT INTO utenti(Email, Username, Nome, FotoProfilo, Bio, Pwd, Salt)
+VALUES ("massimo.potenza@gmail.com", 
+        "max_power", 
+        "Massimo Potenza", 
+        NULL,
+        "Mangio al massimo"
+        "35aefb2e7589690332664055d7eabcb58358f8cff47ea32379d00be5a775d06
+        1d282d7e241068336bd3b924ad402a25d459b6df8c53904228ac43f5b715bf
+        890",
+        "93259a59a2ba31948f1ddc5208e5bbb8c481f4dcb47884e12d90ba9b0ec3fe
+        6121de37171fe2f11cbc4f3bb1c65856dfacee0284833b839f5f50b2526f0b
+        6587"); /*Ciao1234*/
+
+INSERT INTO utenti(Email, Username, Nome, FotoProfilo, Bio, Pwd, Salt)
+VALUES ("gino.buonvino@gmail.com", 
+        "gino_goodwine", 
+        "Gino Buonvino", 
+        NULL, 
+        "Mi bevo il cognome"
+        "6ec8b1aa4ff922aaa9fc3d928b5e70f2b47840c8f5cbbedf1c744ecd0e72e8
+        a300deeb0806b5525a6be1d15692e6241acff20ca96961f1cb4e5221a292166
+        a42",
+        "72613629f13acb1c9f887ef152dc4d03d36682e97b673a81573d27a0db7edb
+        08adc103bc20c52216a4f929a7d4c5398b11539f397a62fda75050c57cbfbe3
+        836"); /*CiaoCiao*/
+
+/*INSERT NAZIONI*/
+
 INSERT INTO `nazioni` (`IDNazione`, `Shortname`, `Nome`) VALUES
 (1, 'AF', 'Afghanistan'),
 (2, 'AL', 'Albania'),
@@ -51,7 +94,7 @@ INSERT INTO `nazioni` (`IDNazione`, `Shortname`, `Nome`) VALUES
 (50, 'CD', 'Congo The Democratic Republic Of The'),
 (51, 'CK', 'Cook Islands'),
 (52, 'CR', 'Costa Rica'),
-(53, 'CI', 'Cote D\'Ivoire (Ivory Coast)'),
+(53, 'CI', 'Cote D Ivoire (Ivory Coast)'),
 (54, 'HR', 'Croatia (Hrvatska)'),
 (55, 'CU', 'Cuba'),
 (56, 'CY', 'Cyprus'),
@@ -245,3 +288,43 @@ INSERT INTO `nazioni` (`IDNazione`, `Shortname`, `Nome`) VALUES
 (244, 'YU', 'Yugoslavia'),
 (245, 'ZM', 'Zambia'),
 (246, 'ZW', 'Zimbabwe');
+
+/*INSERT POST*/
+
+INSERT INTO post(EmailUtente, Titolo, Foto, Ricetta, IDNazione, DataPost)
+VALUES ("guido.lavespa@gmail.com", 
+        "Tagliatelle al ragù",
+        NULL,
+        "Soffriggete cipolla, carota e sedano in olio di oliva. Aggiungete il trito di maiale e manzo. Sfumate col vino e aggiustate di sale. Unite la 
+        passata di pomodoro e lasciate cuocere. Versate il ragù in una ampia ciotola e aggiungete le tagliatelle scolate al dente. Una spolverata di 
+        parmigiano e.. Buon appetito!",
+        107,
+        '2023-12-05');
+
+INSERT INTO post(EmailUtente, Titolo, Foto, Ricetta, IDNazione, DataPost)
+VALUES ("guido.lavespa@gmail.com", 
+        "Cappelletti in brodo",
+        NULL,
+        "Tritate finemente la carne, prendete una padella, sciogliete il burro e soffriggetevi la carne.
+        Aggiungete il parmigiano, il prosciutto e la mortadella tritate finemente un pizzico di sale e abbondante noce moscata, mescolate bene. 
+        Stendete la pasta foglia, ricavatene dei piccoli quadretti e farcite ciascuno con delle piccole parti di composto, ripiegate la pasta in modo che 
+        risulti un triangolo, premete sui bordi e ripiegate attorno ad un dito. Cuocete in un buon brodo di carne.",
+        107,
+        '2023-11-20');
+
+INSERT INTO post(EmailUtente, Titolo, Foto, Ricetta, IDNazione, DataPost)
+VALUES ("massimo.potenza@gmail.com", 
+        "Pollo alla cacciatora",
+        NULL,
+        "In un tegame capiente mettiamo un filo di olio e tritiamo grossolanamente carota, cipolla e sedano direttamente nel tegame. 
+        Quando il soffritto è appassito, sistemiamo in pentola il pollo a pezzi, con la pelle rivolta verso il basso, e facciamolo rosolare per bene. 
+        Di tanto in tanto giriamolo per farlo rosolare da tutti i lati. Saliamo e pepiamo la carne e diamo una mescolata, poi sfumiamo con il vino.",
+        107,
+        '2023-12-05');
+
+/*INSERT SEGUITI*/
+
+INSERT INTO seguiti(EmailSeguito, EmailFollower, DataInzio)
+VALUES ("guido.lavespa@gmail.com", 
+        "gino.buonvino@gmail.com",
+        '2023-12-5');
