@@ -3,8 +3,9 @@
 ## Squisito: il sito web per condividere i piatti casalinghi
 
 ### Introduzione
-"Squisito" è un sito web creato per condividere i propri piatti casalinghi, con foto e ricetta allegato.
-Si può anche mettere dei "mi piace", cercare e seguire altri utenti e visualizzare vari post nel mondo.
+"Squisito" è un sito web creato per condividere i propri piatti casalinghi, con foto e ricetta allegata.
+E' possibile mettere dei "mi piace" ai post delle altre persone, cercare e seguire altri utenti, visualizzare post da tutto il mondo,
+ed esprimere il proprio pensiero tramite commenti.
 
 ### Creatori
 - Rigoni Lorenzo
