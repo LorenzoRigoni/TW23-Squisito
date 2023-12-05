@@ -9,8 +9,6 @@ window.addEventListener("load", function () {
 
     const formData = new FormData();
     formData.append("IDPost", IDPost);
-    let textareaElement = document.getElementById("textArea");
-    textareaElement.setAttribute("name", IDPost);
 
     // Effettuare una richiesta fetch per inviare i dati al server
     fetch(url, {})
@@ -18,7 +16,7 @@ window.addEventListener("load", function () {
       .then((text) => {
         const datiJSON = JSON.parse(text); //datiJSON[0]['Nazione'];
         let followBtn = document.getElementById("followBtn");
-        followBtn.setAttribute("data_id", datiJSON[0].IDPost);
+        followBtn.setAttribute("name", datiJSON[0].IDPost);
         followBtn.addEventListener(
           "click",
           function (event) {
@@ -32,10 +30,9 @@ window.addEventListener("load", function () {
         if (datiJSON[0]["IsLiked"]) {
           heart.classList.add("clicked");
         }
-        let contenitoreCommenti = document.getElementById("comment");
         // Creare la card di Bootstrap
         document.getElementById("nomeUtente").textContent =
-          datiJSON[0]["UsernamePost"];
+          datiJSON[0]["Username"];
         document.getElementById("Paese").textContent = datiJSON[0]["Nazione"];
         document.getElementById("testoRicetta").textContent =
           datiJSON[0]["Ricetta"];
@@ -53,48 +50,78 @@ window.addEventListener("load", function () {
         // Imposta il nuovo URL come sfondo dell'immagine
         let immagine = "data:image/jpg;base64," + datiJSON[0]["FotoRicetta"];
         heroImage.style.backgroundImage = 'url("' + immagine + '")';
-
-        for (let i = 1; i < datiJSON.length; i++) {
-          // Creare la struttura HTML del commento
-          let commentContainer = document.createElement("div");
-          commentContainer.className = "row comment py-3";
-
-          let avatarCol = document.createElement("div");
-          avatarCol.className = "col-auto";
-          let avatar = document.createElement("img");
-          avatar.src =
-            "data:image/jpeg;base64," + datiJSON[i]["FotoProfiloCom"];
-          avatar.alt = "profile-image";
-          avatar.className = "avatar avatar-32 rounded-circle my-auto";
-          avatarCol.appendChild(avatar);
-
-          let usernameCol = document.createElement("div");
-          usernameCol.className = "col-auto my-auto p-0";
-          let strong = document.createElement("strong");
-          let usernameParagraph = document.createElement("p");
-          usernameParagraph.className = "m-0";
-          usernameParagraph.textContent = datiJSON[i]["Username"];
-          strong.appendChild(usernameParagraph);
-          usernameCol.appendChild(strong);
-
-          let contentCol = document.createElement("div");
-          contentCol.className = "col-auto my-auto";
-          let contentParagraph = document.createElement("p");
-          contentParagraph.textContent = datiJSON[i]["Contenuto"];
-          contentCol.appendChild(contentParagraph);
-
-          // Aggiunta degli elementi al container del commento
-          commentContainer.appendChild(avatarCol);
-          commentContainer.appendChild(usernameCol);
-          commentContainer.appendChild(contentCol);
-          // Aggiunta del commento al documento
-          contenitoreCommenti.appendChild(commentContainer);
-        }
+        //load comment
+        loadComment();
         //check if post is of focus user
         if (datiJSON[0]["Email"] == sessionStorage.getItem("userEmail")) {
           $("#delete_post").removeAttr("hidden");
         }
+        //calc different date
+        let start = new Date();
+        let end = new Date(datiJSON[0]["DataPost"]);
+        var diff = start - end;
+        var diffSeconds = diff / 1000;
+        var posted_time = Math.floor(diffSeconds / 3600);
+        if (posted_time < 60) {
+          var posted_time = Math.floor(diffSeconds % 3600) / 60;
+          $("#data_post").text(
+            "Postato " + Math.trunc(posted_time) + " minuti fa"
+          );
+        } else if (posted_time >= 24) {
+          $("#data_post").text(
+            "Postato " + Math.trunc(posted_time / 24) + " giorni fa"
+          );
+        } else {
+          $("#data_post").text("Postato " + posted_time + " ore fa");
+        }
       });
   }
 });
+function loadComment() {
+  let searchParams = new URLSearchParams(window.location.search);
+  $.ajax({
+    url: "/tw23-squisito/model/post_models/get_comment.php",
+    type: "GET",
+    data: {
+      IDPost: searchParams.get("id"),
+    },
+    success: function (datiJSON) {
+      $("#comment").empty();
+      let contenitoreCommenti = document.getElementById("comment");
+      for (let i = 0; i < datiJSON.length; i++) {
+        // Creare la struttura HTML del commento
+        let commentContainer = document.createElement("div");
+        commentContainer.className = "row comment py-3";
 
+        let avatarCol = document.createElement("div");
+        avatarCol.className = "col-auto";
+        let avatar = document.createElement("img");
+        avatar.src = "data:image/jpeg;base64," + datiJSON[i]["FotoProfilo"];
+        avatar.alt = "profile-image";
+        avatar.className = "avatar avatar-32 rounded-circle my-auto";
+        avatarCol.appendChild(avatar);
+
+        let usernameCol = document.createElement("div");
+        usernameCol.className = "col-auto my-auto p-0";
+        let usernameParagraph = document.createElement("p");
+        usernameParagraph.className = "m-0 fw-bold";
+        usernameParagraph.textContent = datiJSON[i]["Username"];
+        usernameCol.appendChild(usernameParagraph);
+
+        let contentCol = document.createElement("div");
+        contentCol.className = "col-auto my-auto";
+        let contentParagraph = document.createElement("p");
+        contentParagraph.className = "m-0";
+        contentParagraph.textContent = datiJSON[i]["Contenuto"];
+        contentCol.appendChild(contentParagraph);
+
+        // Aggiunta degli elementi al container del commento
+        commentContainer.appendChild(avatarCol);
+        commentContainer.appendChild(usernameCol);
+        commentContainer.appendChild(contentCol);
+        // Aggiunta del commento al documento
+        contenitoreCommenti.appendChild(commentContainer);
+      }
+    },
+  });
+}

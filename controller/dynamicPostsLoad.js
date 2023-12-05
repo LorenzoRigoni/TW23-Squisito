@@ -128,7 +128,22 @@ function caricaImmagini() {
 
         let date = document.createElement("p");
         date.className = "mb-0 country-posts text-muted";
-        date.textContent = "Wed, 26 January 2021"; // Puoi sostituire questa data con datiJSON[i].data o un campo data effettivo
+
+        let start = new Date();
+        let end = new Date(datiJSON[i]["DataPost"]);
+        var diff = start - end;
+        var diffSeconds = diff / 1000;
+        var posted_time = Math.floor(diffSeconds / 3600);
+        if (posted_time < 60) {
+          var posted_time = Math.floor(diffSeconds % 3600) / 60;
+          date.textContent =
+            "Postato " + Math.trunc(posted_time) + " minuti fa";
+        } else if (posted_time >= 24) {
+          date.textContent =
+            "Postato " + Math.trunc(posted_time / 24) + " giorni fa";
+        } else {
+          date.textContent = "Postato " + posted_time + " ore fa";
+        }
 
         // Aggiungere il titolo e la data alla terza riga
         titleCol.appendChild(title);

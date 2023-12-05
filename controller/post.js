@@ -30,18 +30,20 @@ window.addEventListener("load", function () {
 });
 //shares post
 $(".pubblica").on("click", function () {
+  let searchParams = new URLSearchParams(window.location.search);
   $.ajax({
     url: "/tw23-squisito/model/post_models/send_comment.php",
     type: "POST",
     data: {
       Contenuto: document.getElementById("textArea").value,
-      IDPost: $("#textArea").attr("name"),
+      IDPost: searchParams.get("id"),
     },
     success: function (result) {},
   });
 });
 //delete post
 $("#delete_post").on("click", function () {
+  let searchParams = new URLSearchParams(window.location.search);
   $.ajax({
     url: "/tw23-squisito/model/post_models/delete_post.php",
     type: "POST",
@@ -61,7 +63,7 @@ function likeClick(event) {
     url: "/tw23-squisito/model/post_models/like_models.php",
     type: "POST",
     data: {
-      IDPost: event.currentTarget.id,
+      IDPost: event.currentTarget.name,
     },
     success: function () {
       if ($heartSpan.hasClass("clicked")) {
