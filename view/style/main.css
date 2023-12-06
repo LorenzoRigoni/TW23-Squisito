@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Inter');
 @import url('https://fonts.googleapis.com/css?family=Kaushan Script');
 @import url('https://fonts.googleapis.com/css?family=Muli');
+
 body {
   min-height: 100%;
   font-family: 'Inter';
@@ -28,12 +29,19 @@ body {
   color: #f26e21;
 }
 
+img,
+.fa-heart,
+.fa-arrow-left {
+  cursor: pointer;
+}
+
 /*-------------SCROLLBAR-----------*/
 /* Firefox */
 * {
   scrollbar-width: auto;
   scrollbar-color: #d99053 #E5E5E5;
 }
+
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
   width: 4px;
@@ -253,17 +261,20 @@ nav.row {
 .form {
   max-width: 90%;
 }
+
 /*------------PROFILE-------------*/
 .divider {
   width: 70%;
   height: 1px;
   background: rgba(0, 0, 0, 0.1)
 }
+
 /*------POST---------*/
 .fixed-row-bottom {
   position: fixed;
   bottom: 0;
 }
+
 .like {
   font-size: 1.5em;
   color: black;
@@ -271,11 +282,13 @@ nav.row {
   padding: 10px;
   background-color: rgba(255, 255, 255, 0.75);
   width: auto;
-  transition:0.5s ease;
+  transition: 0.5s ease;
 }
+
 .like.clicked {
   color: #ff0000;
 }
+
 .line-1 {
   height: 1px;
   background: rgba(0, 0, 0, 0.1)
@@ -315,6 +328,7 @@ nav.row {
   border: 0;
   background-color: transparent;
 }
+
 .pubblica {
   background-color: transparent;
   color: rgba(229, 103, 23, 0.8);
@@ -322,9 +336,11 @@ nav.row {
   font-weight: bold;
   border: 0;
 }
+
 .avatar {
   object-fit: contain;
 }
+
 #nomeUtente {
   margin: 0;
   padding-left: 5px;
@@ -332,11 +348,13 @@ nav.row {
   font-weight: bold;
   line-height: 1.5;
 }
+
 /*-------------------------*/
 @media (max-width: 768px) {
   .hero-image {
     height: 50%;
   }
+
   .fixed-row-bottom {
     position: fixed;
     bottom: 50%;

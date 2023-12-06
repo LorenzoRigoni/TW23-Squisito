@@ -42,10 +42,18 @@ window.addEventListener("load", function () {
           datiJSON[0]["Shortname"] +
           ".png";
         let fotoProfiloPost = document.getElementById("fotoUtentePost");
+        fotoProfiloPost.setAttribute("name",datiJSON[0]["Email"])
         if (datiJSON[0]["FotoProfilo"] != "") {
           fotoProfiloPost.src =
             "data:image/jpeg;base64," + datiJSON[0]["FotoProfilo"];
         }
+        fotoProfiloPost.addEventListener(
+          "click",
+          function (event) {
+            openProfile(event);
+          },
+          false
+        );
         let heroImage = document.getElementById("immagineMain");
         // Imposta il nuovo URL come sfondo dell'immagine
         let immagine = "data:image/jpg;base64," + datiJSON[0]["FotoRicetta"];
@@ -61,18 +69,19 @@ window.addEventListener("load", function () {
         let end = new Date(datiJSON[0]["DataPost"]);
         var diff = start - end;
         var diffSeconds = diff / 1000;
-        var posted_time = Math.floor(diffSeconds / 3600);
-        if (posted_time < 60) {
-          var posted_time = Math.floor(diffSeconds % 3600) / 60;
+        var posted_time_hour = Math.floor(diffSeconds / 3600);
+        var posted_time_min = Math.floor(diffSeconds % 3600) / 60;
+
+        if (posted_time_hour >= 24) {
           $("#data_post").text(
-            "Postato " + Math.trunc(posted_time) + " minuti fa"
+            "Postato " + Math.trunc(posted_time_hour / 24) + " giorni fa"
           );
-        } else if (posted_time >= 24) {
+        } else if (posted_time_hour < 24) {
+          $("#data_post").text("Postato " + posted_time_hour + " ore fa");
+        } else if (posted_time_min < 60) {
           $("#data_post").text(
-            "Postato " + Math.trunc(posted_time / 24) + " giorni fa"
+            "Postato " + Math.trunc(posted_time_min) + " minuti fa"
           );
-        } else {
-          $("#data_post").text("Postato " + posted_time + " ore fa");
         }
       });
   }
@@ -99,6 +108,14 @@ function loadComment() {
         avatar.src = "data:image/jpeg;base64," + datiJSON[i]["FotoProfilo"];
         avatar.alt = "profile-image";
         avatar.className = "avatar avatar-32 rounded-circle my-auto";
+        avatar.setAttribute("name",datiJSON[i]["Email"]);
+        avatar.addEventListener(
+          "click",
+          function (event) {
+            openProfile(event);
+          },
+          false
+        );
         avatarCol.appendChild(avatar);
 
         let usernameCol = document.createElement("div");

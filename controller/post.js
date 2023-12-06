@@ -56,6 +56,11 @@ $("#delete_post").on("click", function () {
     },
   });
 });
+//open profile
+function openProfile(event) {  
+  window.location.href =
+  "../view/profile.html?id=" + event.currentTarget.name;
+};
 function likeClick(event) {
   event.stopPropagation();
   let $heartSpan = $(event.currentTarget);

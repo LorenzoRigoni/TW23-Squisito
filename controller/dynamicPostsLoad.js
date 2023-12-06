@@ -133,16 +133,17 @@ function caricaImmagini() {
         let end = new Date(datiJSON[i]["DataPost"]);
         var diff = start - end;
         var diffSeconds = diff / 1000;
-        var posted_time = Math.floor(diffSeconds / 3600);
-        if (posted_time < 60) {
-          var posted_time = Math.floor(diffSeconds % 3600) / 60;
+        var posted_time_hour = Math.floor(diffSeconds / 3600);
+        var posted_time_min= Math.floor(diffSeconds % 3600)/60;
+
+        if (posted_time_hour >= 24) {
           date.textContent =
-            "Postato " + Math.trunc(posted_time) + " minuti fa";
-        } else if (posted_time >= 24) {
+            "Postato " + Math.trunc(posted_time_hour / 24) + " giorni fa";
+        } else if (posted_time_hour < 24){
+          date.textContent = "Postato " + posted_time_hour + " ore fa";
+        } else if (posted_time_min < 60) {
           date.textContent =
-            "Postato " + Math.trunc(posted_time / 24) + " giorni fa";
-        } else {
-          date.textContent = "Postato " + posted_time + " ore fa";
+            "Postato " + Math.trunc(posted_time_min) + " minuti fa";
         }
 
         // Aggiungere il titolo e la data alla terza riga
