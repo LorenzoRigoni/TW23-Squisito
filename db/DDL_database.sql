@@ -26,7 +26,7 @@ CREATE TABLE post(
     Foto LONGBLOB,
     Ricetta VARCHAR(500) NOT NULL,
     IDNazione INT NOT NULL,
-    DataPost DATE NOT NULL,
+    DataPost DATETIME NOT NULL,
     FOREIGN KEY (EmailUtente) REFERENCES utenti(Email),
     FOREIGN KEY (IDNazione) REFERENCES nazioni(IDNazione)
 );

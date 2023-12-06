@@ -299,7 +299,7 @@ VALUES ("guido.lavespa@gmail.com",
         passata di pomodoro e lasciate cuocere. Versate il ragù in una ampia ciotola e aggiungete le tagliatelle scolate al dente. Una spolverata di 
         parmigiano e.. Buon appetito!",
         107,
-        '2023-12-05');
+        '2023-12-05 09:00:00');
 
 INSERT INTO post(EmailUtente, Titolo, Foto, Ricetta, IDNazione, DataPost)
 VALUES ("guido.lavespa@gmail.com", 
@@ -310,7 +310,7 @@ VALUES ("guido.lavespa@gmail.com",
         Stendete la pasta foglia, ricavatene dei piccoli quadretti e farcite ciascuno con delle piccole parti di composto, ripiegate la pasta in modo che 
         risulti un triangolo, premete sui bordi e ripiegate attorno ad un dito. Cuocete in un buon brodo di carne.",
         107,
-        '2023-11-20');
+        '2023-11-20 09:00:00');
 
 INSERT INTO post(EmailUtente, Titolo, Foto, Ricetta, IDNazione, DataPost)
 VALUES ("massimo.potenza@gmail.com", 
@@ -320,7 +320,7 @@ VALUES ("massimo.potenza@gmail.com",
         Quando il soffritto è appassito, sistemiamo in pentola il pollo a pezzi, con la pelle rivolta verso il basso, e facciamolo rosolare per bene. 
         Di tanto in tanto giriamolo per farlo rosolare da tutti i lati. Saliamo e pepiamo la carne e diamo una mescolata, poi sfumiamo con il vino.",
         107,
-        '2023-12-05');
+        '2023-12-05 09:00:00');
 
 /*INSERT SEGUITI*/
 

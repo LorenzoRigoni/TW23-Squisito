@@ -6,7 +6,7 @@
 include '../login_models/login_functions.php';
 require('../connection_models/db_conn.php');
 
-$query = "SELECT P.IDPost, P.Titolo,P.Foto as FotoRicetta, P.Ricetta, N.Nome AS Nazione, N.Shortname, P.DataPost, U.Email, U.Username,U.FotoProfilo,
+$query = "SELECT P.IDPost, P.Titolo, P.Foto as FotoRicetta, P.Ricetta, N.Nome AS Nazione, N.Shortname, P.DataPost, U.Email, U.Username, U.FotoProfilo,
             (SELECT COUNT(*) FROM mi_piace M1 WHERE M1.IDPost = P.IDPost) AS NumLike,
             (SELECT COUNT(*) FROM mi_piace M2 WHERE M2.EmailUtente = ? AND M2.IDPost = P.IDPost) AS IsLiked,
             (SELECT COUNT(*) FROM seguiti S WHERE S.EmailFollower = ? AND S.EmailSeguito = P.EmailUtente) AS IsFollowed
