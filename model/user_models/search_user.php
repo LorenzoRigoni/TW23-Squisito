@@ -6,7 +6,7 @@
 include '../login_models/login_functions.php';
 require_once("../connection_models/db_conn.php");
 
-$query = "SELECT U.Username, U.FotoProfilo
+$query = "SELECT U.Username, U.Email, U.FotoProfilo
         FROM utenti U 
         WHERE  U.Username LIKE ? AND U.Email != ?";
 
