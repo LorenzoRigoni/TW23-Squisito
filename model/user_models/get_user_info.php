@@ -1,6 +1,6 @@
 <?php
 /**
- * This file contains the model for the login of usergetting the info of a user.
+ * This file contains the model for getting the info of a user.
  */
 
 include "../connection_models/db_conn.php";
