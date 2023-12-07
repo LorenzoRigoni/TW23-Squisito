@@ -38,6 +38,11 @@ window.addEventListener("load", function () {
       },
       success: function (result) {
         const responseObj = JSON.parse(result);
+        if(responseObj[0].Email == sessionStorage.getItem("userEmail")) {
+          $("#edit").removeAttr('hidden');
+        } else {
+          $("#follow").removeAttr('hidden');
+        }
         if (responseObj[0].FotoProfilo != "") {
           $("#user-photo-user").attr(
             "src",
@@ -57,9 +62,9 @@ window.addEventListener("load", function () {
       },
       success: function (result) {
         const responseObj = JSON.parse(result);
-        $("#post-number").text(responseObj[0].NumPosts);
-        $("#followed-number").text(responseObj[1].NumFollowers);
-        $("#seguiti-number").text(responseObj[2].NumSeguiti);
+        $("#post-number").text(" "+responseObj[0].NumPosts);
+        $("#followed-number").text(" "+responseObj[1].NumFollowers);
+        $("#seguiti-number").text(" "+responseObj[2].NumSeguiti);
       },
     });
 
@@ -105,4 +110,8 @@ function search() {
 }
 function postClick(event) {
   window.location.href = "../view/post.html?id=" + event.currentTarget.id;
+}
+function profile() {
+  window.location.href =
+    "../view/profile.html?id=" + sessionStorage.getItem("userEmail");
 }

@@ -29,17 +29,18 @@
                         <h5 id="nomeUtente">User</h5>
                     </div>
                     <div class="row">
-                        <div class="col-auto">
-                            <p>Post <strong id="post-number"></strong></p>
+                        <div class="col-auto d-flex align-items-center">
+                            Post &nbsp <strong id="post-number"></strong>
                         </div>
-                        <div class="col-auto">
-                            <p><strong id="followed-number"></strong> follower</p>
+                        <div class="col-auto d-flex align-items-center">
+                            <strong id="followed-number"></strong> &nbsp follower
                         </div>
-                        <div class="col-auto">
-                            <p><strong id="seguiti-number"></strong> seguiti</p>
+                        <div class="col-auto d-flex align-items-center">
+                            <strong id="seguiti-number"></strong> &nbsp seguiti
                         </div>
-                        <div class="col-auto">
-                            <input type="button" class="btn btn-dark" value="Modifica">
+                        <div class="col-auto d-flex align-items-center">
+                            <input hidden id="edit" type="button" class="btn btn-dark" value="Modifica">
+                            <input hidden id="follow" type="button" class="btn follow" value="Follow">
                         </div>
                     </div>
                     <div class="row">
@@ -61,7 +62,8 @@
                 <span class="fas fa-globe fa-xl" onclick="explore()"></span>
                 <span class="far fa-square-plus fa-xl" onclick="addpost()"></span>
                 <span class="fas fa-magnifying-glass fa-xl" onclick="search()"></span>
-                <img id="user-photo-small" alt="profile-image" class="avatar avatar-32 rounded-circle p-1"  src="/tw23-squisito/view/resource/basic_user.png">
+                <img id="user-photo-small" alt="profile-image" class="avatar avatar-32 rounded-circle p-1"
+                    onclick="profile()" src="/tw23-squisito/view/resource/basic_user.png">
             </div>
         </nav>
     </div>

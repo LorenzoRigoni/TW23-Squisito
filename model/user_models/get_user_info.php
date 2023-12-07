@@ -7,7 +7,7 @@ include "../connection_models/db_conn.php";
 include '../login_models/login_functions.php';
 require_once("../connection_models/db_conn.php");
 
-$query = "SELECT U.Username, U.Nome, U.FotoProfilo, U.Bio
+$query = "SELECT U.Username, U.Email, U.Nome, U.FotoProfilo, U.Bio
         FROM utenti U
         WHERE U.Email = ?";
         
