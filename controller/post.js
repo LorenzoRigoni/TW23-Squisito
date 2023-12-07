@@ -61,6 +61,7 @@ function openProfile(event) {
   window.location.href =
   "../view/profile.html?id=" + event.currentTarget.name;
 };
+
 function likeClick(event) {
   event.stopPropagation();
   let $heartSpan = $(event.currentTarget);
@@ -68,7 +69,7 @@ function likeClick(event) {
     url: "/tw23-squisito/model/post_models/like_models.php",
     type: "POST",
     data: {
-      IDPost: event.currentTarget.name,
+      IDPost: event.currentTarget.id,
     },
     success: function () {
       if ($heartSpan.hasClass("clicked")) {
