@@ -262,6 +262,11 @@ nav.row {
   max-width: 90%;
 }
 
+.create-post{
+border-radius: 5px;
+color: white;
+background: linear-gradient(99deg, #ff4d1c -35.3%, rgba(253, 96, 28, 0.74) 66.33%, #dea024 138.45%);
+}
 /*------------PROFILE-------------*/
 .divider {
   width: 70%;

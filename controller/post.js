@@ -79,31 +79,17 @@ function likeClick(event) {
     },
   });
 }
+//follow
 function sendFollow(event) {
+  let searchParams = new URLSearchParams(window.location.search);
   $.ajax({
     url: "/tw23-squisito/model/user_models/follow_models.php",
     type: "POST",
     data: {
-      IDPost: event.currentTarget.getAttribute("data_id"),
+      IDPost: searchParams.get("id"),
     },
-    success: function (result) {
-      const alreadyFollowedIndex = result.indexOf('"alreadyFollowed":');
-      const alreadyFollowedSubstring = result.slice(
-        alreadyFollowedIndex,
-        result.indexOf("}", alreadyFollowedIndex)
-      );
-      let alreadyFollowedObject = JSON.parse(
-        "{" + alreadyFollowedSubstring + "}"
-      );
-      if (!alreadyFollowedObject.alreadyFollowed) {
-        alert("Hai Inizato a seguirlo");
-        $("#followBtn").removeClass("follow");
-        $("#followBtn").addClass("follow:focus");
-      } else {
-        alert("Hai smesso di seguirlo");
-        $("#followBtn").removeClass("follow:focus");
-        $("#followBtn").addClass("follow");
-      }
+success: function (result) {
+  alert(result);
     },
   });
 }

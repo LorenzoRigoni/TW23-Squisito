@@ -33,7 +33,7 @@ function loadNotification() {
   $.ajax({
     url: "/tw23-squisito/model/post_models/get_notifications.php",
     type: "POST",
-    data: {functionname: 'get'},
+    data: { functionname: "get" },
     success: function (result) {
       let notity = JSON.parse(result);
       let div = "";
@@ -45,7 +45,13 @@ function loadNotification() {
           switch (element.TipoNotifica) {
             case "Like":
               action =
-                element.EmailMittente + " ha messo mi piace alla tua foto";
+                element.EmailMittente + " ha messo mi piace alla tua foto.";
+              break;
+            case "Follow":
+              action = element.EmailMittente + " ha iniziato a seguirti.";
+              break;
+            case "Commento":
+              action = element.EmailMittente + " ha commentato un post.";
               break;
           }
           div +=
@@ -82,7 +88,7 @@ $("#notification").click(function () {
   $.ajax({
     url: "/tw23-squisito/model/post_models/get_notifications.php",
     type: "POST",
-    data: {functionname: 'update'}
+    data: { functionname: "update" },
   });
   $(".sidebar").toggleClass("active");
 });
