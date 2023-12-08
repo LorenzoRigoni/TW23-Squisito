@@ -26,7 +26,7 @@ window.addEventListener("load", function () {
     },
   });
 });
-$("#search_bar").change(function () {
+$("#search_bar").on("input", function () {
   const user = $("#search_bar").val();
   $("#postSpace").empty();
   if (user) {
