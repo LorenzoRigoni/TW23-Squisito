@@ -55,6 +55,13 @@ $("#search_bar").change(function () {
             let user = document.createElement("div");
             user.className ="ms-2 d-flex align-items-center";
             user.textContent = datiJSON[i].Username;
+            cardlist.addEventListener(
+              "click",
+              function (event) {
+                openProfile(event);
+                },
+                false
+              );
             cardCol.appendChild(cardImg);
             cardCol.appendChild(user);
             cardlist.appendChild(cardCol);
@@ -68,6 +75,10 @@ $("#search_bar").change(function () {
 function home() {
   window.location.href = "../view/home.html";
 }
+function openProfile(event) {  
+  window.location.href =
+  "../view/profile.html?id=" + event.currentTarget.id;
+};
 function profile() {
   window.location.href =
     "../view/profile.html?id=" + sessionStorage.getItem("userEmail");
