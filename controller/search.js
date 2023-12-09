@@ -26,7 +26,7 @@ window.addEventListener("load", function () {
     },
   });
 });
-$("#search_bar").on("input", function () {
+$("#search_bar").on("input", debounce(function () {
   const user = $("#search_bar").val();
   $("#postSpace").empty();
   if (user) {
@@ -39,6 +39,7 @@ $("#search_bar").on("input", function () {
       success: function (result) {
         if (result) {
           const datiJSON = JSON.parse(result);
+          $("#postSpace").empty();
           let postSpace = document.getElementById("postSpace");
           for (let i = 0; i < datiJSON.length; i++) {
             let cardlist = document.createElement("li");
@@ -71,7 +72,17 @@ $("#search_bar").on("input", function () {
       },
     });
   }
-});
+},300));
+function debounce(callback, delay) {
+  var timeout
+  return function() {
+    var args = arguments
+    clearTimeout(timeout)
+    timeout = setTimeout(function() {
+      callback.apply(this, args)
+    }.bind(this), delay)
+  }
+}
 function home() {
   window.location.href = "../view/home.html";
 }
