@@ -83,6 +83,8 @@ function likeClick(event) {
 //follow
 function sendFollow(event) {
   let searchParams = new URLSearchParams(window.location.search);
+  event.stopPropagation();
+  let $followSpan = $(event.currentTarget);
   $.ajax({
     url: "/tw23-squisito/model/user_models/follow_models.php",
     type: "POST",
@@ -90,7 +92,11 @@ function sendFollow(event) {
       IDPost: searchParams.get("id"),
     },
 success: function (result) {
-  alert(result);
+  if ($followSpan.hasClass("clicked")) {
+    $followSpan.removeClass("clicked");
+  } else {
+    $followSpan.addClass("clicked");
+  }
     },
   });
 }

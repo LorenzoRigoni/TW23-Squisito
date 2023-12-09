@@ -40,6 +40,7 @@ window.addEventListener("load", function () {
         const responseObj = JSON.parse(result);
         if(responseObj[0].Email == sessionStorage.getItem("userEmail")) {
           $("#edit").removeAttr('hidden');
+          $("#logout").removeAttr('hidden');
         } else {
           $("#follow").removeAttr('hidden');
         }
@@ -96,6 +97,17 @@ window.addEventListener("load", function () {
     });
   }
 });
+$("#logout").on("click",function() {
+  sessionStorage.clear();
+  Object.keys(Cookies.get()).forEach(function(cookieName) {
+    Cookies.remove(cookieName);
+  });
+  window.location.href = "../view/index.html";
+})
+function profile(){
+  let searchParams = new URLSearchParams(window.location.search);
+  searchParams.has("id");
+}
 function home() {
   window.location.href = "../view/home.html";
 }

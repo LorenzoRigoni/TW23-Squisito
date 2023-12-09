@@ -17,6 +17,7 @@ window.addEventListener("load", function () {
         const datiJSON = JSON.parse(text); //datiJSON[0]['Nazione'];
         let followBtn = document.getElementById("followBtn");
         followBtn.setAttribute("name", datiJSON[0].IDPost);
+        followBtn.className ="btn btn-dark follow"
         followBtn.addEventListener(
           "click",
           function (event) {
