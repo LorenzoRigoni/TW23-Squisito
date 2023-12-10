@@ -102,7 +102,7 @@ window.addEventListener("load", function () {
         email: IDUser,
       },
       success: function (result) {
-        if (result != "") {
+        if (result == "") {
           $("#follow").removeClass("clicked");
         } else {
           $("#follow").addClass("clicked");
@@ -154,6 +154,10 @@ function search() {
 }
 function postClick(event) {
   window.location.href = "../view/post.html?id=" + event.currentTarget.id;
+}
+function edit() {
+  let searchParams = new URLSearchParams(window.location.search);
+  window.location.href = "../view/editProfile.html?id=" + searchParams.has("id");
 }
 function profile() {
   window.location.href =

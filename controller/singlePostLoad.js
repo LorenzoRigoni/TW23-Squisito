@@ -33,7 +33,7 @@ window.addEventListener("load", function () {
             email: datiJSON[0]["Email"],
           },
           success: function (result) {
-            if (result != "") {
+            if (result == "") {
               $("#followBtn").removeClass("clicked");
             } else {
               $("#followBtn").addClass("clicked");
