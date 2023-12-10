@@ -36,3 +36,22 @@ window.addEventListener("load", function () {
 $("#fotoProfilo").on("change", function (event) {
     $("#user-photo-user").fadeIn("fast").attr('src',URL.createObjectURL(event.target.files[0]));
 });
+
+function edit() {
+	var formData = new FormData($('#myForm')[0]);
+	  $.ajax({
+        type: 'POST',
+        url: '/tw23-squisito/model/user_models/update_user_info.php',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            // Gestisci la risposta del server qui, se necessario
+            console.log(response);
+        },
+        error: function(error) {
+            // Gestisci gli errori qui, se necessario
+            console.log(error);
+        }
+            });
+}
