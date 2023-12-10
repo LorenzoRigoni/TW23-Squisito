@@ -9,7 +9,7 @@ include '../post_models/pusher.php';
 
 session_start();
 if (checkLogin($conn)) {
-    $followingEmail = getFollowingEmail();
+    $followingEmail = $_POST["Email"];
     require('../connection_models/db_conn.php');
     $query = "SELECT *
         FROM seguiti S
@@ -68,10 +68,9 @@ function executeQuery($query, $followingEmail) {
     $conn->close();
 }
 
-/**
+/*
  * Function for getting the email of the user who created a post.
  * @return string The email of the user.
- */
 function getFollowingEmail() {
     require('../connection_models/db_conn.php');
     $query = "SELECT P.EmailUtente
@@ -89,4 +88,5 @@ function getFollowingEmail() {
     }
     $conn->close();
 }
+ */
 ?>

@@ -25,6 +25,21 @@ window.addEventListener("load", function () {
           },
           false
         );
+        //check follow 
+        $.ajax({
+          url: "/tw23-squisito/model/user_models/is_followed.php",
+          type: "GET",
+          data: {
+            email: datiJSON[0]["Email"],
+          },
+          success: function (result) {
+            if (result != "") {
+              $("#followBtn").removeClass("clicked");
+            } else {
+              $("#followBtn").addClass("clicked");
+            }
+          },
+        });
         let heart = document.getElementById("heart");
         heart.addEventListener("click", likeClick, false);
         heart.setAttribute("id", datiJSON[0].IDPost);

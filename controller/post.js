@@ -89,7 +89,7 @@ function sendFollow(event) {
     url: "/tw23-squisito/model/user_models/follow_models.php",
     type: "POST",
     data: {
-      IDPost: searchParams.get("id"),
+      Email: $("#fotoUtentePost").attr("name"),
     },
 success: function (result) {
   if ($followSpan.hasClass("clicked")) {

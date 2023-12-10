@@ -38,11 +38,11 @@ window.addEventListener("load", function () {
       },
       success: function (result) {
         const responseObj = JSON.parse(result);
-        if(responseObj[0].Email == sessionStorage.getItem("userEmail")) {
-          $("#edit").removeAttr('hidden');
-          $("#logout").removeAttr('hidden');
+        if (responseObj[0].Email == sessionStorage.getItem("userEmail")) {
+          $("#edit").removeAttr("hidden");
+          $("#logout").removeAttr("hidden");
         } else {
-          $("#follow").removeAttr('hidden');
+          $("#follow").removeAttr("hidden");
         }
         if (responseObj[0].FotoProfilo != "") {
           $("#user-photo-user").attr(
@@ -63,9 +63,9 @@ window.addEventListener("load", function () {
       },
       success: function (result) {
         const responseObj = JSON.parse(result);
-        $("#post-number").text(" "+responseObj[0].NumPosts);
-        $("#followed-number").text(" "+responseObj[1].NumFollowers);
-        $("#seguiti-number").text(" "+responseObj[2].NumSeguiti);
+        $("#post-number").text(" " + responseObj[0].NumPosts);
+        $("#followed-number").text(" " + responseObj[1].NumFollowers);
+        $("#seguiti-number").text(" " + responseObj[2].NumSeguiti);
       },
     });
 
@@ -95,16 +95,48 @@ window.addEventListener("load", function () {
         }
       },
     });
+    $.ajax({
+      url: "/tw23-squisito/model/user_models/is_followed.php",
+      type: "GET",
+      data: {
+        email: IDUser,
+      },
+      success: function (result) {
+        if (result != "") {
+          $("#follow").removeClass("clicked");
+        } else {
+          $("#follow").addClass("clicked");
+        }
+      },
+    });
   }
 });
-$("#logout").on("click",function() {
+$("#logout").on("click", function () {
   sessionStorage.clear();
-  Object.keys(Cookies.get()).forEach(function(cookieName) {
+  Object.keys(Cookies.get()).forEach(function (cookieName) {
     Cookies.remove(cookieName);
   });
   window.location.href = "../view/index.html";
-})
-function profile(){
+});
+//follow
+$("#follow").on("click", function () {
+  let searchParams = new URLSearchParams(window.location.search);
+  $.ajax({
+    url: "/tw23-squisito/model/user_models/follow_models.php",
+    type: "POST",
+    data: {
+      Email: searchParams.get("id"),
+    },
+    success: function (result) {
+      if ($("#follow").hasClass("clicked")) {
+        $("#follow").removeClass("clicked");
+      } else {
+        $("#follow").addClass("clicked");
+      }
+    },
+  });
+});
+function profile() {
   let searchParams = new URLSearchParams(window.location.search);
   searchParams.has("id");
 }
