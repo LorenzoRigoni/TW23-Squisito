@@ -12,11 +12,13 @@ $query = "UPDATE utenti
 
 session_start();
 if ($insert = $conn->prepare($query)) {
-    $image = NULL;
-    $insert->bind_param('ssbss', $_POST['username'], $_POST['nome'], $image, $_POST['bio'], $_SESSION['userEmail']);
-    if($_FILES && $_FILES['fotoProfilo']['error'] == 0){
-        $insert->send_long_data(3,file_get_contents($_FILES['fotoProfilo']['tmp_name']));
-    }
+	 if($_FILES && $_FILES['fotoProfilo']['error'] == 0){
+		 $image=file_get_contents($_FILES['fotoProfilo']['tmp_name']);
+    }else {
+		 $image = NULL;
+	}
+    $insert->bind_param('sssss', $_POST['username'], $_POST['nome'], $image, $_POST['bio'], $_SESSION['userEmail']);
+   
     if ($insert->execute()) {
         echo json_encode(array("success" => true));
     } else {
