@@ -36,3 +36,21 @@ window.addEventListener("load", function () {
 $("#fotoProfilo").on("change", function (event) {
     $("#user-photo-user").fadeIn("fast").attr('src',URL.createObjectURL(event.target.files[0]));
 });
+
+function home() {
+  window.location.href = "../view/home.html";
+}
+function openProfile(event) {  
+  window.location.href =
+  "../view/profile.html?id=" + event.currentTarget.id;
+};
+function profile() {
+  window.location.href =
+    "../view/profile.html?id=" + sessionStorage.getItem("userEmail");
+}
+function addpost() {
+  window.location.href = "../view/addpost.html";
+}
+function explore() {
+  window.location.href = "../view/explore.html";
+}
