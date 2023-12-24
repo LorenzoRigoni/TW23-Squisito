@@ -6,11 +6,11 @@
 include '../login_models/login_functions.php';
 include '../post_models/add_notification.php';
 include '../post_models/pusher.php';
+require_once('../connection_models/db_conn.php');
 
 session_start();
 if (checkLogin($conn)) {
     $followingEmail = $_POST["Email"];
-    require('../connection_models/db_conn.php');
     $query = "SELECT *
         FROM seguiti S
         WHERE S.EmailSeguito = ? AND S.EmailFollower = ?";
@@ -26,11 +26,10 @@ if (checkLogin($conn)) {
                 $query = "DELETE FROM seguiti
                         WHERE EmailFollower = ? AND EmailSeguito = ?";
             }
-            $conn->close();
-            $result = executeQuery($query, $followingEmail);
+            $result = executeQuery($query, $followingEmail, $conn);
             echo json_encode($result);
             if ($res->num_rows == 0) {
-                echo json_encode(addNotification(null, $_SESSION['userEmail'], $followingEmail, "Follow"));
+                echo json_encode(addNotification(null, $_SESSION['userEmail'], $followingEmail, "Follow", $conn));
                 pushNotification($followingEmail);
             }
         } else {
@@ -43,14 +42,16 @@ if (checkLogin($conn)) {
     echo json_encode(array("error" => "The user is not logged"));
 }
 
+$conn->close();
+
 /**
  * Function for execute the SQL queries.
  * @param string $query The query to execute
  * @param string $followingEmail The email ot the following user
+ * @param mysqli $conn The connection to the database
  * @return array An associative array with the results
  */
-function executeQuery($query, $followingEmail) {
-    require('../connection_models/db_conn.php');
+function executeQuery($query, $followingEmail, $conn) {
     if ($selectQuery = $conn->prepare($query)) {
         $selectQuery->bind_param("ss", $_SESSION['userEmail'], $followingEmail);
         if ($selectQuery->execute()) {
@@ -65,28 +66,5 @@ function executeQuery($query, $followingEmail) {
     } else {
         return array("error" => $selectQuery->error);
     }
-    $conn->close();
 }
-
-/*
- * Function for getting the email of the user who created a post.
- * @return string The email of the user.
-function getFollowingEmail() {
-    require('../connection_models/db_conn.php');
-    $query = "SELECT P.EmailUtente
-            FROM post P
-            WHERE P.IDPost = ?";
-    if ($selectQuery = $conn->prepare($query)) {
-        $selectQuery->bind_param("i", $_POST['IDPost']);
-        if ($selectQuery->execute()) {
-            return $selectQuery->get_result()->fetch_assoc()['EmailUtente'];
-        } else {
-            return $selectQuery->error;
-        }
-    } else {
-        return $selectQuery->error;
-    }
-    $conn->close();
-}
- */
 ?>

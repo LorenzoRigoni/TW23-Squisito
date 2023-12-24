@@ -3,8 +3,6 @@
  * This file contains the functions for the login of user.
  */
 
-require('../connection_models/db_conn.php');
-
 /**
  * Function for the login of the user.
  * @param string $email The email of the user

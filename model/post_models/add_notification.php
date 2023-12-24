@@ -9,11 +9,10 @@
  * @param string $emailMitt The email of the user that sends the notification
  * @param string $emailDest The email of the user that receives the notification
  * @param string $tipoNot The tipe of notification
+ * @param mysqli $conn The connection to the database
  * @return array An associative array with success or the SQL error
  */
-function addNotification($idPost, $emailMitt, $emailDest, $tipoNot) {
-    require('../connection_models/db_conn.php');
-    
+function addNotification($idPost, $emailMitt, $emailDest, $tipoNot, $conn) {
     $query = "INSERT INTO notifiche (IDPost, EmailMittente, EmailDestinatario, TipoNotifica, DataNotifica)
             VALUES (?, ?, ?, ?, CURRENT_DATE())";
 

@@ -4,7 +4,7 @@
  */
 
 include '../login_models/login_functions.php';
-require('../connection_models/db_conn.php');
+require_once('../connection_models/db_conn.php');
 
 $query = "UPDATE utenti
         SET Username = ?, Nome = ?, FotoProfilo = ?, Bio = ?

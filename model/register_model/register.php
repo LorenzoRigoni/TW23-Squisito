@@ -4,7 +4,7 @@
  */
 
 include '../login_models/login_functions.php';
-require('../connection_models/db_conn.php');
+require_once('../connection_models/db_conn.php');
 
 $pwd = $_POST['password'];
 $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
@@ -22,13 +22,11 @@ if ($insert = $conn->prepare($query)) {
     if ($insert->execute()) {
         $response = array("success" => true);
         echo json_encode($response);
-        $conn->close();
-        require('../connection_models/db_conn.php');
         login($_POST['email'], $pwd, $conn, false);
-        $conn->close();
     } else {
         $response = array("success" => false);
         echo json_encode($response);
     }
 }
+$conn->close();
 ?>

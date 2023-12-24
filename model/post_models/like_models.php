@@ -6,7 +6,7 @@
 include '../login_models/login_functions.php';
 include 'add_notification.php';
 include 'pusher.php';
-require('../connection_models/db_conn.php');
+require_once('../connection_models/db_conn.php');
 
 session_start();
 if (checkLogin($conn)) {
@@ -25,12 +25,11 @@ if (checkLogin($conn)) {
                 $query = "DELETE FROM mi_piace
                         WHERE IDPost = ? AND EmailUtente = ?";
             }
-            $conn->close();
-            $result = executeQuery($query);
+            $result = executeQuery($query, $conn);
             echo json_encode($result);
             if ($res->num_rows == 0) {
-                $emailReceiver = getReceiverEmail();
-                echo json_encode(addNotification($_POST['IDPost'], $_SESSION['userEmail'], $emailReceiver, "Like"));
+                $emailReceiver = getReceiverEmail($conn);
+                echo json_encode(addNotification($_POST['IDPost'], $_SESSION['userEmail'], $emailReceiver, "Like", $conn));
                 pushNotification($emailReceiver);
             }
         } else {
@@ -43,14 +42,16 @@ if (checkLogin($conn)) {
     echo json_encode(array("error" => "The user is not logged"));
 }
 
+$conn->close();
+
 /**
  * Function for execute the SQL queries.
  * @param string $query The query to execute
+ * @param mysqli $conn The connection to the database
  * @return array An associative array with the results
  */
-function executeQuery($query)
+function executeQuery($query, $conn)
 {
-    require('../connection_models/db_conn.php');
     if ($selectQuery = $conn->prepare($query)) {
         $selectQuery->bind_param("is", $_POST['IDPost'], $_SESSION['userEmail']);
         if ($selectQuery->execute()) {
@@ -65,15 +66,14 @@ function executeQuery($query)
     } else {
         return array("error" => $selectQuery->error);
     }
-    $conn->close();
 }
 
 /**
  * Function for getting the email of the user who created the post.
- * @return string The email of the user.
+ * @param mysqli $conn The connection to the database
+ * @return string The email of the user
  */
-function getReceiverEmail() {
-    require('../connection_models/db_conn.php');
+function getReceiverEmail($conn) {
     $query = "SELECT P.EmailUtente
             FROM post P
             WHERE P.IDPost = ?";
@@ -87,6 +87,5 @@ function getReceiverEmail() {
     } else {
         return $selectQuery->error;
     }
-    $conn->close();
 }
 ?>

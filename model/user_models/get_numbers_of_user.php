@@ -4,6 +4,7 @@
  */
 
 include '../login_models/login_functions.php';
+require_once('../connection_models/db_conn.php');
 
 session_start();
 if (checkLogin($conn)) {
@@ -16,9 +17,9 @@ if (checkLogin($conn)) {
     $querySeg = "SELECT COUNT(*) AS NumSeguiti
                 FROM seguiti
                 WHERE EmailFollower = ?";
-    $resPosts = executeQuery($queryPosts);
-    $resFoll = executeQuery($queryFoll);
-    $resSeg = executeQuery($querySeg);
+    $resPosts = executeQuery($queryPosts, $conn);
+    $resFoll = executeQuery($queryFoll, $conn);
+    $resSeg = executeQuery($querySeg, $conn);
     if (array_keys($resPosts)[0] == "error" || array_keys($resFoll)[0] == "error" || array_keys($resSeg)[0] == "error") {
         if (array_keys($resPosts)[0] == "error") {
             echo json_encode(array("error" => $resPosts['error']));
@@ -39,10 +40,10 @@ if (checkLogin($conn)) {
 /**
  * Function for execute the SQL queries.
  * @param string $query The query to execute
+ * @param mysqli $conn The connection to the database
  * @return array An associative array with the results
  */
-function executeQuery($query) {
-    require('../connection_models/db_conn.php');
+function executeQuery($query, $conn) {
     if ($selectQuery = $conn->prepare($query)) {
         $selectQuery->bind_param("s", $_GET['email']);
         if ($selectQuery->execute()) {
@@ -53,6 +54,5 @@ function executeQuery($query) {
     } else {
         return array("error" => $selectQuery->error);
     }
-    $conn->close();
 }
 ?>

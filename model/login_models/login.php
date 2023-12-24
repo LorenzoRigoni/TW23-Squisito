@@ -4,7 +4,6 @@
  */
 
 require_once("../connection_models/db_conn.php");
-include "../connection_models/db_conn.php";
 include "login_functions.php";
 
 session_start();

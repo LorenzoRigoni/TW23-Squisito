@@ -9,6 +9,7 @@
  * @param string $login_string The string of login
  */
 function setSession($email, $login_string) {
+    session_start();
     $_SESSION['userEmail'] = $email;
     $_SESSION['login_string'] = $login_string;
 }

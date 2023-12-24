@@ -4,7 +4,7 @@
  */
 
 include '../login_models/login_functions.php';
-require('../connection_models/db_conn.php');
+require_once('../connection_models/db_conn.php');
 
 $query = "SELECT P.IDPost, P.Titolo, P.Foto as FotoRicetta, P.Ricetta, N.Nome AS Nazione, N.Shortname, P.DataPost, U.Email, U.Username, U.FotoProfilo,
             (SELECT COUNT(*) FROM mi_piace M1 WHERE M1.IDPost = P.IDPost) AS NumLike,

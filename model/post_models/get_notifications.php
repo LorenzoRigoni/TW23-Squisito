@@ -4,7 +4,8 @@
  */
 
 include '../login_models/login_functions.php';
-require('../connection_models/db_conn.php');
+require_once('../connection_models/db_conn.php');
+
 switch ($_POST['functionname']) {
     case 'get':
         $query = "SELECT N.IDNotifica, N.IDPost, N.EmailMittente, N.TipoNotifica, U.Username, U.FotoProfilo, N.DataNotifica, N.Visualizzato
@@ -34,18 +35,19 @@ switch ($_POST['functionname']) {
         }
         break;
     case 'update':
-        updateNotifications();
+        updateNotifications($conn);
         break;
 }
+$conn->close();
 
 
 /**
  * Function to update the notifications that the user has seen.
+ * @param mysqli $conn The connection to the database
  */
-function updateNotifications()
+function updateNotifications($conn)
 {
     session_start();
-    require("../connection_models/db_conn.php");
     $query = "UPDATE notifiche N
         SET N.Visualizzato = TRUE
         WHERE N.EmailDestinatario = ?";
@@ -53,6 +55,5 @@ function updateNotifications()
         $insert->bind_param("s", $_SESSION['userEmail']);
         $insert->execute();
     }
-    $conn->close();
 }
 ?>

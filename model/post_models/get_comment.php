@@ -4,7 +4,7 @@
  */
 
 include '../login_models/login_functions.php';
-require('../connection_models/db_conn.php');
+require_once('../connection_models/db_conn.php');
 
 $query = "SELECT C.IDCommento, U.FotoProfilo, U.Email, U.Username, C.Contenuto, C.DataCommento
 FROM utenti U INNER JOIN commenti C ON U.Email = C.EmailUtente
