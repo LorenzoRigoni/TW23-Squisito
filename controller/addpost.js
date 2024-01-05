@@ -1,4 +1,4 @@
-$("#choose-image").change(function () {
+$("#Foto").change(function () {
   const file = this.files[0];
   let reader = new FileReader();
   reader.onloadend = function () {
@@ -11,7 +11,7 @@ $("#choose-image").change(function () {
 });
 
 $("#sendPostButton").on("click", function () {
-  const fileInputValue = $("#choose-image").val();
+  const fileInputValue = $("#Foto").val();
   const selectCountry = $("#sel1").val();
   const recipe = $("#recepi").val();
   const title = $("#titlePost").val();
