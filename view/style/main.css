@@ -74,6 +74,9 @@ input[type]:focus,
   outline: 0 none !important;
 }
 
+#eye, #eye:hover{
+  color:#333
+}
 /*----------------*/
 
 /*-----------HOME----------*/
