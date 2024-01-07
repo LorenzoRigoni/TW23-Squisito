@@ -39,7 +39,9 @@ $("#login").on("click", function () {
         sessionStorage.setItem("login_string", responseObj.loginString);
         sessionStorage.setItem("close_notify", JSON.stringify([]));
         window.location.href = "../view/home.html";
-      }
+      }else {
+		  alert("Email o Password Errata, riprova");
+	  }
     },
   });
 });
