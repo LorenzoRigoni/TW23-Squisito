@@ -5,56 +5,64 @@
 
 include '../login_models/login_functions.php';
 require_once('../connection_models/db_conn.php');
-
-$query4 = "DELETE FROM post
+		
+$queryNot = "DELETE FROM notifiche
         WHERE IDPost = ?";
 		
-$query = "DELETE FROM notifiche
+$queryLike = "DELETE FROM mi_piace
         WHERE IDPost = ?";
 		
-$query2 = "DELETE FROM mi_piace
+$queryComm = "DELETE FROM commenti
         WHERE IDPost = ?";
-		
-$query3 = "DELETE FROM commenti
-        WHERE IDPost = ?";		
+	
+$queryPost = "DELETE FROM post
+        WHERE IDPost = ?";
 
 session_start();
 if (checkLogin($conn)) {
-    if ($insert = $conn->prepare($query)) {
-        $insert->bind_param('i', $_POST['IDPost']);
-        if ($insert->execute()) {
-			if ($insert2 = $conn->prepare($query2)) {
-				$insert2->bind_param('i', $_POST['IDPost']);
-				if ($insert2->execute()) {
-					echo json_encode(array("success" => true));
-				} else {
-					echo json_encode(array("error" => $insert->error));
-				}
-			}
-            echo json_encode(array("success" => true));
-        } else {
-            echo json_encode(array("error" => $insert->error));
+    $resNot = executeQuery($queryNot, $_POST['IDPost'], $conn);
+    $resLike = executeQuery($queryLike, $_POST['IDPost'], $conn);
+    $resComm = executeQuery($queryComm, $_POST['IDPost'], $conn);
+    $resPost = executeQuery($queryPost, $_POST['IDPost'], $conn);
+    if (empty($resNot) && empty($resLike) && empty($resComm) && empty($resPost)) {
+        echo json_encode(array("success" => true));
+    } else {
+        if (!empty($resNot)) {
+            echo json_encode($resNot['error']);
         }
-    }
-	
-	if ($insert3 = $conn->prepare($query3)) {
-        $insert3->bind_param('i', $_POST['IDPost']);
-        if ($insert3->execute()) {
-			if ($insert4 = $conn->prepare($query4)) {
-				$insert4->bind_param('i', $_POST['IDPost']);
-				if ($insert4->execute()) {
-					echo json_encode(array("success" => true));
-				} else {
-					echo json_encode(array("error" => $insert->error));
-				}
-			}
-            echo json_encode(array("success" => true));
-        } else {
-            echo json_encode(array("error" => $insert->error));
+        if (!empty($resLike)) {
+            echo json_encode($resLike['error']);
+        }
+        if (!empty($resComm)) {
+            echo json_encode($resComm['error']);
+        }
+        if (!empty($resPost)) {
+            echo json_encode($resPost['error']);
         }
     }
 } else {
     echo json_encode(array("error" => "The user is not logged"));
 }
+
 $conn->close();
+
+/**
+ * Function for execute the delete queries.
+ * @param string $query The query to execute
+ * @param int $idPost The id of the post to delete
+ * @param mysqli $conn The connection to the database
+ * @return array An empty array if success, with error inside otherwise
+ */
+function executeQuery($query, $idPost, $conn) {
+    if ($delete = $conn->prepare($query)) {
+        $delete->bind_param("i", $idPost);
+        if ($delete->execute()) {
+            return array();
+        } else {
+            return array("error" => $delete->error);
+        }
+    } else {
+        return array("error" => $conn->error);
+    }
+}
 ?>
