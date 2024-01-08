@@ -8,7 +8,7 @@ require_once('../connection_models/db_conn.php');
 
 switch ($_POST['functionname']) {
     case 'get':
-        $query = "SELECT N.IDNotifica, N.IDPost, N.EmailMittente, N.TipoNotifica, U.Username, U.FotoProfilo, N.DataNotifica, N.Visualizzato
+        $query = "SELECT N.IDNotifica, N.IDPost, N.EmailMittente, N.TipoNotifica, N.Visualizzato
         FROM notifiche N INNER JOIN utenti U ON N.EmailMittente = U.Email
         WHERE N.EmailDestinatario = ?";
 
@@ -18,12 +18,7 @@ switch ($_POST['functionname']) {
                 $selectQuery->bind_param("s", $_SESSION['userEmail']);
                 if ($selectQuery->execute()) {
                     $results = $selectQuery->get_result();
-                    $temp = $results->fetch_all(MYSQLI_ASSOC);
-                    for ($i = 0; $i < count($temp); $i++) {
-                        $temp[$i]['FotoProfilo'] = base64_encode($temp[$i]['FotoProfilo']);
-                    }
-                    $conn->close();
-                    echo json_encode($temp);
+                    echo json_encode($results->fetch_all(MYSQLI_ASSOC));
                 } else {
                     echo json_encode(array("error" => $selectQuery->error));
                 }

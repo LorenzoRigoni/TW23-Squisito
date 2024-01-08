@@ -102,6 +102,7 @@ $(document).on("click", ".cancel", function () {
   close.push($(this).attr("id"));
   sessionStorage.setItem("close_notify", JSON.stringify(close));
   $(this).parent().toggleClass("gone");
+  $("#number-notification").text($("#number-notification").text()-1);
 });
 
 function likeClick(event) {
