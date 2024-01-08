@@ -38,7 +38,7 @@ if (checkLogin($conn)) {
                     if ($res->num_rows == 0) {
                         $emailReceiver = getReceiverEmail($conn);
                         echo json_encode(addNotification($_POST['IDPost'], $_SESSION['userEmail'], $emailReceiver, "Like", $conn));
-                        pushNotification($emailReceiver);
+                        pushNotification(getReceiverUsername($conn));
                     }
                 } else {
                     echo json_encode(array("error" => $numLikes->error));
