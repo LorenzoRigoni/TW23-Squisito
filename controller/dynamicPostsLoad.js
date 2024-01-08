@@ -35,7 +35,7 @@ function caricaImmagini() {
         profileImage.className = "avatar avatar-32 rounded-circle p-1";
 
         let userInfoCol = document.createElement("div");
-        userInfoCol.className = "col-auto";
+        userInfoCol.className = "col-auto p-0";
 
         let userName = document.createElement("h6");
         userName.className = "mb-0";
@@ -104,9 +104,10 @@ function caricaImmagini() {
 
         // Creare il paragrafo con le informazioni sui "Mi piace"
         let likedInfo = document.createElement("p");
-        likedInfo.className = "liked m-1 ps-2";
+        likedInfo.className = "liked m-1";
         likedInfo.textContent = "Piace a ";
         let strongTag = document.createElement("strong");
+        strongTag.id =  datiJSON[i].IDPost + "-Nlikes";
         strongTag.textContent = datiJSON[i].NumLike + " persone";
         likedInfo.appendChild(strongTag);
 
@@ -131,10 +132,10 @@ function caricaImmagini() {
 
         let start = new Date();
         let end = new Date(datiJSON[i]["DataPost"]);
-        var diff = start - end;
-        var diffSeconds = diff / 1000;
-        var posted_time_hour = Math.floor(diffSeconds / 3600);
-        var posted_time_min= Math.floor(diffSeconds % 3600)/60;
+        let diff = start - end;
+        let diffSeconds = diff / 1000;
+        let posted_time_hour = Math.floor(diffSeconds / 3600);
+        let posted_time_min= Math.floor(diffSeconds % 3600)/60;
 
         if (posted_time_hour >= 24) {
           date.textContent =

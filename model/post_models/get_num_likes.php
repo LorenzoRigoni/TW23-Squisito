@@ -6,7 +6,7 @@
 include '../login_models/login_functions.php';
 require_once('../connection_models/db_conn.php');
 
-$query = "SELECT COUNT(*) AS NumLike
+$query = "SELECT COUNT(*) AS NumLike, M.IDPost
         FROM mi_piace M 
         WHERE M.IDPost = ?";
 
@@ -15,7 +15,8 @@ if (checkLogin($conn)) {
     if ($selectQuery = $conn->prepare($query)) {
         $selectQuery->bind_param("i", $_GET['IDPost']);
         if ($selectQuery->execute()) {
-            echo $selectQuery->get_result()->fetch_assoc()['NumLike'];
+            $results = $selectQuery->get_result()->fetch_assoc();
+            echo json_encode($results);
         } else {
             echo json_encode(array("error" => $selectQuery->error));
         }

@@ -81,7 +81,7 @@ input[type]:focus,
 
 /*-----------HOME----------*/
 .avatar {
-  object-fit: contain;
+  object-fit: fill !important;
 }
 
 /*---------------TITOLO------------------*/
@@ -383,7 +383,7 @@ background: linear-gradient(99deg, #ff4d1c -35.3%, rgba(253, 96, 28, 0.74) 66.33
   }
 }
 @media (min-width: 576px) {
-.card-img-top {
+.card-img-top, #postSpace img {
   width: 100%;
   height: 15vw;
   object-fit: cover;

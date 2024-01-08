@@ -79,14 +79,16 @@ window.addEventListener("load", function () {
         //check if post is of focus user
         if (datiJSON[0]["Email"] == sessionStorage.getItem("userEmail")) {
           $("#delete_post").removeAttr("hidden");
+        } else {
+          $("#followBtn").removeAttr("hidden");
         }
         //calc different date
         let start = new Date();
         let end = new Date(datiJSON[0]["DataPost"]);
-        var diff = start - end;
-        var diffSeconds = diff / 1000;
-        var posted_time_hour = Math.floor(diffSeconds / 3600);
-        var posted_time_min = Math.floor(diffSeconds % 3600) / 60;
+        let diff = start - end;
+        let diffSeconds = diff / 1000;
+        let posted_time_hour = Math.floor(diffSeconds / 3600);
+        let posted_time_min = Math.floor(diffSeconds % 3600) / 60;
 
         if (posted_time_hour >= 24) {
           $("#data_post").text(

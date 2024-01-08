@@ -74,9 +74,9 @@ $("#search_bar").on("input", debounce(function () {
   }
 },300));
 function debounce(callback, delay) {
-  var timeout
+  let timeout
   return function() {
-    var args = arguments
+    let args = arguments
     clearTimeout(timeout)
     timeout = setTimeout(function() {
       callback.apply(this, args)
