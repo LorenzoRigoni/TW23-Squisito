@@ -19,7 +19,9 @@ if (checkLogin($conn)) {
             $results = $selectQuery->get_result();
             if ($results->num_rows > 0) {
                 $temp = $results->fetch_all(MYSQLI_ASSOC);
-                $temp[0]['FotoProfilo'] = base64_encode($temp[0]['FotoProfilo']);
+                for ($i = 0; $i < count($temp); $i++) {
+                    $temp[$i]['FotoProfilo'] = base64_encode($temp[$i]['FotoProfilo']);
+                }
                 echo json_encode($temp);
             }
         } else {
