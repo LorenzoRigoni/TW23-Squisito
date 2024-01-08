@@ -115,24 +115,15 @@ function likeClick(event) {
     data: {
       IDPost: idPost,
     },
-    success: function () {
-      $.ajax({
-        url: "/tw23-squisito/model/post_models/get_num_likes.php",
-        type: "GET",
-        data: {
-          IDPost: idPost,
-        },
-        success: function (result) {
-          let likes = JSON.parse(result);
-          let id = "#"+idPost + "-Nlikes";
-          if ($heartSpan.hasClass("clicked")) {
-            $heartSpan.removeClass("clicked");
-          } else {
-            $heartSpan.addClass("clicked");
-          }
-          $(id).text(likes.NumLike + " persone");
-        },
-      });
+    success: function (result) {
+      let likes = JSON.parse(result);
+      let id = "#" + idPost + "-Nlikes";
+      if ($heartSpan.hasClass("clicked")) {
+        $heartSpan.removeClass("clicked");
+      } else {
+        $heartSpan.addClass("clicked");
+      }
+      $(id).text(likes.NumLike + " persone");
     },
   });
 }

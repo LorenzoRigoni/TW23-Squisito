@@ -20,6 +20,7 @@ if (checkLogin($conn)) {
         if ($insert->execute()) {
             $response = array("success" => true);
             echo json_encode($response);
+            header( 'Location: ../../view/home.html');
         } else {
             $response = array("error" => $insert->error);
             echo json_encode($response);

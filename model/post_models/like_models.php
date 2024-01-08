@@ -26,7 +26,6 @@ if (checkLogin($conn)) {
                         WHERE IDPost = ? AND EmailUtente = ?";
             }
             $result = executeQuery($query, $conn);
-            echo ($_POST['IDPost']);
             $query = "";
             $query = "SELECT COUNT(*) AS NumLike
                 FROM mi_piace M 
@@ -37,7 +36,6 @@ if (checkLogin($conn)) {
                     echo json_encode($numLikes->get_result()->fetch_assoc());
                     if ($res->num_rows == 0) {
                         $emailReceiver = getReceiverEmail($conn);
-                        echo json_encode(addNotification($_POST['IDPost'], $_SESSION['userEmail'], $emailReceiver, "Like", $conn));
                         pushNotification(getReceiverUsername($conn));
                     }
                 } else {

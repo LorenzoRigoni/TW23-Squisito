@@ -10,28 +10,6 @@ $("#Foto").change(function () {
   }
 });
 
-$("#sendPostButton").on("click", function () {
-  const fileInputValue = $("#Foto").val();
-  const selectCountry = $("#sel1").val();
-  const recipe = $("#recepi").val();
-  const title = $("#titlePost").val();
-  $.ajax({
-    type: "POST",
-    url: "/tw23-squisito/model/post_models/add_post.php",
-    data: {
-      Foto: fileInputValue,
-      IDNazione: selectCountry,
-      Ricetta: recipe,
-      Titolo: title,
-    },
-    success: function (response) {
-      alert("Post Creato");
-    },
-    error: function (error) {
-      console.error(error);
-    },
-  });
-});
 
 window.addEventListener('load', function() {
   if (Cookies.get("userEmail")) {
