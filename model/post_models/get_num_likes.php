@@ -6,7 +6,7 @@
 include '../login_models/login_functions.php';
 require_once('../connection_models/db_conn.php');
 
-$query = "SELECT COUNT(*) AS NumLike, M.IDPost
+$query = "SELECT COUNT(*) AS NumLike
         FROM mi_piace M 
         WHERE M.IDPost = ?";
 

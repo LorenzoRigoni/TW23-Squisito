@@ -108,13 +108,14 @@ $(document).on("click", ".cancel", function () {
 function likeClick(event) {
   event.stopPropagation();
   let $heartSpan = $(event.currentTarget);
+  const idPost = event.currentTarget.id;
   $.ajax({
     url: "/tw23-squisito/model/post_models/like_models.php",
     type: "POST",
     data: {
-      IDPost: event.currentTarget.id,
+      IDPost: idPost,
     },
-    success: function (idPost) {
+    success: function () {
       $.ajax({
         url: "/tw23-squisito/model/post_models/get_num_likes.php",
         type: "GET",
@@ -123,13 +124,13 @@ function likeClick(event) {
         },
         success: function (result) {
           let likes = JSON.parse(result);
-          let id = likes.IDPost + "-NLikes";
+          let id = "#"+idPost + "-Nlikes";
           if ($heartSpan.hasClass("clicked")) {
             $heartSpan.removeClass("clicked");
           } else {
             $heartSpan.addClass("clicked");
           }
-          $("#" + id).text(likes.NumLike + " persone");
+          $(id).text(likes.NumLike + " persone");
         },
       });
     },
