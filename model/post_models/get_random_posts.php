@@ -11,9 +11,7 @@ $query = "SELECT P.IDPost, P.DataPost, P.Titolo, P.Foto, P.Ricetta, N.Nome AS Na
             (SELECT COUNT(*) FROM mi_piace M2 WHERE M2.EmailUtente = ? AND M2.IDPost = P.IDPost) AS IsLiked
         FROM post P INNER JOIN utenti U ON U.Email = P.EmailUtente
             INNER JOIN nazioni N ON P.IDNazione = N.IDNazione
-        WHERE P.EmailUtente NOT IN (SELECT EmailSeguito
-                                FROM seguiti
-                                WHERE EmailFollower = ?)
+        WHERE P.EmailUtente != ?
         ORDER BY RAND()
         LIMIT 20";
 
