@@ -11,8 +11,7 @@ if(isset($_POST['email'], $_POST['password'], $_POST['ricordami'])) {
     if(login($_POST['email'], $_POST['password'], $conn, $_POST['ricordami'])) {
         $response = array(
             "success" => true,
-            "emailUtente" => $_SESSION['userEmail'],
-            "loginString" => $_SESSION['login_string']
+            "emailUtente" => $_SESSION['userEmail']
         );
     } else {
         $response = array("success" => false);
