@@ -30,7 +30,7 @@ if (checkLogin($conn)) {
             echo json_encode($result);
             if ($res->num_rows == 0) {
                 echo json_encode(addNotification(null, $_SESSION['userEmail'], $followingEmail, "Follow", $conn));
-                pushNotification(getReceiverUsername($conn));
+                pushNotification($followingEmail);
             }
         } else {
             echo json_encode(array("error" => $isFollowed->error));
@@ -65,27 +65,6 @@ function executeQuery($query, $followingEmail, $conn) {
         }
     } else {
         return array("error" => $selectQuery->error);
-    }
-}
-
-/**
- * Function for getting the username of the user who created the post.
- * @param mysqli $conn The connection to the database
- * @return string The username of the user
- */
-function getReceiverUsername($conn) {
-    $query = "SELECT U.Username
-        FROM utenti U
-        WHERE U.Email = ?";
-    if ($selectQuery = $conn->prepare($query)) {
-        $selectQuery->bind_param("s", $_POST["Email"]);
-        if ($selectQuery->execute()) {
-            return $selectQuery->get_result()->fetch_assoc()['Username'];
-        } else {
-            return $selectQuery->error;
-        }
-    } else {
-        return $selectQuery->error;
     }
 }
 ?>

@@ -36,7 +36,8 @@ if (checkLogin($conn)) {
                     echo json_encode($numLikes->get_result()->fetch_assoc());
                     if ($res->num_rows == 0) {
                         $emailReceiver = getReceiverEmail($conn);
-                        pushNotification(getReceiverUsername($conn));
+                        addNotification($_POST['IDPost'], $_SESSION['userEmail'], $emailReceiver, "Like", $conn);
+                        pushNotification($emailReceiver);
                     }
                 } else {
                     echo json_encode(array("error" => $numLikes->error));
@@ -93,27 +94,6 @@ function getReceiverEmail($conn) {
         $selectQuery->bind_param("i", $_POST['IDPost']);
         if ($selectQuery->execute()) {
             return $selectQuery->get_result()->fetch_assoc()['EmailUtente'];
-        } else {
-            return $selectQuery->error;
-        }
-    } else {
-        return $selectQuery->error;
-    }
-}
-
-/**
- * Function for getting the username of the user who created the post.
- * @param mysqli $conn The connection to the database
- * @return string The username of the user
- */
-function getReceiverUsername($conn) {
-    $query = "SELECT U.Username
-        FROM post P INNER JOIN utenti U ON P.EmailUtente = U.Email
-        WHERE P.IDPost = ?";
-    if ($selectQuery = $conn->prepare($query)) {
-        $selectQuery->bind_param("i", $_POST['IDPost']);
-        if ($selectQuery->execute()) {
-            return $selectQuery->get_result()->fetch_assoc()['Username'];
         } else {
             return $selectQuery->error;
         }

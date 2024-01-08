@@ -8,7 +8,7 @@ require_once('../connection_models/db_conn.php');
 
 switch ($_POST['functionname']) {
     case 'get':
-        $query = "SELECT N.IDNotifica, N.IDPost, N.EmailMittente, N.TipoNotifica, N.Visualizzato
+        $query = "SELECT N.IDNotifica, N.IDPost, U.Username, N.TipoNotifica, N.Visualizzato
         FROM notifiche N INNER JOIN utenti U ON N.EmailMittente = U.Email
         WHERE N.EmailDestinatario = ? ORDER BY N.IDNotifica";
 
