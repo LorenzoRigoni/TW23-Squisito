@@ -28,7 +28,7 @@ window.addEventListener("load", function () {
 });
 $("#search_bar").on("input", debounce(function () {
   const user = $("#search_bar").val();
-  $("#postSpace").empty();
+  $("#userSpace").empty();
   if (user) {
     $.ajax({
       url: "/tw23-squisito/model/user_models/search_user.php",
@@ -39,8 +39,8 @@ $("#search_bar").on("input", debounce(function () {
       success: function (result) {
         if (result) {
           const datiJSON = JSON.parse(result);
-          $("#postSpace").empty();
-          let postSpace = document.getElementById("postSpace");
+          $("#userSpace").empty();
+          let postSpace = document.getElementById("userSpace");
           for (let i = 0; i < datiJSON.length; i++) {
             let cardlist = document.createElement("li");
             cardlist.className = "list-group-item d-flex justify-content-between align-content-center";
