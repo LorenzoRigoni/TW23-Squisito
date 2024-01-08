@@ -128,7 +128,7 @@ nav.row {
 
 /*------------POSTS-------------*/
 .posts-box {
-  height: 90vh;
+  /*height: 90vh;*/
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -337,7 +337,7 @@ background: linear-gradient(99deg, #ff4d1c -35.3%, rgba(253, 96, 28, 0.74) 66.33
   background-color: transparent;
 }
 
-.pubblica {
+.pubblica, .pubblica:active {
   background-color: transparent;
   color: rgba(229, 103, 23, 0.8);
   font-size: large;

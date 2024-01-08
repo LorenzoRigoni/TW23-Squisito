@@ -31,15 +31,20 @@ window.addEventListener("load", function () {
 //shares post
 $(".pubblica").on("click", function () {
   let searchParams = new URLSearchParams(window.location.search);
-  $.ajax({
-    url: "/tw23-squisito/model/post_models/send_comment.php",
-    type: "POST",
-    data: {
-      Contenuto: document.getElementById("textArea").value,
-      IDPost: searchParams.get("id"),
-    },
-    success: function (result) {},
-  });
+  if (document.getElementById("textArea").value != "") {
+    $.ajax({
+      url: "/tw23-squisito/model/post_models/send_comment.php",
+      type: "POST",
+      data: {
+        Contenuto: $("#textArea").val(),
+        IDPost: searchParams.get("id"),
+      },
+      success: function () {
+        loadComment();
+        $("#textArea").val("");
+      },
+    });
+  }
 });
 //delete post
 $("#delete_post").on("click", function () {
@@ -57,10 +62,9 @@ $("#delete_post").on("click", function () {
   });
 });
 //open profile
-function openProfile(event) {  
-  window.location.href =
-  "../view/profile.html?id=" + event.currentTarget.name;
-};
+function openProfile(event) {
+  window.location.href = "../view/profile.html?id=" + event.currentTarget.name;
+}
 
 function likeClick(event) {
   event.stopPropagation();
@@ -91,12 +95,12 @@ function sendFollow(event) {
     data: {
       Email: $("#fotoUtentePost").attr("name"),
     },
-success: function (result) {
-  if ($followSpan.hasClass("clicked")) {
-    $followSpan.removeClass("clicked");
-  } else {
-    $followSpan.addClass("clicked");
-  }
+    success: function (result) {
+      if ($followSpan.hasClass("clicked")) {
+        $followSpan.removeClass("clicked");
+      } else {
+        $followSpan.addClass("clicked");
+      }
     },
   });
 }
