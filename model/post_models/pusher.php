@@ -5,9 +5,9 @@
 
 /**
  * Function to push the notification.
- * @param string $receiverEmail The email of the receiver user
+ * @param string $receiverUsername The username of the receiver user
  */
-function pushNotification($receiverEmail) {
+function pushNotification($receiverUsername) {
     require __DIR__ . '../../../vendor/autoload.php';
 
       $options = array(
@@ -21,7 +21,7 @@ function pushNotification($receiverEmail) {
         '1717839',
         $options
       );
-      $trimmed = trim($receiverEmail, "'");
+      $trimmed = trim($receiverUsername, "'");
       $pusher->trigger('my-channel', 'my-event', $trimmed);
 
   }
