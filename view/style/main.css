@@ -215,7 +215,6 @@ nav.row {
   background-image: url('');
   background-position: center;
   background-size: cover;
-  height: 100%;
   display: flex !important;
   flex-direction: column;
   justify-content: space-between;
@@ -378,12 +377,15 @@ background: linear-gradient(99deg, #ff4d1c -35.3%, rgba(253, 96, 28, 0.74) 66.33
 
 /*-------------------------*/
 @media (max-width: 768px) {
-  .hero-image {
-    height: 50%;
-  }
-
   .fixed-row-bottom {
     position: fixed;
     bottom: 50%;
   }
+}
+@media (min-width: 576px) {
+.card-img-top {
+  width: 100%;
+  height: 15vw;
+  object-fit: cover;
+}
 }
