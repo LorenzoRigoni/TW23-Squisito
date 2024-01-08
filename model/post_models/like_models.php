@@ -27,10 +27,24 @@ if (checkLogin($conn)) {
             }
             $result = executeQuery($query, $conn);
             echo ($_POST['IDPost']);
-            if ($res->num_rows == 0) {
-                $emailReceiver = getReceiverEmail($conn);
-                echo json_encode(addNotification($_POST['IDPost'], $_SESSION['userEmail'], $emailReceiver, "Like", $conn));
-                pushNotification($emailReceiver);
+            $query = "";
+            $query = "SELECT COUNT(*) AS NumLike
+                FROM mi_piace M 
+                WHERE M.IDPost = ?";
+            if ($numLikes = $conn->prepare($query)) {
+                $numLikes->bind_param('i', $_POST['IDPost']);
+                if ($numLikes->execute()) {
+                    echo json_encode($numLikes->get_result()->fetch_assoc());
+                    if ($res->num_rows == 0) {
+                        $emailReceiver = getReceiverEmail($conn);
+                        echo json_encode(addNotification($_POST['IDPost'], $_SESSION['userEmail'], $emailReceiver, "Like", $conn));
+                        pushNotification($emailReceiver);
+                    }
+                } else {
+                    echo json_encode(array("error" => $numLikes->error));
+                }
+            } else {
+                echo json_encode(array("error" => $conn->error));
             }
         } else {
             echo json_encode(array("error" => $isLiked->error));
@@ -81,6 +95,27 @@ function getReceiverEmail($conn) {
         $selectQuery->bind_param("i", $_POST['IDPost']);
         if ($selectQuery->execute()) {
             return $selectQuery->get_result()->fetch_assoc()['EmailUtente'];
+        } else {
+            return $selectQuery->error;
+        }
+    } else {
+        return $selectQuery->error;
+    }
+}
+
+/**
+ * Function for getting the username of the user who created the post.
+ * @param mysqli $conn The connection to the database
+ * @return string The username of the user
+ */
+function getReceiverUsername($conn) {
+    $query = "SELECT U.Username
+        FROM post P INNER JOIN utenti U ON P.EmailUtente = U.Email
+        WHERE P.IDPost = ?";
+    if ($selectQuery = $conn->prepare($query)) {
+        $selectQuery->bind_param("i", $_POST['IDPost']);
+        if ($selectQuery->execute()) {
+            return $selectQuery->get_result()->fetch_assoc()['Username'];
         } else {
             return $selectQuery->error;
         }
