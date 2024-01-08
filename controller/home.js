@@ -45,13 +45,13 @@ function loadNotification() {
           switch (element.TipoNotifica) {
             case "Like":
               action =
-                element.EmailMittente + " ha messo mi piace alla tua foto.";
+                element.Username + " ha messo mi piace alla tua foto.";
               break;
             case "Follow":
-              action = element.EmailMittente + " ha iniziato a seguirti.";
+              action = element.Username + " ha iniziato a seguirti.";
               break;
             case "Commento":
-              action = element.EmailMittente + " ha commentato un post.";
+              action = element.Username + " ha commentato un post.";
               break;
           }
           div +=
