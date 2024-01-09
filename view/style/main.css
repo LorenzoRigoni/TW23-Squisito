@@ -27,12 +27,12 @@ body {
 
 .far.active,
 .fas.active {
-  color: #f26e21;
+  color: #8F3400;
 }
 
 .far:hover,
 .fas:hover {
-  color: #f26e21;
+  color: #8F3400;
 }
 
 img,
@@ -45,7 +45,7 @@ img,
 /* Firefox */
 * {
   scrollbar-width: auto;
-  scrollbar-color: #d99053 #E5E5E5;
+  scrollbar-color: #b54a0d #E5E5E5;
 }
 
 /* Chrome, Edge, and Safari */
@@ -58,13 +58,14 @@ img,
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #d99053;
+  background-color: #a0430d;
   border-radius: 10px;
 }
 
 /*----------LOGIN---------*/
 .login-button {
-  background-color: #f26e21;
+  background-color: #8F3400;
+  color: white;
 }
 
 .login-button:hover {
@@ -75,7 +76,7 @@ textarea:focus,
 input:focus,
 input[type]:focus,
 .uneditable-input:focus {
-  border-color: rgba(229, 103, 23, 0.8) !important;
+  border-color: #9e4511 !important;
   box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(229, 103, 23, 0.6) !important;
   outline: 0 none !important;
 }
@@ -136,7 +137,6 @@ nav.row {
 
 /*------------POSTS-------------*/
 .posts-box {
-  /*height: 90vh;*/
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -188,7 +188,7 @@ nav.row {
 
 .notibox {
   font-family: 'Muli', sans-serif;
-  border: 1px solid #f26e21;
+  border: 1px solid #8F3400;
   width: calc(100% - 30px);
   padding: 15px;
   margin: 15px;
@@ -209,7 +209,7 @@ nav.row {
 
 .cancel:hover {
   color: black;
-  background-color: #f26e21;
+  background-color: #8F3400;
 }
 
 .gone {
@@ -275,7 +275,7 @@ nav.row {
 .create-post {
   border-radius: 5px;
   color: white;
-  background: linear-gradient(99deg, #ff4d1c -35.3%, rgba(253, 96, 28, 0.74) 66.33%, #dea024 138.45%);
+  background: linear-gradient(99deg, #8F3400 -35.3%, #ba5d28 66.33%, #c2835e 138.45%);
 }
 
 /*------------PROFILE-------------*/
@@ -316,7 +316,7 @@ nav.row {
 
 .follow {
   transition: 0.5s ease;
-  background-color: rgba(229, 103, 23, 0.8);
+  background-color: #8F3400;
   color: white;
 }
 
@@ -360,7 +360,7 @@ nav.row {
 .pubblica,
 .pubblica:active {
   background-color: transparent;
-  color: rgba(229, 103, 23, 0.8);
+  color: #8F3400;
   font-size: large;
   font-weight: bold;
   border: 0;
