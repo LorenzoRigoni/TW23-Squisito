@@ -1,4 +1,4 @@
-window.addEventListener("load", function () {
+document.addEventListener("load", function () {
   //get id post from param
   let searchParams = new URLSearchParams(window.location.search);
   if (searchParams.has("id")) {

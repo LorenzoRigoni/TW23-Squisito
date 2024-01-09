@@ -174,4 +174,4 @@ function caricaImmagini() {
   });
 }
 // Chiamare la funzione quando la pagina è pronta
-window.onload = caricaImmagini;
+document.onload = caricaImmagini;
