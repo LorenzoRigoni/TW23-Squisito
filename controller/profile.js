@@ -140,18 +140,6 @@ function profile() {
   let searchParams = new URLSearchParams(window.location.search);
   searchParams.has("id");
 }
-function home() {
-  window.location.href = "../view/home.html";
-}
-function addpost() {
-  window.location.href = "../view/addpost.html";
-}
-function explore() {
-  window.location.href = "../view/explore.html";
-}
-function search() {
-  window.location.href = "../view/search.html";
-}
 function postClick(event) {
   window.location.href = "../view/post.html?id=" + event.currentTarget.id;
 }

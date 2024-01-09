@@ -44,8 +44,10 @@
                             <strong id="seguiti-number"></strong> &nbsp seguiti
                         </div>
                         <div class="col-auto d-flex align-items-center">
-                            <input hidden id="edit" type="button" class="btn btn-dark" value="Modifica" onclick="edit()">
-                            <input hidden id="follow" type="button" class="btn btn-dark follow" value="Follow" onclick="follow()">
+                            <input hidden id="edit" type="button" class="btn btn-dark" value="Modifica"
+                                onclick="edit()">
+                            <input hidden id="follow" type="button" class="btn btn-dark follow" value="Follow"
+                                onclick="follow()">
                         </div>
                     </div>
                     <div class="row">
@@ -63,10 +65,13 @@
         </div>
         <nav class="row gx-0">
             <div class="nav">
-                <span class="fas fa-house fa-xl" onclick="home()"></span>
-                <span class="fas fa-globe fa-xl" onclick="explore()"></span>
-                <span class="far fa-square-plus fa-xl" onclick="addpost()"></span>
-                <span class="fas fa-magnifying-glass fa-xl" onclick="search()"></span>
+                <a class="navButton" href="home.html"><span class="fas fa-house fa-xl" onclick="home()"></span></a>
+                <a class="navButton" href="explore.html"><span class="fas fa-globe fa-xl"
+                        onclick="explore()"></span></a>
+                <a class="navButton" href="addpost.html"><span class="far fa-square-plus fa-xl"
+                        onclick="addpost()"></span></a>
+                <a class="navButton" href="search.html"><span class="fas fa-magnifying-glass fa-xl"
+                        onclick="search()"></span></a>
                 <img id="user-photo-small" alt="profile-image" class="avatar avatar-32 rounded-circle p-1"
                     onclick="profile()" src="/tw23-squisito/view/resource/basic_user.png">
             </div>

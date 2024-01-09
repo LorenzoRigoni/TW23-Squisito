@@ -47,18 +47,9 @@ window.addEventListener("load", function () {
     },
   });
 });
-function home() {
-  window.location.href = "../view/home.html";
-}
 function profile() {
   window.location.href =
     "../view/profile.html?id=" + sessionStorage.getItem("userEmail");
-}
-function addpost() {
-  window.location.href = "../view/addpost.html";
-}
-function search() {
-  window.location.href = "../view/search.html";
 }
 function postClick(event) {
   window.location.href = "../view/post.html?id=" + event.currentTarget.id;

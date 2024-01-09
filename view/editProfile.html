@@ -23,8 +23,9 @@
         <div class="d-flex justify-content-center p-5">
             <div class="row">
                 <img id="user-photo-user" src="/tw23-squisito/view/resource/basic_user.png" alt="profile-image"
-                        class="avatar avatar-128 rounded-circle p-1">
-                <form id="myForm" action="/tw23-squisito/model/user_models/update_user_info.php" method="POST" enctype="multipart/form-data" class="login-validation" novalidate="" autocomplete="off">
+                    class="avatar avatar-128 rounded-circle p-1">
+                <form id="myForm" action="/tw23-squisito/model/user_models/update_user_info.php" method="POST"
+                    enctype="multipart/form-data" class="login-validation" novalidate="" autocomplete="off">
                     <div class="mb-3">
                         <label class="mb-2 text-muted" for="username">Username</label>
                         <input id="username" type="text" class="form-control" name="username" value="" required>
@@ -36,14 +37,15 @@
                     </div>
                     <div class="mb-3">
                         <label class="mb-2 text-muted" for="fotoProfilo">Immagine profilo</label>
-                        <input type="file"  accept="image/png, image/jpeg" id="fotoProfilo" class="form-control" name="fotoProfilo">
+                        <input type="file" accept="image/png, image/jpeg" id="fotoProfilo" class="form-control"
+                            name="fotoProfilo">
                     </div>
                     <div class="mb-3">
                         <label class="mb-2 text-muted" for="bio">Bio</label>
                         <textarea id="bio" class="form-control" name="bio"></textarea>
                     </div>
                     <div class="d-flex align-items-center">
-                        <button type="submit"  class="btn login-button ms-auto">
+                        <button type="submit" class="btn login-button ms-auto">
                             Edit
                         </button>
                     </div>
@@ -52,10 +54,13 @@
         </div>
         <nav class="row gx-0">
             <div class="nav">
-                <span class="fas fa-house fa-xl" onclick="home()"></span>
-                <span class="fas fa-globe fa-xl" onclick="explore()"></span>
-                <span class="far fa-square-plus fa-xl" onclick="addpost()"></span>
-                <span class="fas fa-magnifying-glass fa-xl" onclick="search()"></span>
+                <a class="navButton" href="home.html"><span class="fas fa-house fa-xl" onclick="home()"></span></a>
+                <a class="navButton" href="explore.html"><span class="fas fa-globe fa-xl"
+                        onclick="explore()"></span></a>
+                <a class="navButton" href="addpost.html"><span class="far fa-square-plus fa-xl"
+                        onclick="addpost()"></span></a>
+                <a class="navButton" href="search.html"><span class="fas fa-magnifying-glass fa-xl"
+                        onclick="search()"></span></a>
                 <img id="user-photo-small" alt="profile-image" class="avatar avatar-32 rounded-circle p-1"
                     onclick="profile()" src="/tw23-squisito/view/resource/basic_user.png">
             </div>

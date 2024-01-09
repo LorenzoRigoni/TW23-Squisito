@@ -52,6 +52,8 @@ window.addEventListener("load", function () {
         document.getElementById("Paese").textContent = datiJSON[0]["Nazione"];
         document.getElementById("testoRicetta").textContent =
           datiJSON[0]["Ricetta"];
+        document.getElementById("Titolo").textContent =
+          datiJSON[0]["Titolo"];
         let flagElement = document.getElementById("flag");
         flagElement.src =
           "/tw23-squisito/view/resource/flags/" +

@@ -77,15 +77,6 @@ function onSelectionChange(idcountry, nomeNazione) {
   label.textContent = nomeNazione;
   flagElement.src = "/tw23-squisito/view/resource/flags/" + idcountry + ".png";
 }
-function home() {
-  window.location.href = "../view/home.html";
-}
 function profile() {
   window.location.href = "../view/profile.html?id="+sessionStorage.getItem("userEmail");
-}
-function explore() {
-  window.location.href = "../view/explore.html";
-}
-function search() {
-  window.location.href = "../view/search.html";
 }

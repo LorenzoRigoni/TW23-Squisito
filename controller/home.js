@@ -1,4 +1,4 @@
-window.addEventListener("load", function () {
+document.addEventListener("load", function () {
   if (Cookies.get("userEmail")) {
     sessionStorage.setItem("userEmail", Cookies.get("userEmail"));
     sessionStorage.setItem("login_string", Cookies.get("login_string"));
@@ -70,18 +70,9 @@ function loadNotification() {
 function postClick(event) {
   window.location.href = "../view/post.html?id=" + event.currentTarget.id;
 }
-function addpost() {
-  window.location.href = "../view/addpost.html";
-}
-function explore() {
-  window.location.href = "../view/explore.html";
-}
 function profile() {
   window.location.href =
     "../view/profile.html?id=" + sessionStorage.getItem("userEmail");
-}
-function search() {
-  window.location.href = "../view/search.html";
 }
 
 $("#notification").click(function () {
