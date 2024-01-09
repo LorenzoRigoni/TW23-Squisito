@@ -1,4 +1,4 @@
-document.addEventListener("load", function () {
+window.addEventListener("load", function () {
   //check cookie
   if (Cookies.get("userEmail")) {
     sessionStorage.setItem("userEmail", Cookies.get("userEmail"));

@@ -1,4 +1,4 @@
-document.addEventListener("load", function () {
+window.addEventListener("load", function () {
   if (Cookies.get("userEmail")) {
     sessionStorage.setItem("userEmail", Cookies.get("userEmail"));
     sessionStorage.setItem("login_string", Cookies.get("login_string"));
@@ -63,9 +63,9 @@ document.addEventListener("load", function () {
       },
       success: function (result) {
         const responseObj = JSON.parse(result);
-        $("#post-number").text(" " + responseObj[0].NumPosts);
-        $("#followed-number").text(" " + responseObj[1].NumFollowers);
-        $("#seguiti-number").text(" " + responseObj[2].NumSeguiti);
+        $("#post-number").text(": "+responseObj[0].NumPosts);
+        $("#followed-number").text(": "+responseObj[1].NumFollowers);
+        $("#seguiti-number").text(": "+responseObj[2].NumSeguiti);
       },
     });
 
@@ -145,7 +145,8 @@ function postClick(event) {
 }
 function edit() {
   let searchParams = new URLSearchParams(window.location.search);
-  window.location.href = "../view/editProfile.html?id=" + searchParams.has("id");
+  window.location.href =
+    "../view/editProfile.html?id=" + searchParams.has("id");
 }
 function profile() {
   window.location.href =
